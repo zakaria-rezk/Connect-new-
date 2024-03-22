@@ -46,7 +46,7 @@
   <TheFooter/>
 </template>
 
-<style>
+<style scoped>
 .categ a {
   text-decoration: none;
   color: #212529;

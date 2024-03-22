@@ -109,7 +109,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 .slider img {
   height: 450px;
 }

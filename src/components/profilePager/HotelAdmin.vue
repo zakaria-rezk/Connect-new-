@@ -215,7 +215,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 .detailspara {
   background-color: #d9d9d9;
   padding: 20px;

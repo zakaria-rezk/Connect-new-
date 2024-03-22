@@ -51,12 +51,15 @@ const loginData = reactive({
     errorMessage: false,
   },
   password: {
-    value: null,
+    value: "",
     errorMessage: false,
   },
 });
+// ref to access the html elemnt
 const emailInput = ref();
 const passwordInput = ref();
+//
+
 const isValidemail = computed(() => {
   return loginData.email.value.includes("@");
 });
@@ -81,20 +84,25 @@ const emialvaladition = () => {
     passwordInput.value.classList.add("error");
   }
 };
-const dispathchLoginAction = () => {
+  const dispathchLoginAction = async () => {
   emialvaladition();
   if (isValidpass.value && isValidemail.value) {
-    const loginData = {
-      email: loginData.email.value,
-      password: loginData.password.value,
+    const login = {
+      email:loginData.email.value,
+      password:loginData.password.value,
     };
+   await store.login(login);
   }
-  store.login(loginData);
+
   if (store.isAuth) {
+    console.log('is auth')
     router.replace("/Connect.Com");
   }
 };
 </script>
+
+
+
 <style scoped>
 .parent {
   display: flex;

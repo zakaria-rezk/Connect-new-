@@ -1,73 +1,95 @@
 <template>
   <div class="parent">
     <div class="register">
-      <div class="wraper">
-        <h2>انشاء حساب جديد</h2>
-        <div class="inputField">
-          <input
-            type="text"
-            placeholder="الاسم الاول"
-            v-model="registerData.firstName.value"
-            ref="firstNameInput"
-          />
-          <input
-            type="text"
-            placeholder="الاسم الاخير"
-            v-model="registerData.lastName.value"
-            ref="lastNameInput"
-          />
-        </div>
-        <div class="inputField">
-          <input
-            type="email"
-            placeholder="*ادخل عنوان بريدك الالكتروني"
-            v-model="registerData.email.value"
-            ref="emailInput"
-          />
-          <input
-            type="password"
-            placeholder="*ادخل كلمة المرور"
-            v-model="registerData.password.value"
-            ref="passwordInput"
-          />
-        </div>
-        <div class="inputField">
-  
-          <select
-            id="gender"  
-            v-model="registerData.gender.value"  
-            ref="genderInput"   
+      <div class="wrapernotstrap">
+        <form @submit.prevent="dispathchLoginAction">
+          <h2>انشاء حساب جديد</h2>
+          <div class="inputField">
+            <input
+              type="text"
+              placeholder="الاسم الاول"
+              v-model="registerData.firstName.value"
+              ref="firstNameInput"
+            />
+            <input
+              type="text"
+              placeholder="الاسم الاخير"
+              v-model="registerData.lastName.value"
+              ref="lastNameInput"
+            />
+          </div>
+          <div class="inputField">
+            <input
+              type="email"
+              placeholder="*ادخل عنوان بريدك الالكتروني"
+              v-model="registerData.email.value"
+              ref="emailInput"
+            />
+            <input
+              type="text"
+              placeholder="*ادخل كلمة المرور"
+              v-model="registerData.password.value"
+              ref="passwordInput"
+            />
+          </div>
+          <div class="inputField">
+            <input
+              type="tel"
+              placeholder="ادخل رقم الهاتف المحمول"
+              v-model="registerData.phone.value"
+              ref="emailInput"
+            />
+          
+          </div>
+          <div class="inputField">
+            <select
+              id="gender"
+              v-model="registerData.gender.value"
+              ref="genderInput"
+            >
+              <option value="" disabled selected hidden>اختر الجنس</option>
+              <option value="ذكر" id="male">ذكر</option>
+              <option value="انثي" id="female">انثي</option>
+            </select>
+          </div>
+          <div class="inputField">
+            <select
+              id="goverment"
+              v-model="registerData.government.value"
+              ref="goverInput"
+            >
+              <option value="" disabled selected hidden>المحافظة</option>
+              <option
+                v-for="item in egyptGovernorates"
+                :key="item.id"
+                :value="item"
+                id="male"
+              >
+                {{ item }}
+              </option>
+            </select>
+            <select
+              id="city"
+              v-model="registerData.city.value"
+              ref="refernce.cityInput"
+            >
+              <option value="" disabled selected hidden>المدينة</option>
+              <option
+                v-for="item in egyptCities[`${registerData.government.value}`]"
+                :key="item.id"
+                :value="item"
+                id="male"
+              >
+                {{ item }}
+              </option>
+            </select>
+          </div>
+          <button>انشاء حساب</button>
+          <p class="or">او</p>
+          <router-link :to="{ name: 'Login' }" class="router-link"
+            >سجل دخولك الان</router-link
           >
-            <option value=""  disabled selected hidden >اختر الجنس</option>
-            <option value="ذكر" id="male">ذكر</option>
-            <option value="انثي" id="female">انثي</option>
-          </select>
-        </div>
-  
-
-        <!-- <div class="inputField">
-       
-       <select id="countries" placeholder="fdagdg">
-     <option value="val0">المحافظة</option>
-     
-     <option value="val2">ذكر</option>
-     <option value="val3">انثي</option>
-     
-   </select>
-   <select id="countries" placeholder="fdagdg">
-     <option value="val0">المدينة</option>
-     
-     <option value="val2">ذكر</option>
-     <option value="val3">انثي</option>
-     
-   </select>
-   </div>  -->
-
-        <button @click="dispathchLoginAction">انشاء حساب</button>
-        <p class="or">او</p>
-        <router-link :to="{ name: 'Login' }" class="router-link"
-          >سجل دخولك الان</router-link
-        >
+        </form>
       </div>
     </div>
     <div class="logo">
@@ -83,16 +105,21 @@
 import { reactive, computed, ref } from "vue";
 import { useCounterStore } from "../../sotre.js/authentication/authSotre.js";
 const store = useCounterStore();
+
+const egyptGovernorates = store.egyptGovernorates;
+const egyptCities = store.egyptCities;
+
 const registerData = reactive({
   firstName: { value: "", errorMessage: false },
   lastName: { value: "", errorMessage: false },
   email: { value: "", errorMessage: false },
-  password: { value:"", errorMessage: false },
-  gender: { value:"", errorMessage: false },
+  password: { value: "", errorMessage: false },
+  phone: { value: "", errorMessage: false },
+  gender: { value: "", errorMessage: false },
+  government: { value: "", errorMessage: false },
+  city: { value: "", errorMessage: false },
 });
-const fullName =computed (() =>{
-     return registerData.firstName.value +' ' +registerData.lastName.value}
-)
+
 const isValidfirstName = computed(() => {
   return registerData.firstName.value != "";
 });
@@ -106,8 +133,28 @@ const isValidpass = computed(() => {
   return registerData.password.value.length > 6;
 });
 const isValidGender = computed(() => {
-  return registerData.gender.value !='';
+  return registerData.gender.value != "";
 });
+const isValidGovernment = computed(() => {
+  return registerData.government.value != "";
+});
+const isValidCity = computed(() => {
+  return registerData.city.value != "";
+});
+const isValidPhone = computed(() => {
+  return registerData.phone.value.length === 11;
+});
+const fullName = computed(() => {
+  return registerData.firstName.value + " " + registerData.lastName.value;
+});
+const userNmae =computed (()=>{
+  return registerData.firstName.value + registerData.lastName.value;
+})
+const location = computed(() => {
+  return registerData.city.value + "," + registerData.government.value;
+});
+
+// termparly fn will be improved later
 const registerValidtion = () => {
   if (!isValidfirstName.value) {
     registerData.firstName.errorMessage = true;
@@ -129,24 +176,46 @@ const registerValidtion = () => {
     registerData.gender.errorMessage = true;
     genderInput.value.classList.add("error");
   }
+  if (!isValidGovernment.value) {
+    registerData.gender.errorMessage = true;
+    goverInput.value.classList.add("error");
+  }
+  if (!isValidCity.value) {
+    registerData.city.errorMessage = true;
+    cityInput.value.classList.add("error");
+  }
+  if (!isValidPhone.value) {
+    registerData.city.errorMessage = true;
+    refernce.cityInput.value.classList.add("error");
+  }
 };
+
 const dispathchLoginAction = () => {
+console.log(userNmae.value)
   registerValidtion();
   if (
     isValidpass.value &&
     isValidEmail.value &&
     isValidlastName.value &&
-    isValidfirstName.value
+    isValidfirstName.value &&
+    isValidGender &&
+    isValidGovernment &&
+    isValidCity && 
+    isValidPhone
   ) {
-   const signupData= {
-    name :fullName.value,
-    email:registerData.email.value,
-    password:registerData.password.value,
-    gender:registerData.gender.value
-   }
-   store.signup(signupData)
+    const signupData = {
+      name: fullName.value,
+      userName:userNmae.value,
+      email: registerData.email.value,
+      password: registerData.password.value,
+      gender: registerData.gender.value === 'ذكر' ? 1 : 2,
+      location: location.value, 
+      phone:registerData.phone.value
+    };
+      console.log(signupData.phone + typeof(signupData.phone))
+      store.signup(signupData);
   }
-  
+
   ///dispatch logic
 };
 
@@ -154,7 +223,9 @@ const firstNameInput = ref();
 const lastNameInput = ref();
 const emailInput = ref();
 const passwordInput = ref();
-const genderInput =ref();
+const genderInput = ref();
+const goverInput = ref();
+const cityInput = ref();
 </script>
 <style scoped>
 .parent {
@@ -176,48 +247,54 @@ const genderInput =ref();
   flex-basis: 150;
   flex-shrink: 0;
 }
-.register .wraper {
+.register .wrapernotstrap {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
+}
+.wrapernotstrap form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   background-color: rgb(255, 255, 255);
-  flex-basis: 500px;
+  flex-basis: 550px;
   flex-grow: 1;
-  height: 65%;
 }
-.wraper h2 {
-  margin: 1rem;
+.wrapernotstrap form button {
+  background-color: var(--btn-color);
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  border-color: white;
+  cursor: pointer;
+  color: #e5fcfb;
+  font-size: large;
+}
+.wrapernotstrap h2 {
   font-size: 50px;
   color: rgb(13, 159, 207);
 }
-.wraper .inputField {
-  
+.wrapernotstrap .inputField {
   display: flex;
   width: 100%;
   justify-content: flex-start;
 }
-.wraper .inputField input,
+.wrapernotstrap .inputField input,
 select {
-
- 
   width: 100%;
   height: 60px;
   border-color: rgb(13, 159, 207) rgb(17, 81, 231);
   margin: 1rem;
   border-radius: 25px;
 }
-.selectplaceholder{
-  position: relative;
-  font-size: 20px;
-  top: 12%;
-  cursor: pointer;
-}
-.wraper .inputField select {
+
+.wrapernotstrap .inputField select {
   font-size: 20px;
 }
 
-.wraper input::placeholder {
+.wrapernotstrap input::placeholder {
   color: rgb(49, 51, 57);
   font-size: 20px;
   font-weight: 200;
@@ -225,25 +302,20 @@ select {
   margin-right: 5px;
   color: rgb(64, 64, 64);
 }
-.wraper .inputField .error {
+.wrapernotstrap .inputField .error {
   color: rgb(186, 16, 50);
   border-radius: 25px;
   border-color: red red red red;
 }
-.wraper input:focus::placeholder {
+.wrapernotstrap input:focus::placeholder {
   position: relative;
   bottom: 20px;
   font-size: 15px;
 
   color: black;
 }
-.wraper .forgetpass {
-  align-self: flex-start;
-  position: relative;
-  right: 10px;
-}
 
-.wraper .or {
+.wrapernotstrap .or {
   margin: 1rem;
   font-weight: 800;
 }
@@ -254,16 +326,7 @@ select {
 a {
   text-decoration: none;
 }
-.wraper button {
-  background-color: var(--btn-color);
-  width: 220px;
-  height: 100px;
-  border-radius: 10px;
-  border-color: white;
-  cursor: pointer;
-  color: #e5fcfb;
-  font-size: 25px;
-}
+
 .logo {
   display: flex;
   justify-content: center;

@@ -32,11 +32,14 @@
       <div>
         <ul class="navbar-nav">
           <!-- Login Link -->
-          <li class="nav-item">
+          <li class="nav-item" v-show="isAuth">
+            <router-link :to="{ name: 'Login' }" class="nav-link">تسجيل خروج</router-link>
+          </li>
+          <li class="nav-item" v-show="!isAuth">
             <router-link :to="{ name: 'Login' }" class="nav-link">تسجيل الدخول</router-link>
           </li>
           <!-- Signup Link -->
-          <li class="nav-item">
+          <li class="nav-item" v-show="!isAuth">
             <router-link :to="{ name: 'register' }" class="nav-link">انشاء حساب</router-link>
           </li>
         </ul>
@@ -46,7 +49,9 @@
 </template>
 
 <script setup>
-
+import { useCounterStore } from "../../sotre.js/authentication/authSotre.js";
+const store = useCounterStore();
+const isAuth =store.isAuth
 </script>
 
 <style scoped>
