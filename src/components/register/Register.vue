@@ -37,7 +37,7 @@
               type="tel"
               placeholder="ادخل رقم الهاتف المحمول"
               v-model="registerData.phone.value"
-              ref="emailInput"
+              ref="phoneInput"
             />
           
           </div>
@@ -71,7 +71,7 @@
             <select
               id="city"
               v-model="registerData.city.value"
-              ref="refernce.cityInput"
+              ref="cityInput"
             >
               <option value="" disabled selected hidden>المدينة</option>
               <option
@@ -165,6 +165,7 @@ const registerValidtion = () => {
     lastNameInput.value.classList.add("error");
   }
   if (!isValidEmail.value) {
+    console.log(!isValidEmail.value)
     registerData.email.errorMessage = true;
     emailInput.value.classList.add("error");
   }
@@ -185,8 +186,8 @@ const registerValidtion = () => {
     cityInput.value.classList.add("error");
   }
   if (!isValidPhone.value) {
-    registerData.city.errorMessage = true;
-    refernce.cityInput.value.classList.add("error");
+    registerData.phone.errorMessage = true;
+    phoneInput.value.classList.add("error");
   }
 };
 
@@ -226,6 +227,7 @@ const passwordInput = ref();
 const genderInput = ref();
 const goverInput = ref();
 const cityInput = ref();
+const phoneInput=ref();
 </script>
 <style scoped>
 .parent {
