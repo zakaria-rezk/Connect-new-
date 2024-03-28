@@ -254,6 +254,7 @@ const phoneInput=ref();
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
 }
 .wrapernotstrap form {
   display: flex;
@@ -262,7 +263,7 @@ const phoneInput=ref();
   align-items: center;
   background-color: rgb(255, 255, 255);
   flex-basis: 550px;
-  flex-grow: 1;
+  flex: 1;
 }
 .wrapernotstrap form button {
   background-color: var(--btn-color);
@@ -288,7 +289,7 @@ select {
   width: 100%;
   height: 60px;
   border-color: rgb(13, 159, 207) rgb(17, 81, 231);
-  margin: 1rem;
+  margin: 0.7rem;
   border-radius: 25px;
 }
 
@@ -344,6 +345,11 @@ a {
 @media (max-width: 768px) {
   .logo {
     display: none;
+  }
+}
+@media (max-width: 425px) {
+  .form {
+    margin-top:1rem ;
   }
 }
 </style>
