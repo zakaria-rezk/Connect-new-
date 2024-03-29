@@ -27,15 +27,16 @@
             />
             <input
               type="text"
-              placeholder="*ادخل كلمة المرور"
+              :placeholder="registerData.password.errorMessage ? 'يجب ادخال حرف كبير وصغير وعلامة' :'*ادخل كلمة المرور'"
               v-model="registerData.password.value"
               ref="passwordInput"
             />
+            
           </div>
           <div class="inputField">
             <input
               type="tel"
-              placeholder="ادخل رقم الهاتف المحمول"
+              :placeholder="registerData.phone.errorMessage ? 'رقم الهاتف غير صحيح' :'ادخل رقم الهاتف'"
               v-model="registerData.phone.value"
               ref="phoneInput"
             />

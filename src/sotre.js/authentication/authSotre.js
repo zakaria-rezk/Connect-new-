@@ -194,6 +194,7 @@ export const useCounterStore = defineStore( 'autStore', {
   catch(error){
     throw error
   }
+  
   }
 }
 })

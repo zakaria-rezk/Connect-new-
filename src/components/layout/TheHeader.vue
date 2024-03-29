@@ -32,15 +32,15 @@
       <div>
         <ul class="navbar-nav">
           <!-- Login Link -->
-          <li class="nav-item" v-show="!isAuth">
+          <li class="nav-item" v-show="isAuth">
             <router-link :to="{ name: 'customer' }" class="nav-link">حسابي</router-link>
           </li>
           
-          <li class="nav-item" v-show="isAuth">
+          <li class="nav-item" v-show="!isAuth">
             <router-link :to="{ name: 'Login' }" class="nav-link">تسجيل الدخول</router-link>
           </li>
           <!-- Signup Link -->
-          <li class="nav-item" v-show="isAuth">
+          <li class="nav-item" v-show="!isAuth">
             <router-link :to="{ name: 'register' }" class="nav-link">انشاء حساب</router-link>
           </li>
         </ul>
