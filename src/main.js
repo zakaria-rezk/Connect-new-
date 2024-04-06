@@ -7,6 +7,9 @@ import { createPinia } from 'pinia'
 import 'bootstrap/dist/css/bootstrap.css'
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle'
 
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
+
 
 
 /* import font awesome icon component */

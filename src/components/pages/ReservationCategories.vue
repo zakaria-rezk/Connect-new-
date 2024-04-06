@@ -6,7 +6,7 @@
     <div
       class="categ container d-lg-flex  justify-content-between mt-5 col-12"
     >
-      <router-link to="/hotel" class="col-lg-4 col-md-12">
+      <router-link to="/hotelReservations" class="col-lg-4 col-md-12">
         <div class="col-lg-12 d-flex flex-column align-items-center">
           <img
             src="../../../images/hotel.jpg"

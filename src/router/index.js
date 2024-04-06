@@ -22,17 +22,37 @@ import { createRouter, createWebHistory } from 'vue-router';
     {
       path: '/Customer',
       name:'customer' ,
-      component: ()=> import ('../components/profilePager/CustomerProfile.vue')
+      component: ()=> import ('../components/profilePager/customer/customerProfile.vue')
     },
     {
       path: '/HotelAdmin',
       name:'hotel-admin' ,
-      component: ()=> import ('../components/profilePager/HotelAdmin.vue')
+      component: ()=> import ('../components/profilePager/hotel/hotelAdminProfile.vue')
     },
     {
       path: '/ReservationCategories',
       name:'reservation-categories' ,
       component: ()=> import ('../components/pages/ReservationCategories.vue')
+    },
+    {
+      path: '/followReservation',
+      name:'follow-reservation' ,
+      component: ()=> import ('../components/profilePager/hotel/followReservation.vue')
+    },
+    {
+      path: '/hotelReservations',
+      name:'hotel-reservations' ,
+      component: ()=> import ('../components/pages/hotelReservation.vue')
+    },
+    {
+      path: '/addFreelanceBuisness',
+      name:'add-freelance-buisness' ,
+      component: ()=> import ('../components/profilePager/freelancer/addFreelanceBuisness.vue')
+    },
+    {
+      path: '/addReservationBuisness',
+      name:'add-reservation-buisness' ,
+      component: ()=> import ('../components/profilePager/hotel/addReservationBuisness.vue')
     },
     
     {

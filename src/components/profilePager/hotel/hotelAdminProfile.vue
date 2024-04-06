@@ -5,7 +5,7 @@
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img
-            src="../../../images/segal.jpeg"
+            src="../../../../images/segal.jpeg"
             class="d-block w-100"
             alt="..."
             height="400px"
@@ -13,7 +13,7 @@
         </div>
         <div class="carousel-item">
           <img
-            src="../../../images/frames-for-your-heart-FqqiAvJejto-unsplash.jpg"
+            src="../../../../images/frames-for-your-heart-FqqiAvJejto-unsplash.jpg"
             class="d-block w-100"
             alt="..."
             height="400px"
@@ -21,7 +21,7 @@
         </div>
         <div class="carousel-item">
           <img
-            src="../../../images/manuel-moreno-DGa0LQ0yDPc-unsplash.jpg"
+            src="../../../../images/manuel-moreno-DGa0LQ0yDPc-unsplash.jpg"
             class="d-block w-100"
             alt="..."
             height="400px"
@@ -184,9 +184,11 @@
           </div>
           <!-- متابعة الحجوزات -->
           <div class="followres col-md-">
+            <router-link to="/followReservation">
             <button type="button" class="btn btn-primary col-12">
               متابعة الحجوزات
             </button>
+            </router-link>
           </div>
         </div>
       </div>

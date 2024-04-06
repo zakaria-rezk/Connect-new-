@@ -3,14 +3,14 @@
     <div class="cover-photo">
       <!-- صورة الغلاف -->
       <img
-        src="../../assets/WhatsApp Image 2023-06-20 at 09.11.46.jpg"
+        src="../../../assets/WhatsApp Image 2023-06-20 at 09.11.46.jpg"
       />
     </div>
     <div class="profile-info">
       <div class="profile-picture">
         <!-- صورة الصفحة الشخصية -->
         <img
-          src="../../assets/WhatsApp Image 2023-06-20 at 09.11.46.jpg"
+          src="../../../assets/_ZOF0026.JPG"
           alt=""
         />
       </div>
