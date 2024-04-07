@@ -33,8 +33,9 @@
         <ul class="navbar-nav">
           <!-- Login Link -->
           <li class="nav-item" v-show="isAuth">
-            <router-link :to="{ name: 'Login' }" class="nav-link">تسجيل خروج</router-link>
+            <router-link :to="{ name: 'customer' }" class="nav-link">حسابي</router-link>
           </li>
+          
           <li class="nav-item" v-show="!isAuth">
             <router-link :to="{ name: 'Login' }" class="nav-link">تسجيل الدخول</router-link>
           </li>
@@ -46,6 +47,7 @@
       </div>
     </div>
   </nav>
+ 
 </template>
 
 <script setup>
@@ -58,6 +60,14 @@ const isAuth =store.isAuth
  .nav-item .nav-link {
   font-size: 1.1rem; /* تكبير حجم الروابط */
   margin-right: 1rem; /* توسيع المسافات بين الروابط */
+  color: aliceblue;
+  
+}
+.navbar-nav .nav-item:hover {
+  background-color: var(--primarycolor);
+  border-radius: 8px;
+  transform: scale(1.1);
+   /* Change to your desired background color */
 }
 .logo{
   width: 90px;

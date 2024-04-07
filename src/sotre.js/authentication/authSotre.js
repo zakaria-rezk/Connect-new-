@@ -6,6 +6,7 @@ export const useCounterStore = defineStore( 'autStore', {
   state:() => ({
   expiration:null,
   token:null,
+  serverError:false,
   egyptGovernorates: [
     "القاهرة",
     "الإسكندرية",
@@ -115,12 +116,11 @@ export const useCounterStore = defineStore( 'autStore', {
   },
   actions :{
  async login(payload){
-  
+  console.log(payload)
 
  try{ const response =await fetch('https://localhost:7165/api/Account/login',{
     method:'POST',
     headers: {
-     
       'accept': '*/*',
       'Content-Type': 'application/json'
     },
@@ -132,16 +132,18 @@ export const useCounterStore = defineStore( 'autStore', {
     
   })
   const responseData =await response.json()
- console.log(responseData.success)
+
  
   if (!response.ok){
     const error = response.message || 'something went wrong'
+    console.log(response.ok + 'LOGIN response')
     throw error
   }
-   if(responseData.success)
+   if(response.ok)
    {
+    console.log("ok")
    this.token = responseData.token
-    console.log(this.isAuth)
+   localStorage.setItem('token', responseData.token);
    }
   }
   catch(error){
@@ -152,17 +154,10 @@ export const useCounterStore = defineStore( 'autStore', {
 
 
   async signup(payload){
-   console.log (payload.name)
-   console.log (payload.userName)
-   console.log (payload.phone)
-   console.log (payload.email)
-   console.log (payload.password)
-   console.log (payload.location)
-   console.log (typeof(payload.gender))
-  
+
    const currentDate = new Date();
    const isoDateString = currentDate.toISOString();
-   console.log (isoDateString)
+   console.log (payload + "patload")
    try { const response = await fetch('https://localhost:7165/api/Account/register',{
       method:'POST',
       headers: {
@@ -171,7 +166,6 @@ export const useCounterStore = defineStore( 'autStore', {
       },
       body:JSON.stringify({
         name:payload.name,
-        userName:payload.userName,
         phoneNumber:payload.phone,
         email:payload.email,
         password:payload.password,
@@ -185,15 +179,29 @@ export const useCounterStore = defineStore( 'autStore', {
     })
 
     if (!response.ok){
+      
       const error = response.description || 'something went wrong'
       throw error
+      
     }
-    const responseData = await response.json();
-     console.log(responseData + 'responebody')
+    if(response.ok){
+      const login ={
+        email:payload.email,
+        password:payload.password,
+      }
+    await this.login(login)
+    }
+    
+     if(response.status >= 500)
+     {
+     this.serverError =true
+     }
   } 
+  
   catch(error){
     throw error
   }
+  
   }
 }
 })

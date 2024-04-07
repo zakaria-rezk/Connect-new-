@@ -1,4 +1,4 @@
-<template>
+npmnpm<template>
   <div class="parent">
     <TheHeader />
     <img src="../../../images/15.jpg" class="col-12" height="450px" alt="" />
