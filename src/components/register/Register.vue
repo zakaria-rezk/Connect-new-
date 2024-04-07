@@ -1,5 +1,7 @@
 <template>
+          <Error v-show="serverError"  @tryclose="cloesError"/>
   <div class="parent">
+    
     <div class="register">
       <div class="wrapernotstrap">
         <form @submit.prevent="dispathchLoginAction">
@@ -27,7 +29,7 @@
             />
             <input
               type="text"
-              :placeholder="registerData.password.errorMessage ? 'يجب ادخال حرف كبير وصغير وعلامة' :'*ادخل كلمة المرور'"
+              :placeholder="registerData.password.errorMessage ? 'ادخال حرف كبير وصغير وعلامة' :'*ادخل كلمة المرور'"
               v-model="registerData.password.value"
               ref="passwordInput"
             />
@@ -105,6 +107,7 @@
 <script setup>
 import { reactive, computed, ref } from "vue";
 import { useCounterStore } from "../../sotre.js/authentication/authSotre.js";
+import Error from "../UI/Error.vue";
 const store = useCounterStore();
 
 const egyptGovernorates = store.egyptGovernorates;
@@ -217,10 +220,16 @@ console.log(userNmae.value)
       console.log(signupData.phone + typeof(signupData.phone))
       store.signup(signupData);
   }
+  if (store.isAuth) {
+    console.log('is auth')
+    router.replace("/Connect.Com");
+  }
 
   ///dispatch logic
 };
-
+const cloesError = () =>{
+  console.log("dfsfdsfdsfdsf")
+}
 const firstNameInput = ref();
 const lastNameInput = ref();
 const emailInput = ref();
@@ -292,19 +301,25 @@ select {
   border-color: rgb(13, 159, 207) rgb(17, 81, 231);
   margin: 0.7rem;
   border-radius: 25px;
+
+ 
 }
 
 .wrapernotstrap .inputField select {
   font-size: 20px;
+  padding: 10px;
 }
+
 
 .wrapernotstrap input::placeholder {
   color: rgb(49, 51, 57);
   font-size: 20px;
   font-weight: 200;
   float: right;
-  margin-right: 5px;
+  margin-right: 10px;
   color: rgb(64, 64, 64);
+  
+  
 }
 .wrapernotstrap .inputField .error {
   color: rgb(186, 16, 50);

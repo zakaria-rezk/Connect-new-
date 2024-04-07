@@ -1,4 +1,5 @@
 <template>
+  <TheHeader />
   <div class="profile">
     <div class="cover-photo">
       <!-- صورة الغلاف -->
@@ -31,6 +32,7 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import TheHeader from "../layout/TheHeader.vue";
 const fileInput = ref(null);
 const imageUrl = ref(null);
 const noimage = ref(true);
@@ -87,6 +89,8 @@ function resizeImage(imageSrc, maxWidth, maxHeight, callback) {
   img.src = imageSrc;
 }
 </script>
+
+
 
 <style scoped>
 .profile-container {
@@ -163,7 +167,7 @@ footer {
   border-radius: 5px;
   cursor: pointer;
 }
-.ul{
+.ul {
   background-color: azure;
 }
 </style>

@@ -132,16 +132,18 @@ export const useCounterStore = defineStore( 'autStore', {
     
   })
   const responseData =await response.json()
- console.log(responseData.success)
+
  
   if (!response.ok){
     const error = response.message || 'something went wrong'
+    console.log(response.ok + 'LOGIN response')
     throw error
   }
-   if(responseData.success)
+   if(response.ok)
    {
-   this.token = responseData.token
-    console.log(this.isAuth)
+    // console.log(response.ok + 'LOGIN response')
+  //  this.token = responseData.token
+  //   console.log(this.isAuth)
    }
   }
   catch(error){
@@ -152,13 +154,13 @@ export const useCounterStore = defineStore( 'autStore', {
 
 
   async signup(payload){
-   console.log (payload.name)
-   console.log (payload.userName)
-   console.log (payload.phone)
-   console.log (payload.email)
-   console.log (payload.password)
-   console.log (payload.location)
-   console.log (typeof(payload.gender))
+  //  console.log (payload.name)
+  //  console.log (payload.userName)
+  //  console.log (payload.phone)
+  //  console.log (payload.email)
+  //  console.log (payload.password)
+  //  console.log (payload.location)
+  //  console.log (typeof(payload.gender))
   
    const currentDate = new Date();
    const isoDateString = currentDate.toISOString();
@@ -185,12 +187,19 @@ export const useCounterStore = defineStore( 'autStore', {
     })
 
     if (!response.ok){
+      console.log(response.status +"response.ok")
+      console.log(response.description  +"response.description")
       const error = response.description || 'something went wrong'
       throw error
+      
     }
-    const responseData = await response.json();
-     console.log(responseData + 'responebody')
+    
+     if(response.ok)
+     {
+     console.log(response.ok)
+     }
   } 
+  
   catch(error){
     throw error
   }
