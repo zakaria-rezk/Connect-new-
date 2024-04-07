@@ -1,5 +1,5 @@
 <template>
-          <Error v-show="serverError"  @tryclose="cloesError"/>
+          <Error v-show="store.serverError"  @tryclose="cloesError" />
   <div class="parent">
     
     <div class="register">
@@ -105,6 +105,8 @@
 </template>
 
 <script setup>
+import { useRouter } from "vue-router";
+const router = useRouter();
 import { reactive, computed, ref } from "vue";
 import { useCounterStore } from "../../sotre.js/authentication/authSotre.js";
 import Error from "../UI/Error.vue";
@@ -195,8 +197,8 @@ const registerValidtion = () => {
   }
 };
 
-const dispathchLoginAction = () => {
-console.log(userNmae.value)
+const dispathchLoginAction = async () => {
+
   registerValidtion();
   if (
     isValidpass.value &&
@@ -210,21 +212,20 @@ console.log(userNmae.value)
   ) {
     const signupData = {
       name: fullName.value,
-      userName:userNmae.value,
       email: registerData.email.value,
       password: registerData.password.value,
       gender: registerData.gender.value === 'ذكر' ? 1 : 2,
       location: location.value, 
       phone:registerData.phone.value
     };
-      console.log(signupData.phone + typeof(signupData.phone))
-      store.signup(signupData);
+    console.log(signupData + "signup in component")
+    await  store.signup(signupData);
   }
+ 
   if (store.isAuth) {
     console.log('is auth')
     router.replace("/Connect.Com");
   }
-
   ///dispatch logic
 };
 const cloesError = () =>{
