@@ -12,8 +12,11 @@
 </template>
 <script setup>
 import { defineEmits } from 'vue';
+import { useCounterStore } from "../../sotre.js/authentication/authSotre.js";
+const store =useCounterStore();
 const emit =defineEmits(['tryclose'])
 const handelError =() =>{
+ 
   emit('tryclose')
 }
 
@@ -66,9 +69,11 @@ background-color: rgb(249, 241, 230);
  button:hover{
   transform: scale(1.1);
  }
-@media (max-width: 768px) {
+
+@media (max-width: 490px) {
   .body {
-   
+   position: absolute;
+   right: 80px;
     
   }
 }

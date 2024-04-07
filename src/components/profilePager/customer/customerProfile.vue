@@ -5,13 +5,13 @@
       <!-- صورة الغلاف -->
       <img
         class="rounded"
-        src="../../assets/WhatsApp Image 2023-06-20 at 09.11.46.jpg"
+        src="C:\Users\zekor\Connect-new-\src\assets\WhatsApp Image 2023-06-20 at 09.11.46.jpg"
       />
     </div>
     <div class="profile-info">
       <div class="profile-picture">
         <!-- صورة الصفحة الشخصية -->
-        <img v-if="noimage" src="../../assets/css/cuties_3.jpeg" />
+        <img v-if="noimage" src="C:\Users\zekor\Connect-new-\src\assets\css\cuties_3.jpeg" />
         <img :src="imageUrl" />
       </div>
       <label for="fileInput" class="custom-file-upload"> تعديل الصورة </label>
@@ -32,7 +32,7 @@
 </template>
 <script setup>
 import { ref } from "vue";
-import TheHeader from "../layout/TheHeader.vue";
+import TheHeader from "@/components/layout/TheHeader.vue";
 const fileInput = ref(null);
 const imageUrl = ref(null);
 const noimage = ref(true);
