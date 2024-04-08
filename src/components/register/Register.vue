@@ -1,5 +1,7 @@
 <template>
+          <Error v-show="serverError"  @tryclose="cloesError"/>
   <div class="parent">
+    
     <div class="register">
       <div class="wrapernotstrap">
         <form @submit.prevent="dispathchLoginAction">
@@ -27,17 +29,18 @@
             />
             <input
               type="text"
-              placeholder="*ادخل كلمة المرور"
+              :placeholder="registerData.password.errorMessage ? 'ادخال حرف كبير وصغير وعلامة' :'*ادخل كلمة المرور'"
               v-model="registerData.password.value"
               ref="passwordInput"
             />
+            
           </div>
           <div class="inputField">
             <input
               type="tel"
-              placeholder="ادخل رقم الهاتف المحمول"
+              :placeholder="registerData.phone.errorMessage ? 'رقم الهاتف غير صحيح' :'ادخل رقم الهاتف'"
               v-model="registerData.phone.value"
-              ref="emailInput"
+              ref="phoneInput"
             />
           
           </div>
@@ -71,7 +74,7 @@
             <select
               id="city"
               v-model="registerData.city.value"
-              ref="refernce.cityInput"
+              ref="cityInput"
             >
               <option value="" disabled selected hidden>المدينة</option>
               <option
@@ -104,6 +107,7 @@
 <script setup>
 import { reactive, computed, ref } from "vue";
 import { useCounterStore } from "../../sotre.js/authentication/authSotre.js";
+import Error from "../UI/Error.vue";
 const store = useCounterStore();
 
 const egyptGovernorates = store.egyptGovernorates;
@@ -165,6 +169,7 @@ const registerValidtion = () => {
     lastNameInput.value.classList.add("error");
   }
   if (!isValidEmail.value) {
+    console.log(!isValidEmail.value)
     registerData.email.errorMessage = true;
     emailInput.value.classList.add("error");
   }
@@ -185,8 +190,8 @@ const registerValidtion = () => {
     cityInput.value.classList.add("error");
   }
   if (!isValidPhone.value) {
-    registerData.city.errorMessage = true;
-    refernce.cityInput.value.classList.add("error");
+    registerData.phone.errorMessage = true;
+    phoneInput.value.classList.add("error");
   }
 };
 
@@ -215,10 +220,16 @@ console.log(userNmae.value)
       console.log(signupData.phone + typeof(signupData.phone))
       store.signup(signupData);
   }
+  if (store.isAuth) {
+    console.log('is auth')
+    router.replace("/Connect.Com");
+  }
 
   ///dispatch logic
 };
-
+const cloesError = () =>{
+  console.log("dfsfdsfdsfdsf")
+}
 const firstNameInput = ref();
 const lastNameInput = ref();
 const emailInput = ref();
@@ -226,6 +237,7 @@ const passwordInput = ref();
 const genderInput = ref();
 const goverInput = ref();
 const cityInput = ref();
+const phoneInput=ref();
 </script>
 <style scoped>
 .parent {
@@ -252,6 +264,7 @@ const cityInput = ref();
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
 }
 .wrapernotstrap form {
   display: flex;
@@ -260,7 +273,7 @@ const cityInput = ref();
   align-items: center;
   background-color: rgb(255, 255, 255);
   flex-basis: 550px;
-  flex-grow: 1;
+  flex: 1;
 }
 .wrapernotstrap form button {
   background-color: var(--btn-color);
@@ -286,21 +299,27 @@ select {
   width: 100%;
   height: 60px;
   border-color: rgb(13, 159, 207) rgb(17, 81, 231);
-  margin: 1rem;
+  margin: 0.7rem;
   border-radius: 25px;
+
+ 
 }
 
 .wrapernotstrap .inputField select {
   font-size: 20px;
+  padding: 10px;
 }
+
 
 .wrapernotstrap input::placeholder {
   color: rgb(49, 51, 57);
   font-size: 20px;
   font-weight: 200;
   float: right;
-  margin-right: 5px;
+  margin-right: 10px;
   color: rgb(64, 64, 64);
+  
+  
 }
 .wrapernotstrap .inputField .error {
   color: rgb(186, 16, 50);
@@ -342,6 +361,11 @@ a {
 @media (max-width: 768px) {
   .logo {
     display: none;
+  }
+}
+@media (max-width: 425px) {
+  .form {
+    margin-top:1rem ;
   }
 }
 </style>
