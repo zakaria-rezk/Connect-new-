@@ -1,7 +1,13 @@
 <template>
   <TheHeader />
   <div class="profile">
-   
+    <div class="cover-photo">
+      <!-- صورة الغلاف -->
+      <img
+        class="rounded"
+        src="../../assets/WhatsApp Image 2023-06-20 at 09.11.46.jpg"
+      />
+    </div>
     <div class="profile-info">
       <div class="profile-picture">
         <!-- صورة الصفحة الشخصية -->
