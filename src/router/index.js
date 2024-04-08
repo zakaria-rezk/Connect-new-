@@ -24,11 +24,7 @@ import { createRouter, createWebHistory } from 'vue-router';
       name:'customerWithId' ,
       component: ()=> import ('../components/profilePager/customer/customerProfile.vue')
     },
-    {
-      path: '/customer',
-      name:'customer' ,
-      component: ()=> import ('../components/profilePager/customer/customerProfile.vue')
-    },
+  
    
     {
       path: '/HotelAdmin',
