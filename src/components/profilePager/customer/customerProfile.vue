@@ -3,16 +3,26 @@
     <div class="cover-photo">
       <!-- صورة الغلاف -->
       <img
+<<<<<<<<< Temporary merge branch 1:src/components/profilePager/CustomerProfile.vue
+        class="rounded"
         src="../../assets/WhatsApp Image 2023-06-20 at 09.11.46.jpg"
+=========
+        src="../../../assets/WhatsApp Image 2023-06-20 at 09.11.46.jpg"
+>>>>>>>>> Temporary merge branch 2:src/components/profilePager/customer/customerProfile.vue
       />
     </div>
     <div class="profile-info">
       <div class="profile-picture">
         <!-- صورة الصفحة الشخصية -->
+<<<<<<<<< Temporary merge branch 1:src/components/profilePager/CustomerProfile.vue
+        <img v-if="noimage" src="../../assets/css/cuties_3.jpeg" />
+        <img :src="imageUrl" />
+=========
         <img
-          src="../../assets/WhatsApp Image 2023-06-20 at 09.11.46.jpg"
+          src="../../../assets/_ZOF0026.JPG"
           alt=""
         />
+>>>>>>>>> Temporary merge branch 2:src/components/profilePager/customer/customerProfile.vue
       </div>
       <h1>عبدالله سعيد</h1>
       <h1>قنا</h1>
@@ -28,7 +38,68 @@
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import TheHeader from "../layout/TheHeader.vue";
+const fileInput = ref(null);
+const imageUrl = ref(null);
+const noimage = ref(true);
+const zeko = () => {
+  console.log("dsfdsf");
+};
+const handleFileChange = () => {
+  const file = fileInput.value.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      resizeImage(event.target.result, 300, 200, (resizedImage) => {
+        imageUrl.value = resizedImage;
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+  noimage.value = false;
+};
+function resizeImage(imageSrc, maxWidth, maxHeight, callback) {
+  const img = new Image();
+  img.onload = () => {
+    const width = img.width;
+    const height = img.height;
+
+    let newWidth = width;
+    let newHeight = height;
+
+    // Calculate new width and height maintaining aspect ratio
+    if (width > maxWidth) {
+      newWidth = maxWidth;
+      newHeight = (height * maxWidth) / width;
+    }
+    if (newHeight > maxHeight) {
+      newHeight = maxHeight;
+      newWidth = (width * maxHeight) / height;
+    }
+
+    // Create a canvas element to draw the resized image
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = newWidth;
+    canvas.height = newHeight;
+
+    // Draw the image on the canvas
+    ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+    // Get the data URL of the resized image
+    const resizedImage = canvas.toDataURL("image/jpeg");
+
+    // Call the callback function with the resized image data URL
+    callback(resizedImage);
+  };
+  img.src = imageSrc;
+}
+</script>
+
+
+
 <style scoped>
 .profile-container {
   /* max-width: 800px; */
