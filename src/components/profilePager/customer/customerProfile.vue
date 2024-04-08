@@ -5,7 +5,7 @@
       <!-- صورة الغلاف -->
       <img
         class="rounded"
-        src="../../assets/WhatsApp Image 2023-06-20 at 09.11.46.jpg"
+        src="C:\Users\zekor\Connect-new-\src\assets\WhatsApp Image 2023-06-20 at 09.11.46.jpg"
       />
     </div>
     <div class="profile-info">
