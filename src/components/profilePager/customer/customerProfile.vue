@@ -1,13 +1,7 @@
 <template>
   <TheHeader />
   <div class="profile">
-    <div class="cover-photo">
-      <!-- صورة الغلاف -->
-      <img
-        class="rounded"
-        src="C:\Users\zekor\Connect-new-\src\assets\WhatsApp Image 2023-06-20 at 09.11.46.jpg"
-      />
-    </div>
+   
     <div class="profile-info">
       <div class="profile-picture">
         <!-- صورة الصفحة الشخصية -->
@@ -116,7 +110,7 @@ function resizeImage(imageSrc, maxWidth, maxHeight, callback) {
 
 .profile-picture {
   position: relative;
-
+   top: 10px;
   bottom: 30px;
   width: 300px; /* قطر صورة الصفحة الشخصية */
   height: 200px;

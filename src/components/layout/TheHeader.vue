@@ -33,7 +33,7 @@
         <ul class="navbar-nav">
           <!-- Login Link -->
           <li class="nav-item" v-show="isAuth">
-            <router-link :to="{ name: 'customer' }" class="nav-link">حسابي</router-link>
+            <router-link :to="{ name: 'customerWithId', params:{ id:token }}" class="nav-link" @click="showtoken">حسابي</router-link>
           </li>
           
           <li class="nav-item" v-show="!isAuth">
@@ -51,9 +51,17 @@
 </template>
 
 <script setup>
+
 import { useCounterStore } from "../../sotre.js/authentication/authSotre.js";
 const store = useCounterStore();
 const isAuth =store.isAuth
+const token =store.token || 'sdfsdfs'
+const showtoken =()=>{
+  console.log(token)
+}
+// onMounted(() => {
+//       console.log(store.state.token + 'd');
+//     });
 </script>
 
 <style scoped>
