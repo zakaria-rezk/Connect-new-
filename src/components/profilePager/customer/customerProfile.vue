@@ -1,9 +1,9 @@
 <template>
   <TheHeader />
   <div class="profile">
-  git 
+
     <div class="profile-info">
-      <div class="profile-picture">
+      <div class="profile-picture mb-3">
         <!-- صورة الصفحة الشخصية -->
         <img v-if="noimage" src="C:\Users\zekor\Connect-new-\src\assets\css\cuties_3.jpeg" />
         <img :src="imageUrl" />
@@ -19,20 +19,42 @@
       />
       <h1>عبدالله سعيد</h1>
       <h1>قنا</h1>
-      <h4 style="color: #0921f8">اعدادات حسابى</h4>
-      <hr style="margin: 20px" />
+      
+      
+    </div>
+    <div class="container bg-gray-300">
+  <div class="row">
+    <div class="col">
+      <div class="custom-btn-container">
+       <router-link :to="{name: 'aboutCustomer'}"  :class="{ 'btn-warning': activeLink === 'aboutCustomer' }"  ref="aboutCustomerLink" class="btn link m-1 btn-selected الشخصي" @click="handleColor('aboutCustomer')">الملف الشخصي</router-link>
+        <router-link  :to="{name: 'customerProtfolio'}"  :class="{ 'btn-warning': activeLink === 'customerProtfolio' }" class="btn m-1 link  btn-selected الاعمال  "  @click="handleColor('customerProtfolio')"> معرض الاعمال</router-link> 
+        <router-link :to="{name: 'customerProjects'}" :class="{ 'btn-warning': activeLink === 'customerProjects' }" @click="handleColor('customerProjects')" class="btn m-1 link  btn-selected المشاريع"> المشاريع</router-link>
+        <router-view />
+      </div>
+    </div>
+    <div class="col-auto ml-auto">
+      <button class="btn btn-primary m-1">اعدادات حسابى</button>
     </div>
   </div>
+</div>
+  </div>
+
 </template>
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import TheHeader from "@/components/layout/TheHeader.vue";
+import router from "@/router";
 const fileInput = ref(null);
 const imageUrl = ref(null);
 const noimage = ref(true);
-const zeko = () => {
-  console.log("dsfdsf");
-};
+const aboutCustomerLink =ref(null)
+const activeLink =ref('aboutCustomer')
+
+const handleColor =  (par) =>{
+  activeLink.value =par
+     
+  }
+
 const handleFileChange = () => {
   const file = fileInput.value.files[0];
   if (file) {
@@ -81,12 +103,25 @@ function resizeImage(imageSrc, maxWidth, maxHeight, callback) {
     callback(resizedImage);
   };
   img.src = imageSrc;
+
 }
+onMounted(() => {
+      // Trigger a click event on the aboutCustomerLink router link after the component is mounted
+      console.log('onmounted')
+      router.push({name: 'aboutCustomer'})   
+  })
 </script>
 
 
 
 <style scoped>
+.profile{
+  background-color: #f2f2f2;
+}
+
+custom-btn-container button {
+  background-color: #ca1212;
+}
 .profile-container {
   /* max-width: 800px; */
   width: 70%;
@@ -94,16 +129,9 @@ function resizeImage(imageSrc, maxWidth, maxHeight, callback) {
   padding: 5px;
 }
 
-.cover-photo {
-  /* width: 100%; */
-  height: 300px;
-  /* background: url("cover-photo.jpg") no-repeat center center/cover; */
-}
-.cover-photo img {
-  object-position: center;
-  object-fit: fill;
-}
+
 .profile-info {
+  
   text-align: center;
   padding: 20px 0;
 }
@@ -122,37 +150,13 @@ function resizeImage(imageSrc, maxWidth, maxHeight, callback) {
   box-shadow: 0 90px 25px rgba(0, 0, 0, 0.1);
   object-fit: cover;
 }
-.grid-container {
-  display: flex;
-  justify-content: center;
-  /* flex-direction: column; */
-  flex-wrap: wrap;
-  width: 100%;
-  /* display: grid; */
-  /* grid-template-columns: repeat(2, 1fr); */
-  /* gap: 20px; */
-  /* margin-top: 20px; */
-}
 
-.grid-item {
-  background-color: #f2f2f2;
-  padding: 20px;
-  margin: 5px;
-  text-align: center;
-  width: 45%;
-  color: #f2f2f2;
-  background-color: var(--btn-color);
-  border-radius: 20px;
-}
 
 footer {
   margin-top: 40px;
   text-align: center;
 }
-.cover-photo img {
-  width: 100%;
-  height: 380px;
-}
+
 .custom-file-upload {
   display: inline-block;
   padding: 10px 20px;

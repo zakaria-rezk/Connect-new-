@@ -22,7 +22,24 @@ import { createRouter, createWebHistory } from 'vue-router';
     {
       path: '/customer/:id',
       name:'customerWithId' ,
-      component: ()=> import ('../components/profilePager/customer/customerProfile.vue')
+      component: ()=> import ('../components/profilePager/customer/customerProfile.vue'),
+      children:[
+        {
+          path: 'about',
+          name: 'aboutCustomer',
+          component: () => import('../components/profilePager/customer/aboutCustomer.vue')
+    },
+    {
+      path: 'projects',
+      name: 'customerProjects',
+      component: () => import('../components/profilePager/customer/customerProject.vue')
+},
+{
+  path: 'protfolio',
+  name: 'customerProtfolio',
+  component: () => import('../components/profilePager/customer/customerProtfolio.vue')
+},
+      ]
     },
   
    

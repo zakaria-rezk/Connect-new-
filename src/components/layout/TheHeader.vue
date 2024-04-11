@@ -20,10 +20,10 @@
             <router-link :to="{name:'reservation-categories'}" class="nav-link">الحجوزات</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/link3" class="nav-link">الخدمات</router-link>
+            <router-link to="/" class="nav-link">الخدمات</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/link4" class="nav-link">تواصل معنا</router-link>
+            <router-link to="/" class="nav-link">تواصل معنا</router-link>
           </li>
         </ul>
       </div>
@@ -54,10 +54,11 @@
 
 import { useCounterStore } from "../../sotre.js/authentication/authSotre.js";
 const store = useCounterStore();
-const isAuth =store.isAuth
+const isAuth =localStorage.getItem('token');
 const token =store.token || 'sdfsdfs'
+
 const showtoken =()=>{
-  console.log(token)
+  // console.log(token)
 }
 // onMounted(() => {
 //       console.log(store.state.token + 'd');

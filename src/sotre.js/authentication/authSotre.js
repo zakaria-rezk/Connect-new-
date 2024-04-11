@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 export const useCounterStore = defineStore( 'autStore', {
   
   state:() => ({
+  error :false,
   expiration:null,
   token:null,
   serverError:false,
@@ -116,7 +117,7 @@ export const useCounterStore = defineStore( 'autStore', {
   },
   actions :{
  async login(payload){
-  console.log(payload)
+
 
  try{ const response =await fetch('https://localhost:7165/api/Account/login',{
     method:'POST',
@@ -132,16 +133,19 @@ export const useCounterStore = defineStore( 'autStore', {
     
   })
   const responseData =await response.json()
-
+console.log(response)
  
   if (!response.ok){
-    const error = response.message || 'something went wrong'
-    console.log(response.ok + 'LOGIN response')
+     this.error = true;
     throw error
+  }
+  if(response.status > 400){
+    console.log('400')
+    console.log(response.body)
   }
    if(response.ok)
    {
-    console.log("ok")
+    
    this.token = responseData.token
    localStorage.setItem('token', responseData.token);
    }
@@ -157,7 +161,7 @@ export const useCounterStore = defineStore( 'autStore', {
 
    const currentDate = new Date();
    const isoDateString = currentDate.toISOString();
-   console.log (payload + "patload")
+   
    try { const response = await fetch('https://localhost:7165/api/Account/register',{
       method:'POST',
       headers: {

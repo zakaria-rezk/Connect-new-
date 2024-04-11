@@ -9,7 +9,7 @@
           v-model="loginData.email.value"
           ref="emailInput"
         />
-        <p class="error forgetpass" v-if="loginData.email.errorMessage">
+        <p class="error forgetpass" v-if="loginData.email.errorMessage || store.error">
           تاكد من عنوان بريدك الالكتروني
         </p>
         <input
@@ -18,7 +18,7 @@
           placeholder="*ادخل كلمة المرور"
           v-model="loginData.password.value"
         />
-        <p class="error forgetpass" v-if="loginData.password.errorMessage">
+        <p class="error forgetpass" v-if="loginData.password.errorMessage || store.error">
           تاكد من كلمة المرور الخاصة بك
         </p>
 
@@ -72,7 +72,7 @@ const isValidpass = computed(() => {
 // loginData.emailErrorMessage =false;
 // loginData.passwordErrorMessage =false;
 const emialvaladition = () => {
-  console.log(emailInput.value);
+console.log('store.error'+ store.error)
   if (!isValidemail.value) {
     loginData.email.errorMessage = true;
     emailInput.value.classList.add("error");
