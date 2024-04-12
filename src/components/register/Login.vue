@@ -40,10 +40,10 @@
 </template>
 <script setup>
 import { computed, reactive, ref } from "vue";
-import { useCounterStore } from "../../sotre.js/authentication/authSotre.js";
+import { authStore } from "../../sotre.js/authentication/authSotre.js";
 import { useRouter } from "vue-router";
 const router = useRouter();
-const store = useCounterStore();
+const store = authStore();
 
 const loginData = reactive({
   email: {
@@ -95,7 +95,7 @@ console.log('store.error'+ store.error)
   }
 
   if (store.isAuth) {
-    console.log('is auth')
+    
     router.replace("/Connect.Com");
   }
 };

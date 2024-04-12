@@ -33,7 +33,10 @@
         <ul class="navbar-nav">
           <!-- Login Link -->
           <li class="nav-item" v-show="isAuth">
-            <router-link :to="{ name: 'customerWithId', params:{ id:token }}" class="nav-link" @click="showtoken">حسابي</router-link>
+            <router-link :to="{ name: 'customerWithId', params:{ id:token }}" class="nav-link">حسابي</router-link>
+          </li>
+          <li class="nav-item" v-show="isAuth">
+            <router-link :to="{ name: 'Login' }" class="nav-link" @click="logout">تسجيل خروج</router-link>
           </li>
           
           <li class="nav-item" v-show="!isAuth">
@@ -52,17 +55,17 @@
 
 <script setup>
 
-import { useCounterStore } from "../../sotre.js/authentication/authSotre.js";
-const store = useCounterStore();
-const isAuth =localStorage.getItem('token');
-const token =store.token || 'sdfsdfs'
+import { ref } from "vue";
+import { authStore } from "../../sotre.js/authentication/authSotre.js";
+const store = authStore();
+const counter =ref(1)
+const isAuth =localStorage.getItem('token') || null
+const token =localStorage.getItem('token') || 'elia'
 
-const showtoken =()=>{
-  // console.log(token)
+const logout=()=>{
+ store.logout()
 }
-// onMounted(() => {
-//       console.log(store.state.token + 'd');
-//     });
+
 </script>
 
 <style scoped>

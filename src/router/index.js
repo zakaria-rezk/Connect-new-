@@ -8,21 +8,25 @@ import { createRouter, createWebHistory } from 'vue-router';
       path: '/login',
       name:'Login',
       component: ()=> import('../components/register/Login.vue'),
+      meta:{requierAuth:true},
     },
     {
       path: '/register',
       name:'register',
       component: ()=> import('../components/register/Register.vue'),
+      meta:{requierAuth:false},
     },
     {
       path: '/Connect.Com',
       name:'connect',
       component: ()=> import('../components/pages/HomePage.vue'),
+      
     },
     {
       path: '/customer/:id',
       name:'customerWithId' ,
       component: ()=> import ('../components/profilePager/customer/customerProfile.vue'),
+      meta:{requierAuth:true},
       children:[
         {
           path: 'about',
@@ -83,4 +87,10 @@ import { createRouter, createWebHistory } from 'vue-router';
     // ...other routes
   ],
 });
+router.beforeEach(async (to, from)=>{
+  if(to.meta.requierAuth){
+    return '/ReservationCategories'
+  }
+
+})
 export default router;

@@ -12,8 +12,8 @@
 </template>
 <script setup>
 import { defineEmits } from 'vue';
-import { useCounterStore } from "../../sotre.js/authentication/authSotre.js";
-const store =useCounterStore();
+import { authStore } from "../../sotre.js/authentication/authSotre.js";
+const store =authStore();
 const emit =defineEmits(['tryclose'])
 const handelError =() =>{
  

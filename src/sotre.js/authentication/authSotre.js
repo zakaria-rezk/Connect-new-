@@ -1,12 +1,13 @@
 
 import { defineStore } from 'pinia'
 
-export const useCounterStore = defineStore( 'autStore', {
+export const authStore = defineStore( 'autStore', {
   
   state:() => ({
   error :false,
   expiration:null,
   token:null,
+  userName:null,
   serverError:false,
   egyptGovernorates: [
     "القاهرة",
@@ -117,7 +118,7 @@ export const useCounterStore = defineStore( 'autStore', {
   },
   actions :{
  async login(payload){
-
+console.log(payload.userName + 'usernaem')
 
  try{ const response =await fetch('https://localhost:7165/api/Account/login',{
     method:'POST',
@@ -148,6 +149,7 @@ console.log(response)
     
    this.token = responseData.token
    localStorage.setItem('token', responseData.token);
+   this.userName=payload.userName
    }
   }
   catch(error){
@@ -189,9 +191,11 @@ console.log(response)
       
     }
     if(response.ok){
+      
       const login ={
         email:payload.email,
         password:payload.password,
+        userName:payload.name
       }
     await this.login(login)
     }
@@ -206,6 +210,10 @@ console.log(response)
     throw error
   }
   
+  },
+  logout(){
+    localStorage.removeItem('token');
+        this.token=null
   }
 }
 })

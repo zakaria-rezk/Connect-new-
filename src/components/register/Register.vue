@@ -108,9 +108,9 @@
 import { useRouter } from "vue-router";
 const router = useRouter();
 import { reactive, computed, ref } from "vue";
-import { useCounterStore } from "../../sotre.js/authentication/authSotre.js";
+import { authStore } from "../../sotre.js/authentication/authSotre.js";
 import Error from "../UI/Error.vue";
-const store = useCounterStore();
+const store = authStore();
 
 const egyptGovernorates = store.egyptGovernorates;
 const egyptCities = store.egyptCities;

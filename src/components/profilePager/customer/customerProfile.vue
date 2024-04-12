@@ -9,6 +9,7 @@
         <img :src="imageUrl" />
       </div>
       <label for="fileInput" class="custom-file-upload"> تعديل الصورة </label>
+      <FontAwesomeIcon icon={faEnvelope} />
       <input
         type="file"
         id="fileInput"
@@ -17,19 +18,24 @@
         ref="fileInput"
         style="display: none"
       />
-      <h1>عبدالله سعيد</h1>
-      <h1>قنا</h1>
-      
-      
+      <div class="userData d-flex justify-content-center fs-5 ">
+       <p><font-awesome-icon icon="fa-solid fa-user"   /></p> 
+      <p class="px-1">عبدالله سعيد</p>
+      <p><font-awesome-icon icon="fa-solid fa-location"   /></p> 
+      <p class="px-2">قنا</p>
+    </div>
+      <div>
+        <p>صنايعي الوميتال</p>
+      </div>
     </div>
     <div class="container bg-gray-300">
   <div class="row">
     <div class="col">
       <div class="custom-btn-container">
-       <router-link :to="{name: 'aboutCustomer'}"  :class="{ 'btn-warning': activeLink === 'aboutCustomer' }"  ref="aboutCustomerLink" class="btn link m-1 btn-selected الشخصي" @click="handleColor('aboutCustomer')">الملف الشخصي</router-link>
-        <router-link  :to="{name: 'customerProtfolio'}"  :class="{ 'btn-warning': activeLink === 'customerProtfolio' }" class="btn m-1 link  btn-selected الاعمال  "  @click="handleColor('customerProtfolio')"> معرض الاعمال</router-link> 
-        <router-link :to="{name: 'customerProjects'}" :class="{ 'btn-warning': activeLink === 'customerProjects' }" @click="handleColor('customerProjects')" class="btn m-1 link  btn-selected المشاريع"> المشاريع</router-link>
-        <router-view />
+       <router-link :to="{name: 'aboutCustomer'}"  :class="{ 'btn-primary': activeLink === 'aboutCustomer' }"  ref="aboutCustomerLink" class="btn link m-1 btn-selected الشخصي" @click="handleColor('aboutCustomer')">الملف الشخصي</router-link>
+        <router-link  :to="{name: 'customerProtfolio'}"  :class="{ 'btn-primary': activeLink === 'customerProtfolio' }" class="btn m-1 link  btn-selected الاعمال  "  @click="handleColor('customerProtfolio')"> معرض الاعمال</router-link> 
+        <router-link :to="{name: 'customerProjects'}" :class="{ 'btn-primary': activeLink === 'customerProjects' }" @click="handleColor('customerProjects')" class="btn m-1 link  btn-selected المشاريع"> المشاريع</router-link>
+     
       </div>
     </div>
     <div class="col-auto ml-auto">
@@ -38,16 +44,19 @@
   </div>
 </div>
   </div>
-
+  <div class="container">
+  <router-view />
+</div>
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
 import TheHeader from "@/components/layout/TheHeader.vue";
 import router from "@/router";
+
 const fileInput = ref(null);
 const imageUrl = ref(null);
 const noimage = ref(true);
-const aboutCustomerLink =ref(null)
+
 const activeLink =ref('aboutCustomer')
 
 const handleColor =  (par) =>{
@@ -107,7 +116,7 @@ function resizeImage(imageSrc, maxWidth, maxHeight, callback) {
 }
 onMounted(() => {
       // Trigger a click event on the aboutCustomerLink router link after the component is mounted
-      console.log('onmounted')
+    
       router.push({name: 'aboutCustomer'})   
   })
 </script>

@@ -15,13 +15,15 @@ import 'flatpickr/dist/flatpickr.min.css';
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faLocation } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faBars)
+library.add(faLocation,faUser)
 const app=createApp(App)
 app.use(createPinia())
-app.component('FontAwesome', FontAwesomeIcon)
+app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(router)
 app.use(bootstrap)
 app.mount('#app')
