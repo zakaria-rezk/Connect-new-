@@ -29,11 +29,11 @@
             />
             <input
               type="text"
-              :placeholder="registerData.password.errorMessage ? 'ادخال حرف كبير وصغير وعلامة' :'*ادخل كلمة المرور'"
+              placeholder= '*ادخل كلمة المرور'
               v-model="registerData.password.value"
               ref="passwordInput"
             />
-            
+            <p v-if="registerData.password.errorMessage">يجب ان تحتوي كلمة المررو ع حرف صغير وكبير وعلامة</p>
           </div>
           <div class="inputField">
             <input
@@ -294,6 +294,19 @@ const phoneInput=ref();
   display: flex;
   width: 100%;
   justify-content: flex-start;
+  
+  position: relative;
+}
+.wrapernotstrap .inputField p{
+  position:absolute;
+  right: 280px;
+  top: 70px;
+  font-size:12px ;
+  color: rgb(249, 0, 0);
+  font-weight: lighter;
+ 
+  
+ 
 }
 .wrapernotstrap .inputField input,
 select {
