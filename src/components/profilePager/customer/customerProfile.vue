@@ -8,9 +8,10 @@
         <img v-if="noimage" src="C:\Users\zekor\Connect-new-\src\assets\css\cuties_3.jpeg" />
         <img :src="imageUrl" />
       </div>
-      <label for="fileInput" class="custom-file-upload"> تعديل الصورة </label>
+      <label for="fileInput btn" class="custom-file-upload bg-primary"> تعديل الصورة </label>
       <FontAwesomeIcon icon={faEnvelope} />
       <input
+      class="bg-primary btn"
         type="file"
         id="fileInput"
         @change="handleFileChange"
@@ -33,7 +34,7 @@
     <div class="col">
       <div class="custom-btn-container">
        <router-link :to="{name: 'aboutCustomer'}"  :class="{ 'btn-primary': activeLink === 'aboutCustomer' }"  ref="aboutCustomerLink" class="btn link m-1 btn-selected الشخصي" @click="handleColor('aboutCustomer')">الملف الشخصي</router-link>
-        <router-link  :to="{name: 'customerProtfolio'}"  :class="{ 'btn-primary': activeLink === 'customerProtfolio' }" class="btn m-1 link  btn-selected الاعمال  "  @click="handleColor('customerProtfolio')"> معرض الاعمال</router-link> 
+        <router-link  :to="{name: 'customerProtfolio'}"  :class="{ 'btn-primary': activeLink === 'customerProtfolio' }" class="btn m-1 link  btn-selected الاعمال  "  @click="handleColor('customerProtfolio')"> الخدمات </router-link> 
         <router-link :to="{name: 'customerProjects'}" :class="{ 'btn-primary': activeLink === 'customerProjects' }" @click="handleColor('customerProjects')" class="btn m-1 link  btn-selected المشاريع"> المشاريع</router-link>
      
       </div>
@@ -126,6 +127,7 @@ onMounted(() => {
 <style scoped>
 .profile{
   background-color: #f2f2f2;
+  
 }
 
 custom-btn-container button {
@@ -169,7 +171,7 @@ footer {
 .custom-file-upload {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #007bff;
+  
   color: #fff;
   border-radius: 5px;
   cursor: pointer;

@@ -96,8 +96,8 @@ const router = createRouter({
   ],
 });
 router.beforeEach(async (to,from,next) => {
-  const store = authStore();
-  if(to.meta.requierAuth && !store.isAuth) next({name:'Login'})
+  const auth = localStorage.getItem('token')
+  if(to.meta.requierAuth && !auth) next({name:'Login'})
   else next()
   
 });
