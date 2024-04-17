@@ -118,7 +118,7 @@ export const authStore = defineStore( 'autStore', {
   },
   actions :{
  async login(payload){
-console.log(payload.userName + 'usernaem')
+
 
  try{ const response =await fetch('https://localhost:7165/api/Account/login',{
     method:'POST',
@@ -134,7 +134,7 @@ console.log(payload.userName + 'usernaem')
     
   })
   const responseData =await response.json()
-console.log(response)
+
  
   if (!response.ok){
      this.error = true;
@@ -176,8 +176,10 @@ console.log(response)
         email:payload.email,
         password:payload.password,
         confirmPassword:payload.password,
-        location:payload.location,
+        state:payload.state,
+        city:payload.city,
         gender :payload.gender,
+        street:payload.street,
         dob: isoDateString
         
       })

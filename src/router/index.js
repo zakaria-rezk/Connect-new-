@@ -5,6 +5,11 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
+      path: "/Connect.Com",
+      name: "connect",
+      component: () => import("../components/pages/HomePage.vue"),
+    },
+    {
       path: "/login",
       name: "Login",
       component: () => import("../components/register/Login.vue"),
@@ -16,11 +21,7 @@ const router = createRouter({
       component: () => import("../components/register/Register.vue"),
       meta: { requierAuth: false },
     },
-    {
-      path: "/Connect.Com",
-      name: "connect",
-      component: () => import("../components/pages/HomePage.vue"),
-    },
+  
     {
       path: "/customer/:id",
       name: "customerWithId",
@@ -30,9 +31,9 @@ const router = createRouter({
       children: [
         {
           path: "about",
-          name: "aboutCustomer",
+          name: "customerReservation",
           component: () =>
-            import("../components/profilePager/customer/aboutCustomer.vue"),
+            import("../components/profilePager/customer/customerReservation.vue"),
         },
         {
           path: "projects",
@@ -41,14 +42,27 @@ const router = createRouter({
             import("../components/profilePager/customer/customerProject.vue"),
         },
         {
-          path: "protfolio",
-          name: "customerProtfolio",
+          path: "customerMessagess",
+          name: "customerMessagess",
           component: () =>
-            import("../components/profilePager/customer/customerProtfolio.vue"),
+            import("../components/profilePager/customer/customerMessagess.vue"),
         },
+   
       ],
     },
+    {
+      path: "/bussinsPage",
+      name: "bussinsPage",
+      component: () =>
+        import("../components/bussins/bussinsPage.vue"),
+    },
 
+    {
+      path: "/bussinsPage",
+      name: "bussinsPage",
+      component: () =>
+        import("../components/bussins/bussinsPage.vue"),
+    },
     {
       path: "/HotelAdmin",
       name: "hotel-admin",
@@ -76,15 +90,10 @@ const router = createRouter({
       name: "add-freelance-buisness",
       component: () =>
         import(
-          "../components/profilePager/freelancer/addFreelanceBuisness.vue"
+          "../components/forms/addFreelanceBuisness.vue"
         ),
     },
-    {
-      path: "/addReservationBuisness",
-      name: "add-reservation-buisness",
-      component: () =>
-        import("../components/profilePager/hotel/addReservationBuisness.vue"),
-    },
+   
 
     {
       path: "/",

@@ -2,7 +2,7 @@
   <div class="container">
     <BaseCard :title="title" v-if="!services" />
 
-    <table class="table my-3">
+    <table class="table my-3" v-if="services">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -38,9 +38,8 @@ import { reactive, ref } from "vue";
 const title = "لا يوجد خدمات لعرضها";
 const serviceNum=ref(1)
 const formVisibilty = ref("none");
-const services = reactive([
-   
-  {
+const services = reactive([ 
+{
     service: "عمل شبابيك اوضة النوم الوميتال",
     price: 5000,
   },

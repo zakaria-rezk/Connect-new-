@@ -2,10 +2,22 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
       <!-- Logo -->
-      <img src="../../assets/WhatsApp_Image_2024-02-21_at_10.02.13_890990b8-removebg-preview.png" alt="" class="logo">
+      <img
+        src="../../assets/WhatsApp_Image_2024-02-21_at_10.02.13_890990b8-removebg-preview.png"
+        alt=""
+        class="logo"
+      />
 
       <!-- Toggle button for small screens -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -17,7 +29,11 @@
             <router-link to="/" class="nav-link">الرئيسية</router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="{name:'reservation-categories'}" class="nav-link">الحجوزات</router-link>
+            <router-link
+              :to="{ name: 'reservation-categories' }"
+              class="nav-link"
+              >الحجوزات</router-link
+            >
           </li>
           <li class="nav-item">
             <router-link to="/" class="nav-link">الخدمات</router-link>
@@ -33,16 +49,19 @@
         <ul class="navbar-nav">
           <!-- Login Link -->
           <li class="nav-item" v-show="isAuth">
-            <router-link :to="{ name: 'customerWithId', params:{ id:token }}" class="nav-link">حسابي</router-link>
+            <button
+              :to="{ name: 'customerWithId', params: { id: token } }"
+              class="nav-link"
+              @click="chagneverticalNavVisibilty"
+              >حسابي</button
+            >
           </li>
-          <li class="nav-item" v-show="isAuth">
-            <router-link :to="{ name: 'Login' }" class="nav-link" @click="logout">تسجيل خروج</router-link>
-          </li>
-          
-          <li class="nav-item" v-show="!isAuth">
+       
+
+           <li class="nav-item" v-show="!isAuth">
             <router-link :to="{ name: 'Login' }" class="nav-link">تسجيل الدخول</router-link>
           </li>
-          <!-- Signup Link -->
+
           <li class="nav-item" v-show="!isAuth">
             <router-link :to="{ name: 'register' }" class="nav-link">انشاء حساب</router-link>
           </li>
@@ -50,38 +69,84 @@
       </div>
     </div>
   </nav>
- 
+  <nav>
+    <div class="lol" :style="{ display: verticalNav }">
+      <ul>
+       
+
+        <router-link :to="{ name: 'customerWithId', params: { id: token } }" class="router-link"><p class="px-1"><font-awesome-icon icon="fa-solid fa-user"  class="px-1" /></p>  <li>حسابي</li>  </router-link>
+        <router-link :to="{ name: 'customerWithId', params: { id: token } }" class="router-link"><p  class="px-1"> <font-awesome-icon icon="fa-solid fa-money-check" class="px-1"  /></p> <li>نشاطي التجاري</li> </router-link>
+        <router-link :to="{ name: 'customerWithId', params: { id: token } }" class="router-link"><p  class="px-1"><font-awesome-icon icon="fa-solid fa-gears"  class="px-1" /></p> <li>الاعدادات</li> </router-link>
+
+        <router-link :to="{ name: 'Login'}" @click="logout" class="router-link"> <p  class="px-1"><font-awesome-icon icon="fa-solid fa-right-from-bracket"  class="px-1" /></p><li>تسجيل خروج</li> </router-link>
+      </ul>
+    </div>
+  </nav>
 </template>
 
 <script setup>
-
 import { ref } from "vue";
 import { authStore } from "../../sotre.js/authentication/authSotre.js";
 const store = authStore();
-const counter =ref(1)
-const isAuth =localStorage.getItem('token') || null
-const token =localStorage.getItem('token') || 'elia'
-
-const logout=()=>{
- store.logout()
+const verticalNav =ref('none')
+const isAuth = localStorage.getItem("token") || null;
+const token = localStorage.getItem("token") || "elia";
+const chagneverticalNavVisibilty=()=>{
+  verticalNav.value = verticalNav.value=== 'inline' ? 'none':'inline'
 }
-
+const logout = () => {
+  store.logout();
+};
 </script>
 
 <style scoped>
- .nav-item .nav-link {
+.lol {
+  position: absolute;
+  width: 200px;
+  z-index: 100;
+  left: 10px;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+ 
+
+  
+}
+
+.lol ul {
+  display: flex;
+  justify-content: flex-end;
+ padding: 0;
+  flex-direction: column;
+  list-style: none;
+  width: 100%;
+ 
+}
+.router-link{  
+  display: flex;
+  font-size: 1.1rem;
+  color: rgb(71, 67, 67);
+  width: 100%;
+  margin: 3px;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+.router-link:hover{
+  background-color: #f2f2f2;
+  width: 100%;
+}
+.nav-item .nav-link {
   font-size: 1.1rem; /* تكبير حجم الروابط */
   margin-right: 1rem; /* توسيع المسافات بين الروابط */
   color: aliceblue;
-  
 }
 .navbar-nav .nav-item:hover {
   background-color: var(--primarycolor);
   border-radius: 8px;
   transform: scale(1.1);
-   /* Change to your desired background color */
+  /* Change to your desired background color */
 }
-.logo{
+.logo {
   width: 90px;
   height: 45px;
 }

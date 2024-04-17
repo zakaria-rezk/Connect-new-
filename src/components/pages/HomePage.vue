@@ -1,10 +1,13 @@
 <template>
   <div class="parent">
     <TheHeader />
+   
     <!-- سلايدر -->
     <div class="slider">
       <div id="carouselExampleCaptions" class="carousel slide">
         <div class="carousel-inner">
+      
+        
           <div class="carousel-item active">
             <img
               src="../../../images/ciudad-maderas-MXbM1NrRqtI-unsplash.jpg"
@@ -121,6 +124,7 @@
   </div>
 </template>
 <style scoped>
+
 .slider img {
   height: 450px;
 }

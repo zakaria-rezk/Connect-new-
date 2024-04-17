@@ -8,8 +8,8 @@
         <img v-if="noimage" src="C:\Users\zekor\Connect-new-\src\assets\css\cuties_3.jpeg" />
         <img :src="imageUrl" />
       </div>
-      <label for="fileInput btn" class="custom-file-upload bg-primary"> تعديل الصورة </label>
-      <FontAwesomeIcon icon={faEnvelope} />
+      <label for="fileInput" class="custom-file-upload bg-primary"> تعديل الصورة </label>
+     
       <input
       class="bg-primary btn"
         type="file"
@@ -21,26 +21,26 @@
       />
       <div class="userData d-flex justify-content-center fs-5 ">
        <p><font-awesome-icon icon="fa-solid fa-user"   /></p> 
-      <p class="px-1">عبدالله سعيد</p>
-      <p><font-awesome-icon icon="fa-solid fa-location"   /></p> 
-      <p class="px-2">قنا</p>
+      <p class="px-1">{{ userData.userName }} </p>
+      <p><font-awesome-icon icon="fa-solid fa-location" /></p> 
+      <p class="px-2">{{  userData.userCity}},{{userData.userState}}</p>
     </div>
       <div>
-        <p>صنايعي الوميتال</p>
+        <p>{{ userData.userStreet }} </p>
       </div>
     </div>
     <div class="container bg-gray-300">
   <div class="row">
     <div class="col">
       <div class="custom-btn-container">
-       <router-link :to="{name: 'aboutCustomer'}"  :class="{ 'btn-primary': activeLink === 'aboutCustomer' }"  ref="aboutCustomerLink" class="btn link m-1 btn-selected الشخصي" @click="handleColor('aboutCustomer')">الملف الشخصي</router-link>
-        <router-link  :to="{name: 'customerProtfolio'}"  :class="{ 'btn-primary': activeLink === 'customerProtfolio' }" class="btn m-1 link  btn-selected الاعمال  "  @click="handleColor('customerProtfolio')"> الخدمات </router-link> 
-        <router-link :to="{name: 'customerProjects'}" :class="{ 'btn-primary': activeLink === 'customerProjects' }" @click="handleColor('customerProjects')" class="btn m-1 link  btn-selected المشاريع"> المشاريع</router-link>
+       <router-link :to="{name: 'customerReservation'}"  :class="{ 'btn-primary': activeLink === 'aboutCustomer' }"  ref="aboutCustomerLink" class="btn link m-1 btn-selected الشخصي" @click="handleColor('aboutCustomer')"> الحجوزات</router-link>
+        <router-link  :to="{name: 'customerMessagess'}"  :class="{ 'btn-primary': activeLink === 'customerProtfolio' }" class="btn m-1 link  btn-selected الاعمال  "  @click="handleColor('customerProtfolio')"> الطلبات </router-link> 
+     
      
       </div>
     </div>
-    <div class="col-auto ml-auto">
-      <button class="btn btn-primary m-1">اعدادات حسابى</button>
+    <div class="col-auto ml-auto ">
+      <router-link  :to="{name: 'add-freelance-buisness'}"  class="btn link m-1 btn-selected btn-primary"> انشاء عمل</router-link>
     </div>
   </div>
 </div>
@@ -51,21 +51,27 @@
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
+import { activeUser } from "../../../sotre.js/profile/activeUser.js";
 import TheHeader from "@/components/layout/TheHeader.vue";
 import router from "@/router";
-
+const userData =activeUser()
 const fileInput = ref(null);
 const imageUrl = ref(null);
 const noimage = ref(true);
-
 const activeLink =ref('aboutCustomer')
 
+
+
+
 const handleColor =  (par) =>{
-  activeLink.value =par
+  activeLink.value =par;
+  console.log(userData.state)
+
      
   }
 
 const handleFileChange = () => {
+  
   const file = fileInput.value.files[0];
   if (file) {
     const reader = new FileReader();
@@ -117,8 +123,10 @@ function resizeImage(imageSrc, maxWidth, maxHeight, callback) {
 }
 onMounted(() => {
       // Trigger a click event on the aboutCustomerLink router link after the component is mounted
-    
-      router.push({name: 'aboutCustomer'})   
+  userData.userData()
+ 
+      router.push({name: 'customerReservation'})   ;
+      
   })
 </script>
 

@@ -86,6 +86,16 @@
                 {{ item }}
               </option>
             </select>
+            
+          </div>
+          <div class="inputField">
+            <input
+              type="text"
+              placeholder="الشارع"
+              v-model="registerData.street.value"
+            
+            />
+          
           </div>
           <button>انشاء حساب</button>
           <p class="or">او</p>
@@ -124,6 +134,7 @@ const registerData = reactive({
   gender: { value: "", errorMessage: false },
   government: { value: "", errorMessage: false },
   city: { value: "", errorMessage: false },
+  street: { value: "", errorMessage: false },
 });
 
 const isValidfirstName = computed(() => {
@@ -156,9 +167,7 @@ const fullName = computed(() => {
 const userNmae =computed (()=>{
   return registerData.firstName.value + registerData.lastName.value;
 })
-const location = computed(() => {
-  return registerData.city.value + "," + registerData.government.value;
-});
+
 
 // termparly fn will be improved later
 const registerValidtion = () => {
@@ -214,9 +223,12 @@ const dispathchLoginAction = async () => {
       name: fullName.value,
       email: registerData.email.value,
       password: registerData.password.value,
+      phone:registerData.phone.value,
       gender: registerData.gender.value === 'ذكر' ? 1 : 2,
-      location: location.value, 
-      phone:registerData.phone.value
+      state:registerData.government.value,
+      city:registerData.city.value,
+      
+      street:registerData.street.value
     };
     console.log(signupData + "signup in component")
     await  store.signup(signupData);

@@ -12,10 +12,19 @@ import 'flatpickr/dist/flatpickr.min.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
-import { faUser } from '@fortawesome/free-solid-svg-icons'
-import { faLocation } from '@fortawesome/free-solid-svg-icons'
+import { 
+    faUser, 
+    faLocation, 
+    faRightFromBracket, 
+    faGears,
+    faMoneyCheck,
+    faShop,
+    faPhone,
+    faBriefcase,
+    faKitchenSet,faClosedCaptioning
+  } from '@fortawesome/free-solid-svg-icons';
 /* add icons to the library */
-library.add(faLocation,faUser);
+library.add(faMoneyCheck,faGears,faRightFromBracket,faLocation,faUser,faShop,faPhone,faBriefcase,faKitchenSet,faClosedCaptioning);
 
 const app=createApp(App)
 app.use(createPinia())
