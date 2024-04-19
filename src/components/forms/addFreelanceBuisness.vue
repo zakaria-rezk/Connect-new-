@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+ 
     <div class="row d-flex justify-content-center align-items-center form">
       <div class="col-md-8">
         <form id="regForm">
@@ -26,16 +27,16 @@
               ><font-awesome-icon icon="fa fa-shop"></font-awesome-icon
             ></span>
           </div>
-
+         
           <div v-show="current === 5" class="tab">
             <h6>اسم النشاط التجاري الخاص بك</h6>
             <p>
               <input
                 placeholder=". . ."
                 name="fname"
-                v-model="addBussins.name"
+                v-model="Bussins.name"
                 required
-                @focus="toNull(addBussins, 'name')"
+                @focus="toNull(Bussins, 'name')"
               />
             </p>
           </div>
@@ -45,8 +46,8 @@
               <input
                 placeholder=". . ."
                 name="dd"
-                v-model="addBussins.profession"
-                @focus="toNull(addBussins, 'profession')"
+                v-model="Bussins.profession"
+                @focus="toNull(Bussins, 'profession')"
                 required
               />
             </p>
@@ -57,8 +58,8 @@
               <input
                 placeholder=". . ."
                 name="dd"
-                v-model="addBussins.decsription"
-                @focus="toNull(addBussins, 'decsription')"
+                v-model="Bussins.decsription"
+                @focus="toNull(Bussins, 'decsription')"
                 required
               />
             </p>
@@ -70,8 +71,8 @@
               <input
                 placeholder=". . ."
                 name="email"
-                v-model="addBussins.state"
-                @focus="toNull(addBussins, 'state')"
+                v-model="Bussins.state"
+                @focus="toNull(Bussins, 'state')"
                 required
               />
             </p>
@@ -81,9 +82,9 @@
             <p>
               <input
                 placeholder=". . ."
-                v-model="addBussins.city"
+                v-model="Bussins.city"
                 required
-                @focus="toNull(addBussins, 'city')"
+                @focus="toNull(Bussins, 'city')"
               />
             </p>
           </div>
@@ -93,9 +94,9 @@
             <p>
               <input
                 placeholder=". . ."
-                v-model="addBussins.street"
+                v-model="Bussins.street"
                 required
-                @focus="toNull(addBussins, 'street')"
+                @focus="toNull(Bussins, 'street')"
               />
             </p>
           </div>
@@ -106,36 +107,62 @@
               <input
                 placeholder=". . ."
                 required
-                v-model="addBussins.phone"
-                @focus="toNull(addBussins, 'phone')"
+                type="tel"
+                v-model="Bussins.phone"
+                @focus="toNull(Bussins, 'phone')"
               />
             </p>
           </div>
-          <div class="thanks-message text-center" id="text-message">
+          
+          <div v-show="current === 0" class="tab">
+            <h6>  ادخل بعض الخدمات الذي يقدمها النشاط الخاص بك (اختياري)</h6>
+            <p>
+              <input
+                placeholder=". . ."
+                required
+                v-model="skills[0]"
+              />
+              <input
+                placeholder=". . ."
+                required
+                v-model="skills[1]"
+              />
+              <input
+                placeholder=". . ."
+                  v-model="skills[2]"
+                required 
+              />
+            </p>
+             <p class="router-link">لماذا هذا الاختيار</p>            
+              
+           
+            
+          </div>
+          <div  v-show="current ===-1" class="tab thanks" id="text-message">
             <img
               src="https://i.imgur.com/O18mJ1K.png"
               width="100"
               class="mb-4"
             />
-            <h3>Thankyou for your feedback!</h3>
-            <span
-              >Thanks for your valuable information. It helps us to improve our
-              services!</span
-            >
+            <h3> شكرا لك هذا يساعدنا في تحسين خدماتنا</h3>
+            <router-link :to="{name:'Login'}" class="btn btn-primary" @click="submitForm">التالي</router-link>
           </div>
           <div style="overflow: auto" id="nextprevious">
             <div style="float: right">
               <button
+              v-if="current >=0"
                 type="button"
                 class="btn next"
                 id="prevBtn"
                 @click="move(1)"
               >
-                <i class="fa fa-angle-double-left"></i> ⏭️
+                <i  class="fa fa-angle-double-left">{{ current >0 ?'⏭️' :'انشاء نشاط' }}</i> 
               </button>
+
               <button type="button" id="" class="btn back" @click="move(-1)">
                 <i class="fa fa-angle-double-right"></i>⏮️
               </button>
+
             </div>
           </div>
         </form>
@@ -145,13 +172,16 @@
 </template>
 
 <script setup>
-import { computed, onMounted, reactive, ref } from "vue";
-import router from "@/router";
+import { computed,  reactive, ref } from "vue";
+import { addBussins } from "@/sotre.js/bussins/addBussins";
+const store=addBussins()
 const current = ref(5);
 const next = ref(4);
 const back = ref(6);
+ const skills=ref([])
 
-const addBussins = reactive({
+ 
+const Bussins = reactive({
   name: '. . .',
   profession: '. . .',
   decsription: '. . .',
@@ -159,28 +189,28 @@ const addBussins = reactive({
   state: '. . .',
   city: '. . .',
   street: '. . .',
-  skills: [],
+  
 });
 const isVlidName = computed(() => {
-  return addBussins.name.trim() != "" &&addBussins.name !='. . .' ;
+  return Bussins.name.trim() != "" &&Bussins.name !='. . .' ;
 });
 const isVlidprofession = computed(() => {
-  return addBussins.profession.trim() != "" &&addBussins.profession !='. . .';
+  return Bussins.profession.trim() != "" &&Bussins.profession !='. . .';
 });
 const isVliddecsription = computed(() => {
-  return addBussins.decsription.trim() != ""  &&addBussins.decsription !='. . .';
+  return Bussins.decsription.trim() != ""  &&Bussins.decsription !='. . .';
 });
 const isVlidphone = computed(() => {
-  return addBussins.phone.trim() != ""  &&addBussins.phone !='. . .';
+  return Bussins.phone.trim() != ""  &&Bussins.phone !='. . .';
 });
 const isVlidstate = computed(() => {
-  return addBussins.state.trim() != ""  &&addBussins.state !='. . .';
+  return Bussins.state.trim() != ""  &&Bussins.state !='. . .';
 });
 const isVlidcity = computed(() => {
-  return addBussins.city.trim() != ""  &&addBussins.city !='. . .';
+  return Bussins.city.trim() != ""  &&Bussins.city !='. . .';
 });
 const isVlistreet = computed(() => {
-  return addBussins.street.trim() != ""  &&addBussins.street !='. . .';
+  return Bussins.street.trim() != ""  &&Bussins.street !='. . .';
 });
 const formIsvalid = () => {
  if (current.value===5) return isVlidName.value
@@ -198,14 +228,14 @@ const toNull = (obj, proeprty) => {
 const move = (val) => {
   const valid =formIsvalid();
   const step = document.querySelectorAll(".step");
-  if(!valid){
+ 
+  for (let i = 0; i < 1; i++) {
+    if (val > 0) {
+      if(!valid){
     step[current.value].classList.remove("done");
     step[current.value].classList.add("error");
     return
   }
-  for (let i = 0; i < 1; i++) {
-    if (val > 0) {
-      
       step[current.value].classList.add("done");
       if (next.value >= 0) {
         step[next.value].classList.add("next-round");
@@ -226,14 +256,24 @@ const move = (val) => {
 };
 
 //  if(formData.value.name.trim()!='' && formData.value.description.trim() !='' &&formData.value.phoneNumber.length ===11&&formData.value.location.trim() !=''){
-const submitForm = () => {
-  router.push({ name: "bussinsPage" });
+const submitForm = async() => {
+  const CreateBussins = {
+  name: Bussins.name,
+  profession: Bussins.profession,
+  description: Bussins.decsription,
+  phone: Bussins.phone,
+  state: Bussins.state,
+  city: Bussins.city,
+  street: Bussins.street,
+ skills:[...skills.value]
+};
+await store.addBussins(CreateBussins)
 };
 </script>
 
 <style scoped>
 .container {
-  background-color: var(--secondarycolor);
+  background:  linear-gradient(to bottom, #fffdfd, #94a1b3);
   width: 100%;
   height: 100vh;
   border-radius: 20px;
@@ -361,8 +401,16 @@ button:focus {
   margin-top: 30px;
   margin-bottom: 30px;
 }
-
-.thanks-message {
-  display: none;
+.router-link{
+ margin-top: 10px;
+ text-decoration: none;
+ color: red;
+ 
+}
+.thanks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>
