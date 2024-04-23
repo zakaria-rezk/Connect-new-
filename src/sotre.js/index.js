@@ -1,16 +1,16 @@
-import { defineStore } from 'pinia'
-import { authStore } from './authentication/authSotre'
+// import { defineStore } from 'pinia'
+// import { authStore } from './authentication/authSotre'
 
-export const activeUser = defineStore( 'activeuser', {
+// export const activeUser = defineStore( 'activeuser', {
   
-  state:() => ({
-    activeUserToken:localStorage.getItem('token'),
+//   state:() => ({
+//     activeUserToken:localStorage.getItem('token'),
 
-  }),
-  getters :{
+//   }),
+//   getters :{
  
-  },
-  actions :{
+//   },
+//   actions :{
 
-}
-})
+// }
+// })

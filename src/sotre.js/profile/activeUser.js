@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-
+import {jwtDecode }from 'jwt-decode';
 export const activeUser = defineStore("activeUser", {
   state: () => ({
     activeUserToken: localStorage.getItem("token"),
@@ -54,5 +54,10 @@ export const activeUser = defineStore("activeUser", {
         throw error;
       }
     },
+   async decode(token){
+      const decodedToken = jwtDecode(token);
+      const customerRole =  await decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+     console.log(customerRole)
+    }
   },
 });

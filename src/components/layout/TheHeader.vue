@@ -85,8 +85,11 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+
 import { authStore } from "../../sotre.js/authentication/authSotre.js";
+import { activeUser } from "@/sotre.js/profile/activeUser.js";
+
 const store = authStore();
 const verticalNav =ref('none')
 const isAuth = localStorage.getItem("token") || null;
@@ -95,9 +98,14 @@ const chagneverticalNavVisibilty=()=>{
   verticalNav.value = verticalNav.value=== 'inline' ? 'none':'inline'
 }
 const logout = () => {
-  console.log('dsfdsfdsfdsfdsfdsfdfs')
+  
   store.logout();
 };
+onMounted(()=>{
+const user =activeUser();
+const token = localStorage.getItem('token')
+user.decode(token)
+})
 </script>
 
 <style scoped>
