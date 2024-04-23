@@ -95,6 +95,7 @@ const chagneverticalNavVisibilty=()=>{
   verticalNav.value = verticalNav.value=== 'inline' ? 'none':'inline'
 }
 const logout = () => {
+  console.log('dsfdsfdsfdsfdsfdsfdfs')
   store.logout();
 };
 </script>
