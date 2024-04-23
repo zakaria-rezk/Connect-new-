@@ -89,7 +89,7 @@ const router = createRouter({
     },
     {
       path: "/addFreelanceBuisness",
-      name: "add-freelance-buisness",
+      name: "addfreelancebuisness",
       component: () =>
         import(
           "../components/forms/addFreelanceBuisness.vue"

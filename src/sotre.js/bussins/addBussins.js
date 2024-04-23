@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
-import { activeUser } from "..";
-const user = activeUser();
+
+
 export const addBussins = defineStore("addBussins", {
   state: () => ({
-    token: user.activeUserToken,
+    token: localStorage.getItem('token'),
     bussins: {
       name: null,
       profession: null,
@@ -12,6 +12,7 @@ export const addBussins = defineStore("addBussins", {
       state: null,
       city: null,
       street: null,
+     
       skills: [],
     },
   }),

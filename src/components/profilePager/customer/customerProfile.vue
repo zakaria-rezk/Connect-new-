@@ -40,7 +40,7 @@
       </div>
     </div>
     <div class="col-auto ml-auto ">
-      <router-link  :to="{name: 'add-freelance-buisness'}"  class="btn link m-1 btn-selected btn-primary"> انشاء عمل</router-link>
+      <router-link  :to="{name: 'addfreelancebuisness'}"  class="btn link m-1 btn-selected btn-primary"> انشاء عمل</router-link>
     </div>
   </div>
 </div>
