@@ -35,6 +35,8 @@ const router = createRouter({
           component: () =>
             import("../components/profilePager/customer/customerReservation.vue"),
         },
+
+        
         {
           path: "projects",
           name: "customerProjects",
