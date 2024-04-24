@@ -3,7 +3,7 @@ import {jwtDecode }from 'jwt-decode';
 export const activeUser = defineStore("activeUser", {
   state: () => ({
     activeUserToken: localStorage.getItem("token"),
-    roles:null,
+    roles:[],
     name: null,
     gover: null,
     city: null,
@@ -62,6 +62,7 @@ export const activeUser = defineStore("activeUser", {
       const decodedToken = jwtDecode(token);
       const customerRole =  await decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
      this.roles=customerRole;
+     console.log(typeof(this.roles))
      console.log(this.hasBussins)
     }
   },

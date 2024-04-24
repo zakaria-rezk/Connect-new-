@@ -53,17 +53,21 @@
               :to="{ name: 'customerWithId', params: { id: token } }"
               class="nav-link"
               @click="chagneverticalNavVisibilty"
-              >حسابي</button
             >
-          </li>
-       
-
-           <li class="nav-item" v-show="!isAuth">
-            <router-link :to="{ name: 'Login' }" class="nav-link">تسجيل الدخول</router-link>
+              حسابي
+            </button>
           </li>
 
           <li class="nav-item" v-show="!isAuth">
-            <router-link :to="{ name: 'register' }" class="nav-link">انشاء حساب</router-link>
+            <router-link :to="{ name: 'Login' }" class="nav-link"
+              >تسجيل الدخول</router-link
+            >
+          </li>
+
+          <li class="nav-item" v-show="!isAuth">
+            <router-link :to="{ name: 'register' }" class="nav-link"
+              >انشاء حساب</router-link
+            >
           </li>
         </ul>
       </div>
@@ -72,40 +76,73 @@
   <nav>
     <div class="lol" :style="{ display: verticalNav }">
       <ul>
-       
+        <router-link
+          :to="{ name: 'customerWithId', params: { id: token } }"
+          class="router-link"
+          ><p class="px-1">
+            <font-awesome-icon icon="fa-solid fa-user" class="px-1" />
+          </p>
+          <li>حسابي</li>
+        </router-link>
+        <router-link v-if="active.hasBussins"
+          :to="{ name: 'customerWithId', params: { id: token } }"
+          class="router-link"
+          ><p class="px-1">
+            <font-awesome-icon icon="fa-solid fa-money-check" class="px-1" />
+          </p>
+          <li>نشاطي التجاري</li>
+        </router-link>
+        <router-link
+          :to="{ name: 'customerWithId', params: { id: token } }"
+          class="router-link"
+          ><p class="px-1">
+            <font-awesome-icon icon="fa-solid fa-gears" class="px-1" />
+          </p>
+          <li>الاعدادات</li>
+        </router-link>
 
-        <router-link :to="{ name: 'customerWithId', params: { id: token } }" class="router-link"><p class="px-1"><font-awesome-icon icon="fa-solid fa-user"  class="px-1" /></p>  <li>حسابي</li>  </router-link>
-        <router-link :to="{ name: 'customerWithId', params: { id: token } }" class="router-link"><p  class="px-1"> <font-awesome-icon icon="fa-solid fa-money-check" class="px-1"  /></p> <li>نشاطي التجاري</li> </router-link>
-        <router-link :to="{ name: 'customerWithId', params: { id: token } }" class="router-link"><p  class="px-1"><font-awesome-icon icon="fa-solid fa-gears"  class="px-1" /></p> <li>الاعدادات</li> </router-link>
-
-        <router-link :to="{ name: 'Login'}" @click="logout" class="router-link"> <p  class="px-1"><font-awesome-icon icon="fa-solid fa-right-from-bracket"  class="px-1" /></p><li>تسجيل خروج</li> </router-link>
+        <router-link
+          :to="{ name: 'Login' }"
+          @click="logout"
+          class="router-link"
+        >
+          <p class="px-1">
+            <font-awesome-icon
+              icon="fa-solid fa-right-from-bracket"
+              class="px-1"
+            />
+          </p>
+          <li>تسجيل خروج</li>
+        </router-link>
       </ul>
     </div>
   </nav>
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 
 import { authStore } from "../../sotre.js/authentication/authSotre.js";
 import { activeUser } from "@/sotre.js/profile/activeUser.js";
-
+const active = activeUser();
 const store = authStore();
-const verticalNav =ref('none')
-const isAuth = localStorage.getItem("token") || null;
-const token = localStorage.getItem("token") || "elia";
-const chagneverticalNavVisibilty=()=>{
-  verticalNav.value = verticalNav.value=== 'inline' ? 'none':'inline'
-}
+
+const verticalNav = ref("none");
+const isAuth = localStorage.getItem("token");
+const token = localStorage.getItem("token") || "jhhg";
+const chagneverticalNavVisibilty = () => {
+  verticalNav.value = verticalNav.value === "inline" ? "none" : "inline";
+};
 const logout = () => {
-  
   store.logout();
 };
-onMounted(()=>{
-const user =activeUser();
-const token = localStorage.getItem('token')
-user.decode(token)
-})
+onBeforeMount(async () => {
+  const user = activeUser();
+  const token = localStorage.getItem("token");
+  await user.decode(token);
+
+  
+});
 </script>
 
 <style scoped>
@@ -116,21 +153,17 @@ user.decode(token)
   left: 10px;
   border-radius: 10px;
   background-color: rgb(255, 255, 255);
- 
-
-  
 }
 
 .lol ul {
   display: flex;
   justify-content: flex-end;
- padding: 0;
+  padding: 0;
   flex-direction: column;
   list-style: none;
   width: 100%;
- 
 }
-.router-link{  
+.router-link {
   display: flex;
   font-size: 1.1rem;
   color: rgb(71, 67, 67);
@@ -140,7 +173,7 @@ user.decode(token)
   border-radius: 10px;
   transition: background-color 0.3s ease;
 }
-.router-link:hover{
+.router-link:hover {
   background-color: #f2f2f2;
   width: 100%;
 }
