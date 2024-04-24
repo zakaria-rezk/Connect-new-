@@ -121,11 +121,11 @@ function resizeImage(imageSrc, maxWidth, maxHeight, callback) {
   img.src = imageSrc;
 
 }
-onMounted(() => {
+onMounted( async() => {
       // Trigger a click event on the aboutCustomerLink router link after the component is mounted
+      router.push({name: 'customerReservation'})   ;
   userData.userData()
  
-      router.push({name: 'customerReservation'})   ;
       
   })
 </script>

@@ -28,8 +28,8 @@ export const activeUser = defineStore("activeUser", {
   },
   actions: {
     async userData() {
-      console.log("صلنا بسلام الله سبحانه وتعالي");
-      console.log(this.activeUserToken);
+    const token = localStorage.getItem('token')
+    console.log(token)
       try {
         const response = await fetch(
           "https://localhost:7165/api/Account/profile",
@@ -38,7 +38,7 @@ export const activeUser = defineStore("activeUser", {
 
             headers: {
               accept: "*/*",
-              Authorization: `Bearer ${this.activeUserToken}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );
@@ -54,6 +54,7 @@ export const activeUser = defineStore("activeUser", {
         this.gover = data.state;
         this.city = data.city;
         this.street = data.street;
+        console.log('active user ok')
       } catch (error) {
         throw error;
       }

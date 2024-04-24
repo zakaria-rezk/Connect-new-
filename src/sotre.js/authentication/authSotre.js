@@ -214,6 +214,7 @@ export const authStore = defineStore( 'autStore', {
   
   },
   logout(){
+    localStorage.clear();
     localStorage.removeItem('token');
         this.token=null
   }
