@@ -32,9 +32,10 @@ export const activeUser = defineStore("activeUser", {
   },
   actions: {
     async userData() {
-    const token = localStorage.getItem('token')
-    console.log(token)
+      const token = localStorage.getItem('token')
+       console.log(token)
       try {
+      
         const response = await fetch(
           "https://localhost:7165/api/Account/profile",
           {
@@ -63,6 +64,34 @@ export const activeUser = defineStore("activeUser", {
       } catch (error) {
         throw error;
       }
+    },
+    async updateProfile(payload){
+      console.log(payload)
+      console.log(payload.name)
+      const token =localStorage.getItem('token')
+          try{
+            const response =await fetch('https://localhost:7165/api/Account/update-customer-info',{
+              method:'PUT',
+              headers:{
+                'accept': '*/*',
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+              } ,
+              body:JSON.stringify({
+                name:payload.name,
+                street:payload.street,
+                city:payload.city,
+                state:payload.state,
+                gender:0,             
+              })
+             
+            })
+            if (response.ok) {
+              userData()
+            }
+          }catch(error){
+            throw error
+          }
     },
    async decode(token){
       const decodedToken = jwtDecode(token);

@@ -53,7 +53,7 @@
 </div>
 </template>
 <script setup>
-import { onMounted, ref } from "vue";
+import { onBeforeMount, onMounted, onUpdated, ref } from "vue";
 import { activeUser } from "../../../sotre.js/profile/activeUser.js";
 import TheHeader from "@/components/layout/TheHeader.vue";
 import router from "@/router";
@@ -125,8 +125,8 @@ function resizeImage(imageSrc, maxWidth, maxHeight, callback) {
   img.src = imageSrc;
 
 }
-onMounted( async() => {
-      // Trigger a click event on the aboutCustomerLink router link after the component is mounted
+onBeforeMount( async() => {
+    console.log('udate')
       router.push({name: 'customerReservation'})   ;
   userData.userData()
  

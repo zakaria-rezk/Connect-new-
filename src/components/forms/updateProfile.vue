@@ -1,7 +1,7 @@
 <template>
   <div class="updateProfile">
-  <div class="container">
-    <form @submit.prevent="submitForm" class="bg-light p-4 rounded shadow">
+  <div class="container ">
+    <form @submit.prevent="submitForm" class="p-4 rounded shadow">
       <h2 class="mb-4">تعديل البيانات الشخصية</h2>
       <div class="mb-3">
         <label for="inputName" class="form-label">الاسم</label>
@@ -23,30 +23,39 @@
         <label for="inputAddress" class="form-label">الشارع</label>
         <input type="text" class="form-control" id="inputAddress" v-model="formData.street" required>
       </div>
-      <button type="submit" class="btn btn-primary">حفظ</button>
+      <router-link :to="{name:'customerWithId' ,params:{id:token}}" class="btn btn-primary" @click="submitForm">حفظ</router-link> 
+      
     </form>
+
   </div>
+  
 </div>
+
 </template>
 
 <script setup>
 
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import {activeUser} from '../../sotre.js/profile/activeUser.js'
 
 const user=activeUser();
+const token =localStorage.getItem('tokem') || 'lol'
 const formData =reactive({
   name:user.userName,
   phone:user.phone,
-  gover:user.userState,
+  state:user.userState,
   city:user.userCity,
   street:user.userStreet
 
 })
+const submitForm =()=>{
+  user.updateProfile(formData)
+   
+}
 onMounted( async()=>{
   const user =  activeUser();
      await user.userData()
-      console.log(user.userName) 
+     
 })
 </script>
 
@@ -69,12 +78,13 @@ onMounted( async()=>{
   align-items: center;
   color: rgb(32, 31, 31);
   font-size: 1.3rem;
-  
+
 }
 
 form {
  min-width: 600px;
   animation: slide-up 0.5s ease;
+  background-color: aliceblue;
 }
 
 @keyframes slide-up {

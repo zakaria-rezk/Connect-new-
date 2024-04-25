@@ -300,16 +300,18 @@ await store.addBussins(CreateBussins)
   height: 100%;
 }
 #regForm {
-  background-color: #f2f2f2;
+/* background-color: #b1bdbc; */
   margin: 0px auto;
   font-family: Raleway;
   padding: 40px;
   border-radius: 10px;
   margin: auto;
+  max-width: 1000px;
 }
 
 #register {
   color: var(--primarycolor);
+  font-weight: bolder;
 }
 
 h1 {
@@ -342,8 +344,9 @@ input.invalid {
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 h6 {
-  color: #9fb5bc;
-  font-size: 1.4rem;
+  color: #161402;
+  font-size: 1.8rem;
+  font-weight: bolder;
 }
 button {
   color: #ffffff;
@@ -376,11 +379,12 @@ button:focus {
   display: inline-flex;
   justify-content: center;
   transition: transform 0.3s ease-in-out;
+ 
 }
 
 .step {
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
   margin: 0 2px;
   background-color: var(--secondarycolor);
   border: none;
@@ -391,6 +395,8 @@ button:focus {
   font-size: 15px;
   color: var(--primarycolor);
   opacity: 0.5;
+  font-size: 1.3;
+  
 }
 .done {
   background-color: var(--primarycolor) !important ;
@@ -417,6 +423,8 @@ button:focus {
   text-align: center;
   margin-top: 30px;
   margin-bottom: 30px;
+  background-color: #F2B872;
+  border-radius:50px ;
 }
 .router-link{
  margin-top: 10px;

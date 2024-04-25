@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { authStore } from "@/sotre.js/authentication/authSotre";
+import { activeUser } from "@/sotre.js/profile/activeUser";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -28,6 +28,11 @@ const router = createRouter({
       component: () =>
         import("../components/profilePager/customer/customerProfile.vue"),
          meta: { requierAuth: true },
+         beforeEnter: async (to, from, next) => {
+         const user =activeUser();
+        await user.userData()
+        next()
+        },
       children: [
         {
           path: "about",
