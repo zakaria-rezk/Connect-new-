@@ -8,6 +8,7 @@ export const activeUser = defineStore("activeUser", {
     gover: null,
     city: null,
     street: null,
+    phone:null
   }),
   getters: {
     userName(state) {
@@ -22,6 +23,9 @@ export const activeUser = defineStore("activeUser", {
     userStreet(state) {
       return state.street;
     },
+    // userPhone(state){
+    //   return state.phone
+    // }
     hasBussins(state) {
       return state.roles.includes('Freelancer')
     }
@@ -54,6 +58,7 @@ export const activeUser = defineStore("activeUser", {
         this.gover = data.state;
         this.city = data.city;
         this.street = data.street;
+       
         console.log('active user ok')
       } catch (error) {
         throw error;

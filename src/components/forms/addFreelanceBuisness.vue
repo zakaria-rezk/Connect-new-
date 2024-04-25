@@ -1,4 +1,5 @@
 <template>
+  <div class="addBuinss">
   <div class="container">
  
     <div class="row d-flex justify-content-center align-items-center form">
@@ -169,6 +170,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script setup>
@@ -272,8 +274,23 @@ await store.addBussins(CreateBussins)
 </script>
 
 <style scoped>
+.addBuinss{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../assets/15528.jpg");
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+}
 .container {
-  background:  linear-gradient(to bottom, #fffdfd, #94a1b3);
+  
+
+  width: 100%;
+  height: 100vh;
   width: 100%;
   height: 100vh;
   border-radius: 20px;
@@ -283,7 +300,7 @@ await store.addBussins(CreateBussins)
   height: 100%;
 }
 #regForm {
-  background-color: #ffffff;
+  background-color: #f2f2f2;
   margin: 0px auto;
   font-family: Raleway;
   padding: 40px;
@@ -412,5 +429,20 @@ button:focus {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+form {
+ 
+  animation: slide-up 0.5s ease;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
