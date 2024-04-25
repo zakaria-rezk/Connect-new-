@@ -76,7 +76,7 @@
   <nav>
     <div class="lol" :style="{ display: verticalNav }">
       <ul>
-        <router-link
+        <router-link 
           :to="{ name: 'customerWithId', params: { id: token } }"
           class="router-link"
           ><p class="px-1">
@@ -85,7 +85,7 @@
           <li>حسابي</li>
         </router-link>
         <router-link v-if="active.hasBussins"
-          :to="{ name: 'customerWithId', params: { id: token } }"
+          :to="{ name: 'bussinsPage' , params: { id: token }}"
           class="router-link"
           ><p class="px-1">
             <font-awesome-icon icon="fa-solid fa-money-check" class="px-1" />
@@ -129,7 +129,7 @@ const store = authStore();
 
 const verticalNav = ref("none");
 const isAuth = localStorage.getItem("token");
-const token = localStorage.getItem("token") || "jhhg";
+const token = localStorage.getItem("token") ||'sasasasa';
 const chagneverticalNavVisibilty = () => {
   verticalNav.value = verticalNav.value === "inline" ? "none" : "inline";
 };

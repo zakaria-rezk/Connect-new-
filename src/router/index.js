@@ -53,18 +53,14 @@ const router = createRouter({
       ],
     },
     {
-      path: "/bussinsPage",
+      path: "/bussinsPage/:id",
       name: "bussinsPage",
       component: () =>
         import("../components/bussins/bussinsPage.vue"),
+        meta: { requierAuth: true },
     },
 
-    {
-      path: "/bussinsPage",
-      name: "bussinsPage",
-      component: () =>
-        import("../components/bussins/bussinsPage.vue"),
-    },
+    
     {
       path: "/HotelAdmin",
       name: "hotel-admin",

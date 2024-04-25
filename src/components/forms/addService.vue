@@ -22,20 +22,29 @@
   </div>
 </template>
 <script setup>
+import { ref } from "vue";
 const props = defineProps(["formVisibilty"]);
 const emit = defineEmits("closeForm");
-import { ref } from "vue";
+import { activeBussins } from "@/sotre.js/profile/activeBussins";
 const inputVal = ref();
 const serviceDescription = ref("تفاصيل الخدمة");
 const formButton = ref("التالي");
 const serviceDetails = ref();
 const servicePrice = ref();
 const inputType = ref("text");
+const bussins =activeBussins();
 const handleForm = () => {
   if (inputVal.value.trim() != "" || inputVal.value > 0) {
     if (formButton.value === "حفظ") {
       //send data to serve
+      const services ={
+        desc:serviceDetails.value,
+        price:servicePrice.value
+      }
+      // bussins.addServise(payload)
+      console.log(services)
       formButton.value = "التالي";
+      console.log(inputVal.value)
       emit("closeForm");
     }
     if (serviceDescription.value === "تفاصيل الخدمة") {
@@ -57,6 +66,8 @@ const handleForm = () => {
 };
 const deleteFrom = () => {
   inputVal.value = "";
+  serviceDetails.value='';
+  servicePrice.value='';
   emit("closeForm");
 };
 </script>

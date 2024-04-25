@@ -40,7 +40,10 @@
       </div>
     </div>
     <div class="col-auto ml-auto ">
-      <router-link  :to="{name: 'addfreelancebuisness'}"  class="btn link m-1 btn-selected btn-primary"> انشاء عمل</router-link>
+      
+      <router-link v-if="user.hasBussins" :to="{ name: 'bussinsPage' , params: { id: user.activeUserToken }}"  class="btn link m-1 btn-selected btn-primary">  نشاطي التجاري</router-link>
+      <router-link v-if="!user.hasBussins" :to="{name: 'addfreelancebuisness'}"  class="btn link m-1 btn-selected btn-primary"> انشاء عمل</router-link>
+      <router-link :to="{name: 'addfreelancebuisness'}"  class="btn link m-1 btn-selected btn-warning"> تعديل الملف الشخصي </router-link>
     </div>
   </div>
 </div>
@@ -59,13 +62,14 @@ const fileInput = ref(null);
 const imageUrl = ref(null);
 const noimage = ref(true);
 const activeLink =ref('aboutCustomer')
+const user =activeUser();
 
 
 
 
 const handleColor =  (par) =>{
   activeLink.value =par;
-  console.log(userData.state)
+ 
 
      
   }
