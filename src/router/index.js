@@ -60,7 +60,13 @@ const router = createRouter({
         meta: { requierAuth: true },
     },
 
-    
+    {
+      path: "/updateProfile/:id",
+      name: "updateProfile",
+      component: () =>
+        import("../components/forms/updateProfile.vue"),
+        meta: { requierAuth: true },
+    },
     {
       path: "/HotelAdmin",
       name: "hotel-admin",

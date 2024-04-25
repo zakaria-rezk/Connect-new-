@@ -43,7 +43,7 @@
       
       <router-link v-if="user.hasBussins" :to="{ name: 'bussinsPage' , params: { id: user.activeUserToken }}"  class="btn link m-1 btn-selected btn-primary">  نشاطي التجاري</router-link>
       <router-link v-if="!user.hasBussins" :to="{name: 'addfreelancebuisness'}"  class="btn link m-1 btn-selected btn-primary"> انشاء عمل</router-link>
-      <router-link :to="{name: 'addfreelancebuisness'}"  class="btn link m-1 btn-selected btn-warning"> تعديل الملف الشخصي </router-link>
+      <router-link :to="{name: 'updateProfile' ,params: { id: user.activeUserToken }}"  class="btn link m-1 btn-selected btn-warning"> تعديل الملف الشخصي </router-link>
     </div>
   </div>
 </div>
