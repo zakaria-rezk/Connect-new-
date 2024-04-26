@@ -93,7 +93,7 @@
           <li>نشاطي التجاري</li>
         </router-link>
         <router-link
-          :to="{ name: 'customerWithId', params: { id: token } }"
+        :to="{name: 'updateProfile' ,params: { id: token }}" 
           class="router-link"
           ><p class="px-1">
             <font-awesome-icon icon="fa-solid fa-gears" class="px-1" />
@@ -139,7 +139,7 @@ const logout = () => {
 onBeforeMount(async () => {
   const user = activeUser();
   const token = localStorage.getItem("token");
-  console.log(token)
+
   await user.decode(token);
    
   

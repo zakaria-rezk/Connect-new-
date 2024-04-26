@@ -33,7 +33,7 @@ export const activeUser = defineStore("activeUser", {
   actions: {
     async userData() {
       const token = localStorage.getItem('token')
-       console.log(token)
+     
       try {
       
         const response = await fetch(
@@ -53,14 +53,14 @@ export const activeUser = defineStore("activeUser", {
           throw error;
         }
 
-        if (response.ok) console.log(data.name);
-        console.log(this.userName);
+        if (response.ok)
+     
         this.name = data.name;
         this.gover = data.state;
         this.city = data.city;
         this.street = data.street;
        
-        console.log('active user ok')
+   
       } catch (error) {
         throw error;
       }

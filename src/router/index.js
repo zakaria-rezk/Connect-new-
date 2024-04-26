@@ -23,6 +23,19 @@ const router = createRouter({
     },
   
     {
+      path: "/forgetpassword",
+      name: "forgetpassword",
+      component: () => import("../components/register/changePass.vue"),
+     
+    },
+    {
+      path: "/changepassword/:id",
+      name: "changepassword",
+      component: () => import("../components/register/changePass.vue"),
+     
+    },
+  
+    {
       path: "/customer/:id",
       name: "customerWithId",
       component: () =>

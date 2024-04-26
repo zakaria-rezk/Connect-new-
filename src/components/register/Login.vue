@@ -22,7 +22,7 @@
           تاكد من كلمة المرور الخاصة بك
         </p>
 
-        <p class="forgetpass">ِ<a href=""> هل نسيت كلمة المرور؟</a></p>
+        <router-link  class="forgetpass router-link" :to="{name: 'forgetpassword'}">ِ هل نسيت كلمة المرور؟</router-link >
         <button @click="dispathchLoginAction">تسجيل دخول</button>
         <p class="or">او</p>
         <router-link :to="{ name: 'register' }" class="router-link">
