@@ -26,28 +26,7 @@
           </p>
         </div>
         <div class="bussins-services">
-          <BaseCard title="title" />
-
-          <table class="table my-3">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <!-- Counter column -->
-                <th scope="col">الخدمة</th>
-                <th scope="col">السعر</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in services" :key="item.id">
-                <th scope="row">{{ serviceNum }}</th>
-                <!-- Counter value -->
-                <td>{{ item.service }}</td>
-                <td>{{ item.price }} جنيه</td>
-              </tr>
-
-              <!-- Add more rows as needed -->
-            </tbody>
-          </table>
+          <BaseCard title="title" class="my-5" />
           <addService :formVisibilty="formVisibilty" @closeForm="closeForm" />
           <div class="container d-flex justify-content-center my-4">
             <button
@@ -58,6 +37,31 @@
               اضافة خدمة
             </button>
           </div>
+
+
+          
+          <!-- <table class="table my-3">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+           
+                <th scope="col">الخدمة</th>
+                <th scope="col">السعر</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in services" :key="item.id">
+                <th scope="row">{{ serviceNum }}</th>
+            
+                <td>{{ item.service }}</td>
+                <td>{{ item.price }} جنيه</td>
+              </tr>
+
+             
+            </tbody>
+          </table> -->
+          
+    
         </div>
       </div>
     </div>

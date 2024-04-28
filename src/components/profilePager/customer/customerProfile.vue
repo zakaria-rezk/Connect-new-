@@ -9,7 +9,6 @@
         <img :src="imageUrl" />
       </div>
       <label for="fileInput" class="custom-file-upload bg-primary"> تعديل الصورة </label>
-     
       <input
       class="bg-primary btn"
         type="file"
@@ -43,7 +42,7 @@
       
       <router-link v-if="user.hasBussins" :to="{ name: 'bussinsPage' , params: { id: user.activeUserToken }}"  class="btn link m-1 btn-selected btn-primary">  نشاطي التجاري</router-link>
       <router-link v-if="!user.hasBussins" :to="{name: 'addfreelancebuisness'}"  class="btn link m-1 btn-selected btn-primary"> انشاء عمل</router-link>
-      <router-link :to="{name: 'updateProfile' ,params: { id: user.activeUserToken }}"  class="btn link m-1 btn-selected btn-warning"> تعديل الملف الشخصي </router-link>
+      <router-link :to="{name: 'updateProfile' ,params: {id: user.activeUserToken }}"  class="btn link m-1 btn-selected btn-warning"> تعديل الملف الشخصي </router-link>
     </div>
   </div>
 </div>
@@ -53,7 +52,7 @@
 </div>
 </template>
 <script setup>
-import { onBeforeMount, onMounted, onUpdated, ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import { activeUser } from "../../../sotre.js/profile/activeUser.js";
 import TheHeader from "@/components/layout/TheHeader.vue";
 import router from "@/router";
@@ -97,7 +96,6 @@ function resizeImage(imageSrc, maxWidth, maxHeight, callback) {
     let newWidth = width;
     let newHeight = height;
 
-    // Calculate new width and height maintaining aspect ratio
     if (width > maxWidth) {
       newWidth = maxWidth;
       newHeight = (height * maxWidth) / width;
@@ -107,19 +105,16 @@ function resizeImage(imageSrc, maxWidth, maxHeight, callback) {
       newWidth = (width * maxHeight) / height;
     }
 
-    // Create a canvas element to draw the resized image
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
     canvas.width = newWidth;
     canvas.height = newHeight;
 
-    // Draw the image on the canvas
     ctx.drawImage(img, 0, 0, newWidth, newHeight);
 
-    // Get the data URL of the resized image
     const resizedImage = canvas.toDataURL("image/jpeg");
 
-    // Call the callback function with the resized image data URL
+    
     callback(resizedImage);
   };
   img.src = imageSrc;

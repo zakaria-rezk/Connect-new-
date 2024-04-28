@@ -1,75 +1,91 @@
 <template>
   <div class="container-fluid" :style="{ display: formVisibilty }">
+    <img src="C:\Users\zekor\Connect-new-\src\assets\15528.jpg" alt="" width="200" height="300">
     <form action="" class="row justify-content-center">
-      <div class="col-md-10 d-flex justify-content-center align-items-center">
+     
+      <div class="col-md-10 d-flex flex-column justify-content-center align-items-center from-inputs">
         <!-- Adjust column width as needed -->
-        <label for="" class="form-label"> {{ serviceDescription }}</label>
+      
+        <div class="input-field">
+          <label for="">اسم الخدمة</label>
         <input
-          :type="inputType"
+          type="text"
           class="form-control field"
-          v-model="inputVal"
+          v-model="service.name"
+          accept="image/png, image/jpeg, image/jpg"
         />
-        <button
-          type="submit"
-          class="btn submit btn-primary mx-1"
-          @click.prevent="handleForm"
-        >
-          {{ formButton }}
-        </button>
+      </div>
+      <div class="input-field">
+        <label for="">نبذة  مختصرة عن الخدمة</label>
+
+        <input
+          type="text"
+          class="form-control field"
+          v-model="service.descriptoin"
+          accept="image/png, image/jpeg, image/jpg"
+        />
+      </div>
+      <div class="input-field">
+        <label for=""> سعر الخدمة</label>
+
+        <input
+          type="number"
+          class="form-control field"
+          v-model="service.price"
+          accept="image/png, image/jpeg, image/jpg"
+        />
+      </div>
+      <div class="input-field  d-flex justify-content-center image-label">
+        <label for="img" class="btn btn-primary"> ارفق صورة</label>
+
+        <input
+          type="file"
+          class="form-control field img"
+          @change="handelImgSrc($event)"
+          id="img"
+          accept="image/png, image/jpeg, image/jpg"
+        
+          hidden
+        />
+      </div>
+     
       </div>
     </form>
     <button class="btn delete-btn" @click.prevent="deleteFrom">❌</button>
+    <button class="btn delete-btn" @click.prevent="addServices">✅</button>
   </div>
 </template>
 <script setup>
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 const props = defineProps(["formVisibilty"]);
 const emit = defineEmits("closeForm");
 import { activeBussins } from "@/sotre.js/profile/activeBussins";
 const inputVal = ref();
-const serviceDescription = ref("تفاصيل الخدمة");
-const formButton = ref("التالي");
-const serviceDetails = ref();
-const servicePrice = ref();
-const inputType = ref("text");
-const bussins =activeBussins();
-const handleForm = () => {
-  if (inputVal.value.trim() != "" || inputVal.value > 0) {
-    if (formButton.value === "حفظ") {
-      //send data to serve
-      const services ={
-        desc:serviceDetails.value,
-        price:servicePrice.value
-      }
-      // bussins.addServise(payload)
-      console.log(services)
-      formButton.value = "التالي";
-      console.log(inputVal.value)
-      emit("closeForm");
-    }
-    if (serviceDescription.value === "تفاصيل الخدمة") {
-      serviceDetails.value = inputVal.value;
-      console.log(serviceDetails.value + "details");
-      serviceDescription.value = "سعر الخدمة";
-      inputType.value = "number";
-      formButton.value = "حفظ";
-    } else if (serviceDescription.value === "سعر الخدمة") {
-      serviceDescription.value = "تفاصيل الخدمة";
-      inputType.value = "text";
-      formButton.value = "التالي";
-      servicePrice.value = inputVal.value;
-      console.log(servicePrice.value + "price");
-    }
+const service =reactive({
+  name:null,
+  price:null,
+  descriptoin:null,
+  ImageUrl:null,
+})
 
-    inputVal.value = "";
-  }
+ const addServices =()=>{
+       console.log(service)
+
+ }
+
+const handelImgSrc = (event) => {
+  const file = event.target.files[0];
+console.log(URL.createObjectURL(file))
+service.ImageUrl = URL.createObjectURL(file);
 };
 const deleteFrom = () => {
-  inputVal.value = "";
-  serviceDetails.value='';
-  servicePrice.value='';
+  service.name = "";
+  service.descriptoin='';
+  service.price='';
+  service.ImageUrl=null;
   emit("closeForm");
 };
+
 </script>
 <style scoped>
 .container-fluid {
@@ -78,13 +94,18 @@ const deleteFrom = () => {
   margin: 0;
   overflow: hidden;
   background-color: #f2f2f2;
+  
 }
 label {
   font-size: 16px;
   font-weight: 500;
 }
+.input-field{
+  width: 100%;
+}
 .field {
   height: 50px;
+ 
   font-size: larger;
 }
 form {
@@ -96,5 +117,10 @@ form {
 }
 .container-fluid:hover .delete-btn {
   opacity: 1;
+}
+.image-label label{
+   align-self: cneter;
+   justify-self: center;
+   cursor: pointer;
 }
 </style>
