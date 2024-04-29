@@ -83,7 +83,7 @@ const handelImgSrc = (event) => {
   const file = event.target.files[0];
       
       console.log(file)
-   service.ImageUrl=file.name
+   service.ImageUrl=file
      
 };
 const deleteFrom = () => {

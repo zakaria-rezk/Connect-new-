@@ -78,6 +78,8 @@ export const addBussins = defineStore("addBussins", {
       }
     },
     async addServices(payload) {
+      console.log(payload.ImageUrl)
+    
       const url = "https://localhost:7165/api/Freelancer/add-offered-service";
       const queryPar = {
         Name: payload.name,
@@ -92,20 +94,18 @@ export const addBussins = defineStore("addBussins", {
         )
         .join("&");
    
-            // let formData =new FormData();
-            // formData.append('image',payload.ImageUrl)
-     
+            console.log(url + "?" + queryString)
+            let formDate =new FormData()
+            formDate.append('image',payload.ImageUrl)
+            formDate.append('imageName',payload.ImageUrl.name)
      
       try {
         const response = await fetch(url + "?" + queryString, {
           method: "POST",
           headers: {
-            accept: "*/*",
             Authorization: `Bearer ${this.token}`,
           },
-          body:JSON.stringify({
-            Image:payload.ImageUrl
-          })
+          body:formDate
         });
       } catch (error) {
         throw error;
