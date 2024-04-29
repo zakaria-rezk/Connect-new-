@@ -1,9 +1,8 @@
 import { defineStore } from "pinia";
 
-
 export const addBussins = defineStore("addBussins", {
   state: () => ({
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem("token"),
     bussins: {
       name: null,
       profession: null,
@@ -12,7 +11,7 @@ export const addBussins = defineStore("addBussins", {
       state: null,
       city: null,
       street: null,
-     
+
       skills: [],
     },
   }),
@@ -35,7 +34,6 @@ export const addBussins = defineStore("addBussins", {
   },
   actions: {
     async addBussins(payload) {
-      console.log("وصلنا بعون ");
       console.log(this.token);
       console.log(payload);
       try {
@@ -57,7 +55,7 @@ export const addBussins = defineStore("addBussins", {
 
               city: payload.city,
               state: payload.state,
-              skills:['sdfsa'],
+              skills: ["sdfsa"],
             }),
           }
         );
@@ -75,6 +73,40 @@ export const addBussins = defineStore("addBussins", {
         this.city = payload.city;
         this.street = payload.street;
         this.skills = payload.skills;
+      } catch (error) {
+        throw error;
+      }
+    },
+    async addServices(payload) {
+      const url = "https://localhost:7165/api/Freelancer/add-offered-service";
+      const queryPar = {
+        Name: payload.name,
+        Description: payload.description,
+        Price: payload.price,
+        IsAvailable: payload.IsAvailable,
+      };
+      const queryString = Object.keys(queryPar)
+        .map(
+          (key) =>
+            encodeURIComponent(key) + "=" + encodeURIComponent(queryPar[key])
+        )
+        .join("&");
+   
+            // let formData =new FormData();
+            // formData.append('image',payload.ImageUrl)
+     
+     
+      try {
+        const response = await fetch(url + "?" + queryString, {
+          method: "POST",
+          headers: {
+            accept: "*/*",
+            Authorization: `Bearer ${this.token}`,
+          },
+          body:JSON.stringify({
+            Image:payload.ImageUrl
+          })
+        });
       } catch (error) {
         throw error;
       }

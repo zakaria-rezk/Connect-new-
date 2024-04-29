@@ -21,7 +21,7 @@
         <input
           type="text"
           class="form-control field"
-          v-model="service.descriptoin"
+          v-model="service.description"
           accept="image/png, image/jpeg, image/jpg"
         />
       </div>
@@ -57,30 +57,38 @@
 </template>
 <script setup>
 import { reactive, ref } from "vue";
+import { addBussins } from "@/sotre.js/bussins/addBussins";
+const bussins =addBussins();
 const props = defineProps(["formVisibilty"]);
 const emit = defineEmits("closeForm");
+
 import { activeBussins } from "@/sotre.js/profile/activeBussins";
 const inputVal = ref();
 const service =reactive({
   name:null,
   price:null,
-  descriptoin:null,
+  description:null,
+  IsAvailable:true,
   ImageUrl:null,
 })
 
  const addServices =()=>{
-       console.log(service)
+  console.log(service)
+  bussins.addServices(service)
+      
 
  }
 
 const handelImgSrc = (event) => {
   const file = event.target.files[0];
-console.log(URL.createObjectURL(file))
-service.ImageUrl = URL.createObjectURL(file);
+      
+      console.log(file)
+   service.ImageUrl=file.name
+     
 };
 const deleteFrom = () => {
   service.name = "";
-  service.descriptoin='';
+  service.description='';
   service.price='';
   service.ImageUrl=null;
   emit("closeForm");
@@ -89,7 +97,7 @@ const deleteFrom = () => {
 </script>
 <style scoped>
 .container-fluid {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15); 
   padding: 0;
   margin: 0;
   overflow: hidden;

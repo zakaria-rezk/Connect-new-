@@ -26,7 +26,8 @@
           </p>
         </div>
         <div class="bussins-services">
-          <BaseCard title="title" class="my-5" />
+          <BaseCard title="الخدمات" class="my-5" />
+          <servicesCard/> 
           <addService :formVisibilty="formVisibilty" @closeForm="closeForm" />
           <div class="container d-flex justify-content-center my-4">
             <button
@@ -36,32 +37,7 @@
             >
               اضافة خدمة
             </button>
-          </div>
-
-
-          
-          <!-- <table class="table my-3">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-           
-                <th scope="col">الخدمة</th>
-                <th scope="col">السعر</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in services" :key="item.id">
-                <th scope="row">{{ serviceNum }}</th>
-            
-                <td>{{ item.service }}</td>
-                <td>{{ item.price }} جنيه</td>
-              </tr>
-
-             
-            </tbody>
-          </table> -->
-          
-    
+          </div> 
         </div>
       </div>
     </div>
@@ -69,10 +45,12 @@
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
+import servicesCard from "../bussins/servicesCard.vue";
 import BaseCard from "@/components/UI/BaseCard.vue";
 import TheHeader from "../layout/TheHeader.vue";
 import addService from "@/components/forms/addService.vue";
 import { activeBussins } from "@/sotre.js/profile/activeBussins.js";
+
 const formVisibilty = ref("none");
 const active =activeBussins();
 const showForm = () => {
