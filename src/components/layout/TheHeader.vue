@@ -139,8 +139,8 @@ const logout = () => {
 onBeforeMount(async () => {
   const user = activeUser();
   const token = localStorage.getItem("token");
-
-  await user.decode(token);
+        console.log(user.hasBussins)
+      await user.decode(token);
    
   
 });

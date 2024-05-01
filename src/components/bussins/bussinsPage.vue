@@ -15,7 +15,7 @@
       </div>
       <div class="bussins">
         <div class="bussins-detail">
-          <h3>اسم النشاط :{{active.bussinsName}}</h3>
+          <h3>اسم النشاط :{{active.name}}</h3>
           <h3>نوع النشاط : {{active.bussinsDesc}}</h3>
         </div>
         <div class="title">
@@ -44,15 +44,17 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref } from "vue";
+import { onBeforeMount, onBeforeUnmount, ref } from "vue";
 import servicesCard from "../bussins/servicesCard.vue";
 import BaseCard from "@/components/UI/BaseCard.vue";
 import TheHeader from "../layout/TheHeader.vue";
 import addService from "@/components/forms/addService.vue";
 import { activeBussins } from "@/sotre.js/profile/activeBussins.js";
-
+ const isopen =ref(false)
 const formVisibilty = ref("none");
+
 const active =activeBussins();
+
 const showForm = () => {
   formVisibilty.value = "flex";
 };
@@ -66,11 +68,7 @@ const handelImgSrc = (event) => {
 
   imgUrl.value = URL.createObjectURL(file);
 };
-onMounted( ()=>{
-  const active =activeBussins();
-  active.bussinsData()
-}
-)
+
 
 </script>
 

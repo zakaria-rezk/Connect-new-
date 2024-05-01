@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { activeUser } from "@/sotre.js/profile/activeUser";
+import { activeBussins } from "@/sotre.js/profile/activeBussins";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -76,6 +77,11 @@ const router = createRouter({
       component: () =>
         import("../components/bussins/bussinsPage.vue"),
         meta: { requierAuth: true },
+        beforeEnter: async (to, from, next) => {
+          const active =  activeBussins();
+           await active.bussinsData()
+             next();
+        }
     },
 
     {

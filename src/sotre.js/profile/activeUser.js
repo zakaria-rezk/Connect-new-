@@ -26,9 +26,9 @@ export const activeUser = defineStore("activeUser", {
     // userPhone(state){
     //   return state.phone
     // }
-    hasBussins(state) {
-      return state.roles.includes('Freelancer')
-    }
+    // hasBussins(state) {
+    //   return state.roles.includes('Freelancer')
+    // }
   },
   actions: {
     async userData() {
@@ -66,8 +66,7 @@ export const activeUser = defineStore("activeUser", {
       }
     },
     async updateProfile(payload){
-      console.log(payload)
-      console.log(payload.name)
+      
       const token =localStorage.getItem('token')
           try{
             const response =await fetch('https://localhost:7165/api/Account/update-customer-info',{
@@ -94,8 +93,11 @@ export const activeUser = defineStore("activeUser", {
           }
     },
    async decode(token){
+    
       const decodedToken = jwtDecode(token);
+    
       const customerRole =  await decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+     
      this.roles=customerRole;
    
     }

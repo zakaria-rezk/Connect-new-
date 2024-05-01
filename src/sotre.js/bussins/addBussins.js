@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { activeUser } from "../profile/activeUser";
 
 export const addBussins = defineStore("addBussins", {
   state: () => ({
@@ -34,8 +35,9 @@ export const addBussins = defineStore("addBussins", {
   },
   actions: {
     async addBussins(payload) {
-      console.log(this.token);
-      console.log(payload);
+      const token =localStorage.getItem('token')
+   
+     console.log(payload)
       try {
         const response = await fetch(
           "https://localhost:7165/api/Freelancer/add-freelancer-business",
@@ -43,7 +45,7 @@ export const addBussins = defineStore("addBussins", {
             method: "POST",
             headers: {
               accept: "*/*",
-              Authorization: `Bearer ${this.token}`,
+              Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
@@ -61,8 +63,10 @@ export const addBussins = defineStore("addBussins", {
         );
 
         if (!response.ok) {
+         
           const error = response.message || "can not fetch userData";
           throw error;
+         
         }
 
         if (response.ok) this.name = payload.name;
@@ -73,6 +77,8 @@ export const addBussins = defineStore("addBussins", {
         this.city = payload.city;
         this.street = payload.street;
         this.skills = payload.skills;
+      const active =activeUser()
+      active.decode(token)
       } catch (error) {
         throw error;
       }

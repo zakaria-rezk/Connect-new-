@@ -121,8 +121,9 @@ function resizeImage(imageSrc, maxWidth, maxHeight, callback) {
 
 }
 onBeforeMount( async() => {
-    console.log('udate')
-      router.push({name: 'customerReservation'})   ;
+  
+  console.log('udate')
+   router.push({name: 'customerReservation'})   ;
   userData.userData()
  
       
