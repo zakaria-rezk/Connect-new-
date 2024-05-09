@@ -15,19 +15,29 @@
       </div>
       <div class="bussins">
         <div class="bussins-detail">
-          <h3>اسم النشاط :{{active.name}}</h3>
-          <h3>نوع النشاط : {{active.bussinsDesc}}</h3>
+          <h3>اسم النشاط :{{ active.name }}</h3>
+          <h3>نوع النشاط : {{ active.bussinsDesc }}</h3>
         </div>
         <div class="title">
           <BaseCard title="نبذة عن المحبة" />
 
           <p>
-            {{active.bussinsDesc}}
+            {{ active.bussinsDesc }}
           </p>
         </div>
         <div class="bussins-services">
           <BaseCard title="الخدمات" class="my-5" />
-          <servicesCard/> 
+          <div class="services">
+            
+            
+            <servicesCard />
+            <servicesCard />
+            <servicesCard />
+            <servicesCard />
+            <servicesCard />
+          
+          </div>
+
           <addService :formVisibilty="formVisibilty" @closeForm="closeForm" />
           <div class="container d-flex justify-content-center my-4">
             <button
@@ -37,7 +47,7 @@
             >
               اضافة خدمة
             </button>
-          </div> 
+          </div>
         </div>
       </div>
     </div>
@@ -49,11 +59,11 @@ import servicesCard from "../bussins/servicesCard.vue";
 import BaseCard from "@/components/UI/BaseCard.vue";
 import TheHeader from "../layout/TheHeader.vue";
 import addService from "@/components/forms/addService.vue";
-import { activeBussins } from "@/sotre.js/profile/activeBussins.js";
- const isopen =ref(false)
+import { activeBussins } from "@/sotre.js/bussins/activeBussins.js";
+const isopen = ref(false);
 const formVisibilty = ref("none");
 
-const active =activeBussins();
+const active = activeBussins();
 
 const showForm = () => {
   formVisibilty.value = "flex";
@@ -68,8 +78,6 @@ const handelImgSrc = (event) => {
 
   imgUrl.value = URL.createObjectURL(file);
 };
-
-
 </script>
 
 <style scoped>
@@ -94,20 +102,16 @@ const handelImgSrc = (event) => {
   display: flex;
   justify-content: space-evenly;
 }
-/* .container {
-  position: relative;
-  text-align: center;
-  width: 100%;
-  height: 100vh;
-  margin: 0 auto;
 
-} */
 .cover-photo {
   width: 100%;
   height: 400px;
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
+}
+.services{
+
 }
 .cover-photo:hover {
   content: "Click to Change";

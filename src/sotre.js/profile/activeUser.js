@@ -26,9 +26,9 @@ export const activeUser = defineStore("activeUser", {
     // userPhone(state){
     //   return state.phone
     // }
-    // hasBussins(state) {
-    //   return state.roles.includes('Freelancer')
-    // }
+    hasBussins(state) {
+      return state.roles.includes('Freelancer')
+    }
   },
   actions: {
     async userData() {
@@ -95,8 +95,10 @@ export const activeUser = defineStore("activeUser", {
    async decode(token){
     
       const decodedToken = jwtDecode(token);
-    
+    console.log(decodedToken)
       const customerRole =  await decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+      const customerID =  await decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+      localStorage.setItem('Id',customerID)
      
      this.roles=customerRole;
    

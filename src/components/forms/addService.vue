@@ -51,8 +51,9 @@
      
       </div>
     </form>
-    <button class="btn delete-btn" @click.prevent="deleteFrom">❌</button>
     <button class="btn delete-btn" @click.prevent="addServices">✅</button>
+    <button class="btn delete-btn" @click.prevent="deleteFrom">❌</button>
+   
   </div>
 </template>
 <script setup>
@@ -62,7 +63,7 @@ const bussins =addBussins();
 const props = defineProps(["formVisibilty"]);
 const emit = defineEmits("closeForm");
 
-import { activeBussins } from "@/sotre.js/profile/activeBussins";
+import { activeBussins } from "@/sotre.js/bussins/activeBussins";
 const inputVal = ref();
 const service =reactive({
   name:null,
@@ -72,9 +73,14 @@ const service =reactive({
   ImageUrl:null,
 })
 
- const addServices =()=>{
-  console.log(service)
-  bussins.addServices(service)
+ const addServices = async()=>{
+   await bussins.addServices(service)
+  service.name = "";
+  service.description='';
+  service.price='';
+  service.ImageUrl=null;
+  emit("closeForm");
+ 
       
 
  }

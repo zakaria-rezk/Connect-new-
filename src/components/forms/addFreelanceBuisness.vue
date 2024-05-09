@@ -118,9 +118,9 @@
             <div v-show="current === 0" class="tab">
               <h6>ادخل بعض الخدمات الذي يقدمها النشاط الخاص بك (اختياري)</h6>
               <p>
-                <input placeholder=". . ." required v-model="skills[0]" />
-                <input placeholder=". . ." required v-model="skills[1]" />
-                <input placeholder=". . ." v-model="skills[2]" required />
+                <input placeholder=". . ." required v-model="skill1" />
+                <input placeholder=". . ." required v-model="skill2" />
+                <input placeholder=". . ."  required   v-model="skill3"  />
               </p>
               <p class="router-link">لماذا هذا الاختيار</p>
             </div>
@@ -175,7 +175,9 @@ const store = addBussins();
 const current = ref(5);
 const next = ref(4);
 const back = ref(6);
-const skills = ref([]);
+const skill1 =ref()
+const skill2 =ref()
+const skill3 =ref()
 
 const Bussins = reactive({
   name: ". . .",
@@ -252,7 +254,7 @@ const move = (val) => {
 
 //  if(formData.value.name.trim()!='' && formData.value.description.trim() !='' &&formData.value.phoneNumber.length ===11&&formData.value.location.trim() !=''){
 const submitForm = async () => {
-  console.log('dsfdsfdsaf')
+  
   const CreateBussins = {
     name: Bussins.name,
     profession: Bussins.profession,
@@ -261,8 +263,9 @@ const submitForm = async () => {
     state: Bussins.state,
     city: Bussins.city,
     street: Bussins.street,
-    skills: [...skills.value],
+    skills: [skill1.value,skill2.value,skill3.value],
   };
+  console.log(CreateBussins)
   await store.addBussins(CreateBussins);
   router.push({name:'bussinsPage' ,params:{id:token}})
 };

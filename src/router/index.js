@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { activeUser } from "@/sotre.js/profile/activeUser";
-import { activeBussins } from "@/sotre.js/profile/activeBussins";
+import { activeBussins } from "@/sotre.js/bussins/activeBussins";
 
 const router = createRouter({
   history: createWebHistory(),

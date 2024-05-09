@@ -57,7 +57,7 @@ export const addBussins = defineStore("addBussins", {
 
               city: payload.city,
               state: payload.state,
-              skills: ["sdfsa"],
+              skills: payload.skills,
             }),
           }
         );
@@ -77,12 +77,13 @@ export const addBussins = defineStore("addBussins", {
         this.city = payload.city;
         this.street = payload.street;
         this.skills = payload.skills;
-      const active =activeUser()
-      active.decode(token)
+     
       } catch (error) {
         throw error;
       }
     },
+
+    
     async addServices(payload) {
       console.log(payload.ImageUrl)
     
