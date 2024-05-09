@@ -14,31 +14,31 @@
           />
         </div>
         <div class="mb-3">
-          <label for="inputEmail" class="form-label">رقم الهاتف</label>
+          <label for="inputPhone" class="form-label">رقم الهاتف</label>
           <input
             type="tel"
             class="form-control"
             id="inputEmail"
-            v-model="formData.phone"
+            v-model="formData.phoneNumber"
             required
           />
         </div>
         <div class="mb-3">
-          <label for="inputPassword" class="form-label">المحافظة</label>
+          <label for="inputStata" class="form-label">المحافظة</label>
           <input
             type="text"
             class="form-control"
-            id="inputPassword"
+            id="inputStata"
             v-model="formData.gover"
             required
           />
         </div>
         <div class="mb-3">
-          <label for="inputPhone" class="form-label">المدينة</label>
+          <label for="inputCity" class="form-label">المدينة</label>
           <input
             type="text"
             class="form-control"
-            id="inputPhone"
+            id="inputCity"
             v-model="formData.city"
             required
           />
@@ -81,12 +81,13 @@ const token = localStorage.getItem("token") || "lol";
 
 const formData = reactive({
   name: user.userName,
-  phone: user.phone,
+  phoneNumber: null,
   state: user.userState,
   city: user.userCity,
   street: user.userStreet,
 });
 const submitForm = () => {
+  console.log(formData)
   user.updateProfile(formData);
 };
 onMounted(async () => {

@@ -23,9 +23,9 @@ export const activeUser = defineStore("activeUser", {
     userStreet(state) {
       return state.street;
     },
-    // userPhone(state){
-    //   return state.phone
-    // }
+    userPhone(state){
+      return state.phone
+    },
     hasBussins(state) {
       return state.roles.includes('Freelancer')
     }
@@ -68,6 +68,11 @@ export const activeUser = defineStore("activeUser", {
     async updateProfile(payload){
       
       const token =localStorage.getItem('token')
+      console.log(payload.name)
+      console.log(payload.street)
+      console.log(payload.phoneNumber)
+      console.log(payload.city)
+      console.log(payload.street)
           try{
             const response =await fetch('https://localhost:7165/api/Account/update-customer-info',{
               method:'PUT',
@@ -79,9 +84,12 @@ export const activeUser = defineStore("activeUser", {
               body:JSON.stringify({
                 name:payload.name,
                 street:payload.street,
+                phoneNumber:payload.phoneNumber,
+               
                 city:payload.city,
                 state:payload.state,
-                gender:0,             
+                gender:1,     
+                dob:"2024-05-09T20:26:20.297Z"        
               })
              
             })
