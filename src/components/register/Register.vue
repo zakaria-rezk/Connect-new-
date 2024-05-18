@@ -1,8 +1,8 @@
 <template>
-          <Error v-show="store.serverError"  @tryclose="cloesError" />
+          <Error v-show="store.warn"  @tryclose="cloesError" :title="store.Message" :link="store.link"/>
   <div class="parent">
     
-    <div class="register">
+    <div class="register"> 
       <div class="wrapernotstrap">
         <form @submit.prevent="dispathchLoginAction">
           <h2>انشاء حساب جديد</h2>
@@ -33,7 +33,7 @@
               v-model="registerData.password.value"
               ref="passwordInput"
             />
-            <p v-if="registerData.password.errorMessage">يجب ان تحتوي كلمة المررو ع حرف صغير وكبير وعلامة</p>
+            <p v-if="registerData.password.errorMessage">يجب ان تحتوي كلمة المررو ع حرف صغير وكبير ورقم وعلامة</p>
           </div>
           <div class="inputField">
             <input
@@ -141,13 +141,19 @@ const isValidfirstName = computed(() => {
   return registerData.firstName.value != "";
 });
 const isValidlastName = computed(() => {
-  return registerData.password.value != "";
+  return registerData.lastName.value != "";
 });
 const isValidEmail = computed(() => {
   return registerData.email.value.includes("@");
 });
 const isValidpass = computed(() => {
-  return registerData.password.value.length > 6;
+  const password = registerData.password.value;
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasLowerCase = /[a-z]/.test(password);
+  const hasNumber = /\d/.test(password);
+  const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+ 
+  return hasUpperCase && hasLowerCase && hasNumber && hasSymbol ;
 });
 const isValidGender = computed(() => {
   return registerData.gender.value != "";
@@ -230,19 +236,19 @@ const dispathchLoginAction = async () => {
       
       street:registerData.street.value
     };
-    console.log(signupData + "signup in component")
+   
     await  store.signup(signupData);
+   
   }
  
-  if (store.isAuth) {
-    console.log('is auth')
-    router.replace("/Connect.Com");
-  }
-  ///dispatch logic
+ 
 };
 const cloesError = () =>{
-  console.log("dfsfdsfdsfdsf")
+   store.warn=false;
+   store.Message=null;
+   registerData.email.errorMessage = true;
 }
+// element refs
 const firstNameInput = ref();
 const lastNameInput = ref();
 const emailInput = ref();
@@ -311,8 +317,8 @@ const phoneInput=ref();
 }
 .wrapernotstrap .inputField p{
   position:absolute;
-  right: 280px;
-  top: 70px;
+  right: 267px;
+  top: 60px;
   font-size:12px ;
   color: rgb(249, 0, 0);
   font-weight: lighter;
@@ -323,7 +329,7 @@ const phoneInput=ref();
 .wrapernotstrap .inputField input,
 select {
   width: 100%;
-  height: 60px;
+  height: 50px;
   border-color: rgb(13, 159, 207) rgb(17, 81, 231);
   margin: 0.7rem;
   border-radius: 25px;
@@ -354,7 +360,7 @@ select {
 }
 .wrapernotstrap input:focus::placeholder {
   position: relative;
-  bottom: 20px;
+  bottom: 15px;
   font-size: 15px;
 
   color: black;

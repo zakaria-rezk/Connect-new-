@@ -4,19 +4,27 @@
    <h1>حدث خطا</h1>  
   </header>
    <div class="message">
-    <h2>رجاء التاكد من اتصالك بالانترنت و اعد المحاولة</h2>
-    <button @click="handelError"> اغلاق</button>
+    <h2>{{ title }}</h2>
+    <button @click="handelError" v-if="!link"> اغلاق</button>
+    <button @click="confirmEmail" v-else-if="link"> تاكيد</button>
+
    </div>
  </div>
  
 </template>
 <script setup>
+import router from '@/router';
 import { defineEmits } from 'vue';
-
+import { defineProps } from 'vue';
 
 const emit =defineEmits(['tryclose'])
+const props =defineProps(['title','link'])
 const handelError =() =>{
  
+  emit('tryclose')
+}
+const confirmEmail =()=>{
+  router.push({name:'Login'})   ;
   emit('tryclose')
 }
 
@@ -73,6 +81,7 @@ background-color: rgb(249, 241, 230);
 @media (max-width: 490px) {
   .body {
    position: absolute;
+   
    right: 80px;
     
   }

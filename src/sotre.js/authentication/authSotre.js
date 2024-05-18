@@ -4,11 +4,12 @@ import { defineStore } from 'pinia'
 export const authStore = defineStore( 'autStore', {
   
   state:() => ({
-  error :false,
+    Message :null,
   expiration:null,
   token:null,
   userName:null,
-  serverError:false,
+  warn:false,
+  link:false,
   egyptGovernorates: [
     "القاهرة",
     "الإسكندرية",
@@ -133,24 +134,22 @@ export const authStore = defineStore( 'autStore', {
     })
     
   })
+  
   const responseData =await response.json()
-
+  if(response.ok)
+    {
+    this.token = responseData.token
+    localStorage.setItem('token', responseData.token);
+    this.userName=payload.userName
+    }
  
-  if (!response.ok){
-     this.error = true;
-    throw error
+ else if (response.status === 401){
+  console.log("401")
+  this.warn=true;
+    this.Message="يرجاء تاكيد بريدك الالكتروني وتسجيل الدخول مرة اخري"
   }
-  if(response.status > 400){
-    console.log('400')
-    console.log(response.body)
-  }
-   if(response.ok)
-   {
-    
-   this.token = responseData.token
-   localStorage.setItem('token', responseData.token);
-   this.userName=payload.userName
-   }
+
+
   }
   catch(error){
     throw error
@@ -160,7 +159,7 @@ export const authStore = defineStore( 'autStore', {
 
 
   async signup(payload){
-
+   
    const currentDate = new Date();
    const isoDateString = currentDate.toISOString();
    
@@ -185,27 +184,20 @@ export const authStore = defineStore( 'autStore', {
       })
       
     })
-
-    if (!response.ok){
-      
-      const error = response.description || 'something went wrong'
-      throw error
-      
-    }
-    if(response.ok){
-      
-      const login ={
-        email:payload.email,
-        password:payload.password,
-        userName:payload.name
-      }
-    await this.login(login)
+    console.log(response)
+    if(response.status === 200){
+      this.link=true;
+      this.warn=true;
+    this.Message ="برجاء تاكيد بريدك الالكتروني وتسجيل الدخول مرة اخري";
+   
     }
     
-     if(response.status >= 500)
+  else if(response.status === 400)
      {
-     this.serverError =true
+      this.warn=true;
+      this.Message="هذا البريد الالكتروني موجود بالفعل"
      }
+     
   } 
   
   catch(error){

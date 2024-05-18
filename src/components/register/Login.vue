@@ -1,4 +1,6 @@
 <template>
+            <Error v-show="store.warn"  @tryclose="cloesError" :title="store.Message" :link="store.link"/>
+
   <div class="parent">
     <div class="login">
       <div class="wraper">
@@ -42,6 +44,9 @@
 import { computed, reactive, ref } from "vue";
 import { authStore } from "../../sotre.js/authentication/authSotre.js";
 import { useRouter } from "vue-router";
+
+import Error from "../UI/Error.vue";
+
 const router = useRouter();
 const store = authStore();
 
@@ -69,17 +74,16 @@ const isValidpass = computed(() => {
 
 //t
 
-// loginData.emailErrorMessage =false;
-// loginData.passwordErrorMessage =false;
+
 const emialvaladition = () => {
-console.log('store.error'+ store.error)
+
   if (!isValidemail.value) {
     loginData.email.errorMessage = true;
     emailInput.value.classList.add("error");
   }
 
   if (!isValidpass.value) {
-    console.log("fdgfdgfd");
+    
     loginData.password.errorMessage = true;
     passwordInput.value.classList.add("error");
   }
@@ -99,6 +103,11 @@ console.log('store.error'+ store.error)
     router.replace("/Connect.Com");
   }
 };
+const cloesError = () =>{
+   store.warn=false;
+   store.Message=null;
+   registerData.email.errorMessage = true;
+}
 </script>
 
 
@@ -142,7 +151,7 @@ console.log('store.error'+ store.error)
   height: 80px;
   width: 100%;
   border-color: rgb(13, 159, 207) rgb(17, 81, 231);
-  margin: 1rem;
+  margin: 0.2rem;
   border-radius: 25px;
   font-size: 20px;
 }
@@ -152,6 +161,7 @@ console.log('store.error'+ store.error)
   font-weight: 200;
   float: right;
   margin-right: 5px;
+  margin-top:8px ;
   color: rgb(64, 64, 64);
 }
 .wraper .error {
