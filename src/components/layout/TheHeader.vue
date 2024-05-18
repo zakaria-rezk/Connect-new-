@@ -50,7 +50,7 @@
           <!-- Login Link -->
           <li class="nav-item" v-show="isAuth">
             <button
-              :to="{ name: 'customerWithId', params: { id: token } }"
+              :to="{ name: 'customerWithId', params: { id: userName } }"
               class="nav-link"
               @click="chagneverticalNavVisibilty"
             >
@@ -77,7 +77,7 @@
     <div class="lol" :style="{ display: verticalNav }">
       <ul>
         <router-link 
-          :to="{ name: 'customerWithId', params: { id: token } }"
+          :to="{ name: 'customerWithId', params: { id: userName } }"
           class="router-link"
           ><p class="px-1">
             <font-awesome-icon icon="fa-solid fa-user" class="px-1" />
@@ -85,7 +85,7 @@
           <li>حسابي</li>
         </router-link>
         <router-link v-if="active.hasBussins"
-          :to="{ name: 'bussinsPage' , params: { id: token }}"
+          :to="{ name: 'bussinsPage' , params: { id: userName }}"
           class="router-link"
           ><p class="px-1">
             <font-awesome-icon icon="fa-solid fa-money-check" class="px-1" />
@@ -93,7 +93,7 @@
           <li>نشاطي التجاري</li>
         </router-link>
         <router-link
-        :to="{name: 'updateProfile' ,params: { id: token }}" 
+        :to="{name: 'updateProfile' ,params: { id: userName }}" 
           class="router-link"
           ><p class="px-1">
             <font-awesome-icon icon="fa-solid fa-gears" class="px-1" />
@@ -129,7 +129,8 @@ const store = authStore();
 
 const verticalNav = ref("none");
 const isAuth = localStorage.getItem("token");
-const token = localStorage.getItem("token") ||'sasasasa';
+const userName = localStorage.getItem("userName") ||'sasasasa';
+const token = localStorage.getItem("token") ||'sasassasa';
 const chagneverticalNavVisibilty = () => {
   verticalNav.value = verticalNav.value === "inline" ? "none" : "inline";
 };
