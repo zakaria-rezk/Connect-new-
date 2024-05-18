@@ -11,7 +11,7 @@
           v-model="loginData.email.value"
           ref="emailInput"
         />
-        <p class="error forgetpass" v-if="loginData.email.errorMessage || store.error">
+        <p class="error forgetpass" v-if="store.userNotFound">
           تاكد من عنوان بريدك الالكتروني
         </p>
         <input
@@ -20,7 +20,7 @@
           placeholder="*ادخل كلمة المرور"
           v-model="loginData.password.value"
         />
-        <p class="error forgetpass" v-if="loginData.password.errorMessage || store.error">
+        <p class="error forgetpass" v-if="store.incorrectPass">
           تاكد من كلمة المرور الخاصة بك
         </p>
 
@@ -65,11 +65,11 @@ const emailInput = ref();
 const passwordInput = ref();
 //
 
-const isValidemail = computed(() => {
-  return loginData.email.value.includes("@");
+const userNotFound = computed(() => {
+  return store.userNotFound;
 });
-const isValidpass = computed(() => {
-  return loginData.password.value !=0;
+const incorrectPass = computed(() => {
+  return store.incorrectPass;
 });
 
 //t
@@ -77,26 +77,26 @@ const isValidpass = computed(() => {
 
 const emialvaladition = () => {
 
-  if (!isValidemail.value) {
+  if (userNotFound.value) {
     loginData.email.errorMessage = true;
     emailInput.value.classList.add("error");
   }
 
-  if (!isValidpass.value) {
+  if (incorrectPass.value) {
     
     loginData.password.errorMessage = true;
     passwordInput.value.classList.add("error");
   }
 };
   const dispathchLoginAction = async () => {
-  emialvaladition();
-  if (isValidpass.value && isValidemail.value) {
+  
     const login = {
       email:loginData.email.value,
       password:loginData.password.value,
     };
    await store.login(login);
-  }
+   emialvaladition();
+
 
   if (store.isAuth) {
     

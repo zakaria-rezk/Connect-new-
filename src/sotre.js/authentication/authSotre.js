@@ -8,6 +8,8 @@ export const authStore = defineStore( 'autStore', {
   expiration:null,
   token:null,
   userName:null,
+  userNotFound:false,
+  incorrectPass:false,
   warn:false,
   link:false,
   egyptGovernorates: [
@@ -142,13 +144,20 @@ export const authStore = defineStore( 'autStore', {
     localStorage.setItem('token', responseData.token);
     this.userName=payload.userName
     }
- 
+    else if (response.status === 404){
+      
+      this.userNotFound=true;
+       
+      }
+
  else if (response.status === 401){
   console.log("401")
-  this.warn=true;
-    this.Message="يرجاء تاكيد بريدك الالكتروني وتسجيل الدخول مرة اخري"
+  this.incorrectPass=true;
   }
-
+     else if(response.status===403){
+      this.warn=true;
+      this.Message="برجاء تاكيد بريدك الالكتروني"
+     }
 
   }
   catch(error){
