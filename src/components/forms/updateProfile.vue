@@ -130,4 +130,10 @@ form {
     transform: translateY(0);
   }
 }
+@media (max-width: 590px){
+  form{
+    min-width: 00px;
+   
+  }
+}
 </style>

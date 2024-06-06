@@ -64,19 +64,20 @@ const isopen = ref(false);
 const formVisibilty = ref("none");
 
 const active = activeBussins();
-
+const imgUrl = ref("/src/assets/WhatsApp Image 2023-06-20 at 09.11.46.jpg");
 const showForm = () => {
   formVisibilty.value = "flex";
 };
 const closeForm = () => {
   formVisibilty.value = "none";
 };
-const imgUrl = ref("/src/assets/WhatsApp Image 2023-06-20 at 09.11.46.jpg");
+
 
 const handelImgSrc = (event) => {
   const file = event.target.files[0];
 
   imgUrl.value = URL.createObjectURL(file);
+  
 };
 </script>
 
@@ -110,9 +111,7 @@ const handelImgSrc = (event) => {
   object-position: center;
   border-radius: 10px;
 }
-.services{
 
-}
 .cover-photo:hover {
   content: "Click to Change";
   position: relative;

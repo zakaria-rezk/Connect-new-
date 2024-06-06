@@ -101,10 +101,10 @@ export const addBussins = defineStore("addBussins", {
         )
         .join("&");
    
-            console.log(url + "?" + queryString)
+            
             let formDate =new FormData()
             formDate.append('image',payload.ImageUrl)
-            formDate.append('imageName',payload.ImageUrl.name)
+            // formDate.append('imageName',payload.ImageUrl.name)
      
       try {
         const response = await fetch(url + "?" + queryString, {

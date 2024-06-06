@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { activeUser } from "@/sotre.js/profile/activeUser";
 import { activeBussins } from "@/sotre.js/bussins/activeBussins";
+import { UserProfile } from "@/sotre.js/profile/userProfile";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -44,7 +45,9 @@ const router = createRouter({
          meta: { requierAuth: true },
          beforeEnter: async (to, from, next) => {
          const user =activeUser();
-        await user.userData()
+         const pic =UserProfile()
+         await pic.getProfilePic()
+         await user.userData()
         next()
         },
       children: [
