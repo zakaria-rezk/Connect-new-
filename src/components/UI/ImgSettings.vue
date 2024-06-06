@@ -1,11 +1,14 @@
 <template>
-  <div class="edit-img-info" :style="{ opacity: divVisibilty }">
-    <button class="btn"><font-awesome-icon icon="fa-solid fa-eye" class="px-1"/>عرض الصورة</button>
+  <div class="edit-img-info">
+    <button class="btn" @click.prevent="emitFire"><font-awesome-icon icon="fa-solid fa-eye" class="px-1" />عرض الصورة</button>
     <label for="fileInput" class="btn"><font-awesome-icon icon="fa-solid fa-eye" class="px-1"/>تغيير الصورة</label>
   </div>
 </template>
 <script setup>
-const props = defineProps(["divVisibilty"]);
+const emit =defineEmits("displayImg");
+const emitFire =()=>{
+    emit("displayImg")
+}
 </script>
 <style scoped>
 .edit-img-info {

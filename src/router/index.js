@@ -94,23 +94,13 @@ const router = createRouter({
         import("../components/forms/updateProfile.vue"),
         meta: { requierAuth: true },
     },
-    {
-      path: "/HotelAdmin",
-      name: "hotel-admin",
-      component: () =>
-        import("../components/profilePager/hotel/hotelAdminProfile.vue"),
-    },
+
     {
       path: "/ReservationCategories",
       name: "reservation-categories",
       component: () => import("../components/pages/ReservationCategories.vue"),
     },
-    {
-      path: "/followReservation",
-      name: "follow-reservation",
-      component: () =>
-        import("../components/profilePager/hotel/followReservation.vue"),
-    },
+  
     {
       path: "/hotelReservations",
       name: "hotel-reservations",
