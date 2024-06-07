@@ -28,14 +28,7 @@
           <li class="nav-item">
             <router-link to="/" class="nav-link">الرئيسية</router-link>
           </li>
-          <li class="nav-item">
-            <router-link
-              :to="{ name: 'reservation-categories' }"
-              class="nav-link"
-              >        
-              </router-link
-            >
-          </li>
+         
           <li class="nav-item">
             <router-link to="/" class="nav-link">الخدمات</router-link>
           </li>
@@ -78,7 +71,7 @@
     </div>
   </nav>
   <nav>
-    <div class="lol" :style="{ display: verticalNav }">
+    <div class="verticalNav" :style="{ display: verticalNav }">
       <ul>
         <router-link
           :to="{ name: 'customerWithId', params: { id: userName } }"
@@ -144,18 +137,18 @@ const logout = () => {
 };
 onBeforeMount(async () => {
   const profilePic =UserProfile();
-  await profilePic.getProfilePic()
+  await profilePic.getProfilePic();
   const user = activeUser();
   const token = localStorage.getItem("token");
 
  
-  console.log(pic)
+ 
   await user.decode(token);
 });
 </script>
 
 <style scoped>
-.lol {
+.verticalNav {
   position: absolute;
   width: 200px;
   z-index: 100;
@@ -164,7 +157,7 @@ onBeforeMount(async () => {
   background-color: rgb(255, 255, 255);
 }
 
-.lol ul {
+.verticalNav ul {
   display: flex;
   justify-content: flex-end;
   padding: 0;
@@ -203,13 +196,13 @@ onBeforeMount(async () => {
 } 
 .imgpic img{
   border-radius: 50%;
-  max-width: 50px;
-  max-height: 50px; 
+  max-width: 40px;
+  max-height: 40px; 
  
 }
 
 .logo {
   width: 90px;
-  height: 45px;
+  height: 40px;
 }
 </style>

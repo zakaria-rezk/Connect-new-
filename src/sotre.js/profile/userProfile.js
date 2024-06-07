@@ -24,7 +24,7 @@ export const UserProfile = defineStore("userProfile", {
           }
         );
 
-        console.log(response);
+        
       } catch (error) {
         throw error;
       }
@@ -51,7 +51,7 @@ export const UserProfile = defineStore("userProfile", {
         const imageUrl = await response.text();
         const baseUrl = "https://localhost:7165";
         this.profilePic = `${baseUrl}${imageUrl}`;
-        console.log(this.profilePic)
+       
         localStorage.setItem("pic", this.profilePic);
       } catch (error) {
         throw error;

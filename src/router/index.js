@@ -10,12 +10,18 @@ const router = createRouter({
       path: "/Connect.Com",
       name: "connect",
       component: () => import("../components/pages/HomePage.vue"),
+      beforeEnter:async(to, from, next)=>{
+        const profilePic =UserProfile();
+        await profilePic.getProfilePic();
+        next();
+      }
     },
     {
       path: "/login",
       name: "Login",
       component: () => import("../components/register/Login.vue"),
       meta: { requierAuth: false },
+     
     },
     {
       path: "/register",

@@ -110,8 +110,6 @@ const displayProfilePic = ref(false);
 const userImg = ref(null);
 const showImg = () => {
   displayProfilePic.value = true;
-
-  console.log("SF");
 };
 const ImgSetting = () => {
   divVisibilty.value = divVisibilty.value === 0 ? 1 : 0;
@@ -128,10 +126,10 @@ const handleFileChange = (e) => {
 const handleClickOutside = (event) => {
   if (divVisibilty.value === 1 && !changeImgRef.value.contains(event.target)) {
     divVisibilty.value = 0;
-    console.log("click if anywhere");
+ 
   }
   if (displayProfilePic.value && !userImg.value.contains(event.target) &&  event.target.tagName !== 'BUTTON') {
-    console.log("hidesex")
+    
     displayProfilePic.value = false;
   }
 };
@@ -139,7 +137,7 @@ const handleClickOutside = (event) => {
 onBeforeMount(async () => {
   //add event listener that trigger when the user click any where
   document.addEventListener("click", handleClickOutside);
-  console.log(userProfile.profilePic);
+ 
   router.push({ name: "customerReservation" });
   userData.userData();
 });
@@ -197,7 +195,7 @@ custom-btn-container button {
   width: 100%;
   height: 100%;
   z-index: 2;
- 
+  
   background-color: rgba(42, 42, 44, 0.8);
 }
 .viewImg img {
@@ -205,7 +203,7 @@ custom-btn-container button {
   width: 80%;
   height: 70%;
   border-radius: 50px;
- 
+  object-fit: fill;
 }
 footer {
   margin-top: 40px;
