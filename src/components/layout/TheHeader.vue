@@ -1,13 +1,13 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-      <!-- Logo -->
-      <img
-        src="../../assets/WhatsApp_Image_2024-02-21_at_10.02.13_890990b8-removebg-preview.png"
-        alt=""
-        class="logo"
-      />
-
+      <!-- Logo --><router-link to="/">
+        <img
+          src="../../assets/WhatsApp_Image_2024-02-21_at_10.02.13_890990b8-removebg-preview.png"
+          alt=""
+          class="logo"
+        />
+      </router-link>
       <!-- Toggle button for small screens -->
       <button
         class="navbar-toggler"
@@ -32,7 +32,8 @@
             <router-link
               :to="{ name: 'reservation-categories' }"
               class="nav-link"
-              >الحجوزات</router-link
+              >        
+              </router-link
             >
           </li>
           <li class="nav-item">
@@ -45,16 +46,19 @@
       </div>
 
       <!-- Left side links -->
+     
       <div>
+       
+        
         <ul class="navbar-nav">
           <!-- Login Link -->
           <li class="nav-item" v-show="isAuth">
             <button
-              :to="{ name: 'customerWithId', params: { id: userName } }"
+             
               class="nav-link"
               @click="chagneverticalNavVisibilty"
             >
-              حسابي
+            <div class="imgpic"> <img :src="pic" alt=""></div>
             </button>
           </li>
 
@@ -76,7 +80,7 @@
   <nav>
     <div class="lol" :style="{ display: verticalNav }">
       <ul>
-        <router-link 
+        <router-link
           :to="{ name: 'customerWithId', params: { id: userName } }"
           class="router-link"
           ><p class="px-1">
@@ -84,8 +88,9 @@
           </p>
           <li>حسابي</li>
         </router-link>
-        <router-link v-if="active.hasBussins"
-          :to="{ name: 'bussinsPage' , params: { id: userName }}"
+        <router-link
+          v-if="active.hasBussins"
+          :to="{ name: 'bussinsPage', params: { id: userName } }"
           class="router-link"
           ><p class="px-1">
             <font-awesome-icon icon="fa-solid fa-money-check" class="px-1" />
@@ -93,7 +98,7 @@
           <li>نشاطي التجاري</li>
         </router-link>
         <router-link
-        :to="{name: 'updateProfile' ,params: { id: userName }}" 
+          :to="{ name: 'updateProfile', params: { id: userName } }"
           class="router-link"
           ><p class="px-1">
             <font-awesome-icon icon="fa-solid fa-gears" class="px-1" />
@@ -121,16 +126,16 @@
 
 <script setup>
 import { onBeforeMount, ref } from "vue";
-
+import { UserProfile } from "@/sotre.js/profile/userProfile";
 import { authStore } from "../../sotre.js/authentication/authSotre.js";
 import { activeUser } from "@/sotre.js/profile/activeUser.js";
 const active = activeUser();
 const store = authStore();
-
+const pic =localStorage.getItem('pic')
 const verticalNav = ref("none");
 const isAuth = localStorage.getItem("token");
-const userName = localStorage.getItem("userName") ||'sasasasa';
-const token = localStorage.getItem("token") ||'sasassasa';
+const userName = localStorage.getItem("userName") || "sasasasa";
+
 const chagneverticalNavVisibilty = () => {
   verticalNav.value = verticalNav.value === "inline" ? "none" : "inline";
 };
@@ -138,12 +143,14 @@ const logout = () => {
   store.logout();
 };
 onBeforeMount(async () => {
+  const profilePic =UserProfile();
+  await profilePic.getProfilePic()
   const user = activeUser();
   const token = localStorage.getItem("token");
-        console.log(user.hasBussins)
-      await user.decode(token);
-   
-  
+
+ 
+  console.log(pic)
+  await user.decode(token);
 });
 </script>
 
@@ -190,6 +197,17 @@ onBeforeMount(async () => {
   transform: scale(1.1);
   /* Change to your desired background color */
 }
+.imgpic{
+  overflow: hidden;
+
+} 
+.imgpic img{
+  border-radius: 50%;
+  max-width: 50px;
+  max-height: 50px; 
+ 
+}
+
 .logo {
   width: 90px;
   height: 45px;

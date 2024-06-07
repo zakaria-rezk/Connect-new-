@@ -197,13 +197,15 @@ custom-btn-container button {
   width: 100%;
   height: 100%;
   z-index: 2;
+ 
   background-color: rgba(42, 42, 44, 0.8);
 }
 .viewImg img {
   margin: 2px;
   width: 80%;
-  height: 60%;
+  height: 70%;
   border-radius: 50px;
+ 
 }
 footer {
   margin-top: 40px;
