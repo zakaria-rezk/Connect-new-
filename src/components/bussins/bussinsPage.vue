@@ -54,7 +54,7 @@
   </div>
 </template>
 <script setup>
-import { onBeforeMount, onBeforeUnmount, ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import servicesCard from "../bussins/servicesCard.vue";
 import BaseCard from "@/components/UI/BaseCard.vue";
 import TheHeader from "../layout/TheHeader.vue";

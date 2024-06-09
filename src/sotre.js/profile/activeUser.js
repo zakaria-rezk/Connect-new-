@@ -68,11 +68,7 @@ export const activeUser = defineStore("activeUser", {
     async updateProfile(payload){
       
       const token =localStorage.getItem('token')
-      console.log(payload.name)
-      console.log(payload.street)
-      console.log(payload.phoneNumber)
-      console.log(payload.city)
-      console.log(payload.street)
+      
           try{
             const response =await fetch('https://localhost:7165/api/Account/update-customer-info',{
               method:'PUT',

@@ -137,9 +137,9 @@ const handleClickOutside = (event) => {
 onBeforeMount(async () => {
   //add event listener that trigger when the user click any where
   document.addEventListener("click", handleClickOutside);
- 
+  await userData.userData();
   router.push({ name: "customerReservation" });
-  userData.userData();
+ 
 });
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
@@ -177,10 +177,9 @@ custom-btn-container button {
 
 .profile-picture {
   position: relative;
-
   top: 10px;
   bottom: 30px;
-  width: 300px; /* قطر صورة الصفحة الشخصية */
+  width: 300px; 
   height: 200px;
 
   margin: 0 auto 1px;

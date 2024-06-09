@@ -11,8 +11,7 @@ const router = createRouter({
       name: "connect",
       component: () => import("../components/pages/HomePage.vue"),
       beforeEnter:async(to, from, next)=>{
-        const profilePic =UserProfile();
-        await profilePic.getProfilePic();
+       
         next();
       }
     },

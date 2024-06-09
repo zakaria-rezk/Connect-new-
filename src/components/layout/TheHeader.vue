@@ -9,49 +9,31 @@
         />
       </router-link>
       <!-- Toggle button for small screens -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    
 
       <!-- Navbar links -->
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="" id="navbarNav">
         <ul class="navbar-nav mx-auto">
           <!-- Four links in the middle -->
           <li class="nav-item">
             <router-link to="/" class="nav-link">الرئيسية</router-link>
           </li>
-         
+
           <li class="nav-item">
             <router-link to="/" class="nav-link">الخدمات</router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/" class="nav-link">تواصل معنا</router-link>
-          </li>
+         
         </ul>
       </div>
 
       <!-- Left side links -->
-     
+
       <div>
-       
-        
         <ul class="navbar-nav">
           <!-- Login Link -->
           <li class="nav-item" v-show="isAuth">
-            <button
-             
-              class="nav-link"
-              @click="chagneverticalNavVisibilty"
-            >
-            <div class="imgpic"> <img :src="pic" alt=""></div>
+            <button class="nav-link" @click="chagneverticalNavVisibilty">
+              <div class="imgpic"><img :src="pic" alt="" /></div>
             </button>
           </li>
 
@@ -124,11 +106,13 @@ import { authStore } from "../../sotre.js/authentication/authSotre.js";
 import { activeUser } from "@/sotre.js/profile/activeUser.js";
 const active = activeUser();
 const store = authStore();
-const pic =localStorage.getItem('pic')
+const pic =ref(null)
 const verticalNav = ref("none");
 const isAuth = localStorage.getItem("token");
 const userName = localStorage.getItem("userName") || "sasasasa";
-
+ const fetchProfilePic =()=>{
+  
+ }
 const chagneverticalNavVisibilty = () => {
   verticalNav.value = verticalNav.value === "inline" ? "none" : "inline";
 };
@@ -136,13 +120,13 @@ const logout = () => {
   store.logout();
 };
 onBeforeMount(async () => {
-  const profilePic =UserProfile();
-  await profilePic.getProfilePic();
+  const getProfilePic = UserProfile();
+  await getProfilePic.getProfilePic();
+  const profilePic = localStorage.getItem("pic");
+  pic.value=profilePic
   const user = activeUser();
   const token = localStorage.getItem("token");
 
- 
- 
   await user.decode(token);
 });
 </script>
@@ -190,15 +174,13 @@ onBeforeMount(async () => {
   transform: scale(1.1);
   /* Change to your desired background color */
 }
-.imgpic{
+.imgpic {
   overflow: hidden;
-
-} 
-.imgpic img{
+}
+.imgpic img {
   border-radius: 50%;
   max-width: 40px;
-  max-height: 40px; 
- 
+  max-height: 40px;
 }
 
 .logo {

@@ -37,7 +37,7 @@ export const activeBussins = defineStore("activeBussins", {
           console.log('active bussins datta')
             this.name =data.name
             this.description=data.description
-             console.log(data)
+            
        
         
     },
