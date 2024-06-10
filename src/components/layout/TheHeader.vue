@@ -109,10 +109,8 @@ const store = authStore();
 const pic =ref(null)
 const verticalNav = ref("none");
 const isAuth = localStorage.getItem("token");
-const userName = localStorage.getItem("userName") || "sasasasa";
- const fetchProfilePic =()=>{
-  
- }
+const userName = localStorage.getItem("userName")||'hg';
+
 const chagneverticalNavVisibilty = () => {
   verticalNav.value = verticalNav.value === "inline" ? "none" : "inline";
 };

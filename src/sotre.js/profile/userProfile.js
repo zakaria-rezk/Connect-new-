@@ -23,8 +23,6 @@ export const UserProfile = defineStore("userProfile", {
             body: formData,
           }
         );
-
-        
       } catch (error) {
         throw error;
       }

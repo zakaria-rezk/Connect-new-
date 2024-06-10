@@ -59,11 +59,12 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { addBussins } from "@/sotre.js/bussins/addBussins";
+
 const bussins =addBussins();
 const props = defineProps(["formVisibilty"]);
 const emit = defineEmits("closeForm");
 
-import { activeBussins } from "@/sotre.js/bussins/activeBussins";
+
 const inputVal = ref();
 const service =reactive({
   name:null,

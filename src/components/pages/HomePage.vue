@@ -146,7 +146,7 @@ const getTopRated = async () => {
       throw new Error("Failed to fetch data");
     }
     const jsonData = await response.json();
-    console.log(jsonData)
+   
     toprateds.value = jsonData;
   } catch (error) {
     console.error("Error fetching data:", error.message);

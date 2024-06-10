@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import { activeUser } from "@/sotre.js/profile/activeUser";
 import { activeBussins } from "@/sotre.js/bussins/activeBussins";
 import { UserProfile } from "@/sotre.js/profile/userProfile";
+import { offeredServices } from "@/sotre.js/bussins/offeredServices";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -86,10 +87,14 @@ const router = createRouter({
         import("../components/bussins/bussinsPage.vue"),
         meta: { requierAuth: true },
         beforeEnter: async (to, from, next) => {
+          // console.log('before enter bussins')
+          // const useOfferedServices = offeredServices();
+          // await useOfferedServices.getOfferdServices(1);
           const active =  activeBussins();
            await active.bussinsData()
              next();
-        }
+        },
+   
     },
 
     {

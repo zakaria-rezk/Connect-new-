@@ -1,8 +1,8 @@
 <template>
   <TheHeader />
-  <div class="bussins">
-    <div class="container">
-      <div>
+  <div class="bussins container">
+    <div class="">
+      <div class="cover">
         <img :src="imgUrl" alt="" class="cover-photo" />
         <label for="imgFile"></label>
         <input
@@ -27,17 +27,9 @@
         </div>
         <div class="bussins-services">
           <BaseCard title="الخدمات" class="my-5" />
-          <div class="services">
-            
-            
-            <servicesCard />
-            <servicesCard />
-            <servicesCard />
-            <servicesCard />
-            <servicesCard />
-          
+          <div class="services d-flex">
+            <pagination/> 
           </div>
-
           <addService :formVisibilty="formVisibilty" @closeForm="closeForm" />
           <div class="container d-flex justify-content-center my-4">
             <button
@@ -54,31 +46,32 @@
   </div>
 </template>
 <script setup>
-import { onBeforeMount, ref } from "vue";
-import servicesCard from "../bussins/servicesCard.vue";
+import { onBeforeMount, onMounted, ref } from "vue";
+import pagination from "../bussins/pagination.vue";
+
 import BaseCard from "@/components/UI/BaseCard.vue";
 import TheHeader from "../layout/TheHeader.vue";
 import addService from "@/components/forms/addService.vue";
 import { activeBussins } from "@/sotre.js/bussins/activeBussins.js";
-const isopen = ref(false);
+
 const formVisibilty = ref("none");
 
 const active = activeBussins();
 const imgUrl = ref("/src/assets/WhatsApp Image 2023-06-20 at 09.11.46.jpg");
 const showForm = () => {
+  data.value++;
   formVisibilty.value = "flex";
 };
 const closeForm = () => {
   formVisibilty.value = "none";
 };
 
-
 const handelImgSrc = (event) => {
   const file = event.target.files[0];
 
   imgUrl.value = URL.createObjectURL(file);
-  
 };
+
 </script>
 
 <style scoped>
@@ -103,13 +96,16 @@ const handelImgSrc = (event) => {
   display: flex;
   justify-content: space-evenly;
 }
-
+.cover {
+  width: 100%;
+}
 .cover-photo {
   width: 100%;
   height: 400px;
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
+  object-fit: fill;
 }
 
 .cover-photo:hover {
