@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid" :style="{ display: formVisibilty }">
-    <img src="C:\Users\zekor\Connect-new-\src\assets\15528.jpg" alt="" width="200" height="300">
+    <img src="../../assets/15528.jpg" alt="" width="200" height="300">
     <form action="" class="row justify-content-center">
      
       <div class="col-md-10 d-flex flex-column justify-content-center align-items-center from-inputs">

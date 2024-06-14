@@ -82,9 +82,9 @@
             placeholder="ابحث هنا"
             aria-label="Search"
           />
-          <button @click="Search" class="btn btn-primary" type="button">
+          <router-link :to="{name:'Connect',hash:'#section'}" @click="Search" class="btn btn-primary" type="button">
             ابحث
-          </button>
+          </router-link>
         </div>
       </div>
       <!-- نواتج البحث -->
@@ -94,6 +94,7 @@
         </div>
       </div>
       <!-- الاعلى تقييما -->
+       <section id="section">
       <div class="toprated col-12">
         <div class="head d-flex justify-content-center mt-5">
           <h4 class="p-4">الاعلى تقييما</h4>
@@ -120,6 +121,7 @@
           </div>
         </div>
       </div>
+    </section>
     </div>
   </div>
 </template>

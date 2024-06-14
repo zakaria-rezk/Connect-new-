@@ -118,10 +118,11 @@ const handleColor = (par) => {
   activeLink.value = par;
 };
 
-const handleFileChange = (e) => {
+const handleFileChange = async (e) => {
   const file = e.target.files[0];
 
-  userProfile.sendProfilePic(file);
+  await userProfile.sendProfilePic(file);
+  await userProfile.getProfilePic()
 };
 const handleClickOutside = (event) => {
   if (divVisibilty.value === 1 && !changeImgRef.value.contains(event.target)) {
@@ -136,9 +137,10 @@ const handleClickOutside = (event) => {
 
 onBeforeMount(async () => {
   //add event listener that trigger when the user click any where
+  router.push({ name: "customerReservation" });
   document.addEventListener("click", handleClickOutside);
   await userData.userData();
-  router.push({ name: "customerReservation" });
+
  
 });
 onBeforeUnmount(() => {

@@ -1,6 +1,6 @@
 <template>
   <TheHeader />
-  <div class="bussins container">
+  <div class="bussins container-fluid" id="services">
     <div class="">
       <div class="cover">
         <img :src="imgUrl" alt="" class="cover-photo" />
@@ -13,6 +13,7 @@
           hidden
         />
       </div>
+      
       <div class="bussins">
         <div class="bussins-detail">
           <h3>اسم النشاط :{{ active.name }}</h3>
@@ -39,8 +40,10 @@
             >
               اضافة خدمة
             </button>
+            
           </div>
         </div>
+      
       </div>
     </div>
   </div>
@@ -59,7 +62,7 @@ const formVisibilty = ref("none");
 const active = activeBussins();
 const imgUrl = ref("/src/assets/WhatsApp Image 2023-06-20 at 09.11.46.jpg");
 const showForm = () => {
-  data.value++;
+  
   formVisibilty.value = "flex";
 };
 const closeForm = () => {

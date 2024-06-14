@@ -1,119 +1,140 @@
 <template>
-  <button class="btn p-1 fs-1" @click="changePageIndex">-</button>
-  <div class="container">
-    <div v-for="service in useOfferedServices.G_offeredServices" :key="service.id" class="wrapper">
-      <div class="banner-image"></div>
-      <h1>Toyota Supra</h1>
-      <p>
-        Lorem ipsum dolor sit amet, <br />
-        consectetur adipiscing elit.
-      </p>
+  <div class="container container-fluid">
+    <button
+    :disabled="pageIndex === 1"
+    @click.prevent="previousPage"
+    class="btn pg-btn  p-1 fs-1"
+    >السابق</button
+  >
+    <div
+      v-for="service in useOfferedServices.G_offeredServices"
+      :key="service.id"
+      :class="['wrapper','px-5',{animated:isAnimted}]"
+    >
+      <img :src="service.image" class="banner-image" alt="" />
+
+      <h3 class="bg-secandray">{{ service.name }}</h3>
+      <p class="">{{service.description}}</p>
+      <div class="button-wrapper">
+        <button class="btn outline">{{ service.price }}ج</button>
+        <button class="btn fill">اطلب الخدمة</button>
+      </div>
     </div>
-    <div class="button-wrapper">
-      <button class="btn outline">DETAILS</button>
-      <button class="btn fill">BUY NOW</button>
-    </div>
+  
+  <button class="btn  pg-btn p-1 fs-1" @click="nextPage">التالي</button>
+
   </div>
-  <button class="btn p-1 fs-1">-></button>
+ 
 </template>
 <script setup>
 import { offeredServices } from "@/sotre.js/bussins/offeredServices";
-import { ref, onBeforeMount, onMounted, watch } from "vue";
-import { defineEmits } from "vue";
+import { ref, onBeforeMount, onMounted } from "vue";
+const isAnimted=ref(false)
 const useOfferedServices = offeredServices();
 
+const pageIndex = ref(1);
 
-const emits = defineEmits(["loadData"]);
-
-let pageIndex = ref(1);
-
-const changePageIndex = async () => {
+const nextPage = async () => {
+  isAnimted.value=!isAnimted.value;
   ++pageIndex.value;
-  
-  await useOfferedServices.getOfferdServices(1);
+ 
+ setTimeout( async()=>{
+  await useOfferedServices.getOfferdServices(pageIndex.value);
+  isAnimted.value=!isAnimted.value;
+ },2600)
+  // isAnimted.value=false;
+};
+const previousPage = async () => {
+  --pageIndex.value;
+
+  await useOfferedServices.getOfferdServices(pageIndex.value);
 };
 
-   
-onMounted (async () => {
-  console.log("onmounted hook pagination")
+onMounted(async () => {
+  console.log("onmounted hook pagination");
   const useOfferedServices = offeredServices();
   await useOfferedServices.getOfferdServices(1);
-  
- 
-  
+  console.log(useOfferedServices.G_offeredServices);
 });
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <style scoped>
-
-
-
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
 
 .container {
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(17, 25, 40, 0.25);
+  
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.125);
-  padding: 38px;
-  filter: drop-shadow(0 30px 10px rgba(0, 0, 0, 0.125));
+  border: 1px solid var(--gray);
+  padding: 10px;
+  color: rgb(0, 0, 0);
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: center;
+  flex-basis: 500px;
+  flex-grow:1 ;
+ flex-shrink: 1;
   text-align: center;
+  min-height: 500px;
+  overflow: hidden;
+  
 }
 
 .wrapper {
-  width: 100%;
-  height: 100%;
+  
+ 
+  margin-top:25px ;
+  /* animation: pagination 2s ease-in  0s 1 normal forwards ; */
+  animation: paginationS 3s;
+ 
+  width: 25%;
+  
+}
+.wrapper img {
+  object-fit: cover;
+  width:100% ;
+  height: 250px;
+ 
+}
+.animated{
+  animation: pagination 3s ease-in  0s 1 alternate ;
+  background-color: rgb(207, 204, 204);
 }
 
 .banner-image {
-  background-image: url(https://images.unsplash.com/photo-1641326201918-3cafc641038e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80);
-  background-position: center;
   background-size: cover;
-  height: 300px;
-  width: 100%;
+  height: 25%;
+  width: 25%;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.255);
+  border: 1px solid var(--gray);
 }
 
-h1 {
+h3 {
   font-family: "Righteous", sans-serif;
-  color: rgba(255, 255, 255, 0.98);
+  color: rgba(0, 0, 0, 0.98);
   text-transform: uppercase;
-  font-size: 2.4rem;
+  font-size: 1.5rem;
+  
+  word-wrap: break-word;
+  
+  
 }
 
 p {
-  color: #fff;
+  color: #737272;
   font-family: "Lato", sans-serif;
   text-align: center;
   font-size: 0.8rem;
-  line-height: 150%;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  width: 70px;
+  
+ 
+  
+  
 }
 
 .button-wrapper {
-  margin-top: 18px;
+  margin-top: 12px;
 }
 
 .btn {
@@ -142,6 +163,7 @@ p {
   color: rgba(255, 255, 255, 0.9);
   border-color: rgba(255, 255, 255, 0.9);
   transition: all 0.3s ease;
+  background-color: var(--gray);
 }
 
 .fill {
@@ -154,8 +176,39 @@ p {
 
 .fill:hover {
   transform: scale(1.125);
-  border-color: rgba(255, 255, 255, 0.9);
+  border-color:var(--gray);
   filter: drop-shadow(0 10px 5px rgba(0, 0, 0, 0.125));
   transition: all 0.3s ease;
+  
+}
+@media (max-width: 768px) {
+  .container{
+    
+    overflow: scroll;
+   display: inline;
+   
+      padding: 1px;
+    width: 100%;
+    height: 1000px;
+  }
+.wrapper{
+  width: 100%;
+}
+.wrapper img{
+  width: 100%;
+} 
+
+}
+@keyframes pagination {
+  from{ transform: translateX(0px)}
+  to{transform: translateX(1800px)}
+  /* from{ transform: translateX(100px)}
+  to{transform: translateX(0px)} */
+}
+@keyframes paginationS {
+  from{ transform: translateX(-1500px); opacity: 0.0;}
+  to{transform: translateX(0px);opacity: 1;}
+  /* from{ transform: translateX(100px)}
+  to{transform: translateX(0px)} */
 }
 </style>

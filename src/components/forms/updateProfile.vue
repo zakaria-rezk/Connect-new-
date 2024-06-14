@@ -29,7 +29,7 @@
             type="text"
             class="form-control"
             id="inputStata"
-            v-model="formData.gover"
+            v-model="formData.state"
             required
           />
         </div>
@@ -55,13 +55,13 @@
         </div>
         <div class="router-link">
           <router-link
-            :to="{ name: 'customerWithId', params: { id: token } }"
+            :to="{ name: 'customerWithId', params: { id: userName } }"
             class="btn btn-primary"
             @click="submitForm"
             >حفظ</router-link
           >
           <router-link
-            :to="{ name: 'changepassword', params: { id: token } }"
+            :to="{ name: 'changepassword', params: { id: userName } }"
             class="btn btn-danger"
             >تغيير كلمة المرور</router-link
           >
@@ -77,7 +77,7 @@ import { activeUser } from "../../sotre.js/profile/activeUser.js";
 
 
 const user = activeUser();
-const token = localStorage.getItem("token") || "lol";
+const userName = localStorage.getItem("userName")||'hg';
 
 const formData = reactive({
   name: user.userName,

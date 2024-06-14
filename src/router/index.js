@@ -87,9 +87,7 @@ const router = createRouter({
         import("../components/bussins/bussinsPage.vue"),
         meta: { requierAuth: true },
         beforeEnter: async (to, from, next) => {
-          // console.log('before enter bussins')
-          // const useOfferedServices = offeredServices();
-          // await useOfferedServices.getOfferdServices(1);
+         
           const active =  activeBussins();
            await active.bussinsData()
              next();

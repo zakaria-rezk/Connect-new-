@@ -4,6 +4,10 @@
   --primarycolor: #1358b2;
   --btn-color:  rgb(13, 159, 207);
   --secondarycolor: #f2f2f2;
+  --gray: #c7c5c5;
+}
+html{
+  scroll-behavior: smooth;
 }
 .updateProfile  , .wrap {
   display: flex;

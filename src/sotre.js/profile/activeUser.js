@@ -84,8 +84,7 @@ export const activeUser = defineStore("activeUser", {
                
                 city:payload.city,
                 state:payload.state,
-                gender:1,     
-                dob:"2024-05-09T20:26:20.297Z"        
+                       
               })
              
             })
