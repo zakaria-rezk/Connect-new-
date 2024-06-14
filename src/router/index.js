@@ -51,8 +51,8 @@ const router = createRouter({
          meta: { requierAuth: true },
          beforeEnter: async (to, from, next) => {
          const user =activeUser();
-         const pic =UserProfile()
-         await pic.getProfilePic()
+        //  const pic =UserProfile()
+        //  await pic.getProfilePic()
          await user.userData()
         next()
         },

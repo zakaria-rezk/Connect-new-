@@ -9,7 +9,6 @@
         />
       </router-link>
       <!-- Toggle button for small screens -->
-    
 
       <!-- Navbar links -->
       <div class="" id="navbarNav">
@@ -22,7 +21,6 @@
           <li class="nav-item">
             <router-link to="/" class="nav-link">الخدمات</router-link>
           </li>
-         
         </ul>
       </div>
 
@@ -100,16 +98,16 @@
 </template>
 
 <script setup>
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, onMounted, ref } from "vue";
 import { UserProfile } from "@/sotre.js/profile/userProfile";
 import { authStore } from "../../sotre.js/authentication/authSotre.js";
 import { activeUser } from "@/sotre.js/profile/activeUser.js";
 const active = activeUser();
 const store = authStore();
-const pic =ref(null)
+const pic = ref(null);
 const verticalNav = ref("none");
 const isAuth = localStorage.getItem("token");
-const userName = localStorage.getItem("userName")||'hg';
+const userName = ref("null");
 
 const chagneverticalNavVisibilty = () => {
   verticalNav.value = verticalNav.value === "inline" ? "none" : "inline";
@@ -117,15 +115,20 @@ const chagneverticalNavVisibilty = () => {
 const logout = () => {
   store.logout();
 };
+
 onBeforeMount(async () => {
+  const token = localStorage.getItem("token");
+  const user = activeUser();
+  await user.decode(token);
+  const username = localStorage.getItem("userName");
+  userName.value = username;
+});
+onMounted(async () => {
   const getProfilePic = UserProfile();
   await getProfilePic.getProfilePic();
   const profilePic = localStorage.getItem("pic");
-  pic.value=profilePic
-  const user = activeUser();
-  const token = localStorage.getItem("token");
-
-  await user.decode(token);
+  pic.value = profilePic;
+  
 });
 </script>
 

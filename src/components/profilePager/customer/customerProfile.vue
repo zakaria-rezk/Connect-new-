@@ -3,6 +3,7 @@
   <div class="viewImg" v-if="displayProfilePic">
     <img :src="userProfile.profilePic" ref="userImg" />
   </div>
+  <p>{{ data }}</p>
   <div class="profile">
     <div class="profile-info">
       <div class="profile-picture">
@@ -98,7 +99,7 @@ import TheHeader from "@/components/layout/TheHeader.vue";
 import { UserProfile } from "@/sotre.js/profile/userProfile.js";
 import ImgSettings from "../../UI/ImgSettings.vue";
 import router from "@/router";
-import ImgSettingsVue from "@/components/UI/ImgSettings.vue";
+const data = ref(1);
 const userData = activeUser();
 const fileInput = ref(null);
 const activeLink = ref("aboutCustomer");
@@ -120,28 +121,33 @@ const handleColor = (par) => {
 
 const handleFileChange = async (e) => {
   const file = e.target.files[0];
-
+  data.value++;
   await userProfile.sendProfilePic(file);
-  await userProfile.getProfilePic()
+  setTimeout( async function(){
+    await userProfile.getProfilePic();
+  },15000)
+  
 };
 const handleClickOutside = (event) => {
   if (divVisibilty.value === 1 && !changeImgRef.value.contains(event.target)) {
     divVisibilty.value = 0;
- 
   }
-  if (displayProfilePic.value && !userImg.value.contains(event.target) &&  event.target.tagName !== 'BUTTON') {
-    
+  if (
+    displayProfilePic.value &&
+    !userImg.value.contains(event.target) &&
+    event.target.tagName !== "BUTTON"
+  ) {
     displayProfilePic.value = false;
   }
 };
 
 onBeforeMount(async () => {
-  //add event listener that trigger when the user click any where
+  const pic = UserProfile();
+  await pic.getProfilePic();
+  console.log("unbefore un mount");
   router.push({ name: "customerReservation" });
   document.addEventListener("click", handleClickOutside);
   await userData.userData();
-
- 
 });
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
@@ -181,7 +187,7 @@ custom-btn-container button {
   position: relative;
   top: 10px;
   bottom: 30px;
-  width: 300px; 
+  width: 300px;
   height: 200px;
 
   margin: 0 auto 1px;
@@ -196,7 +202,7 @@ custom-btn-container button {
   width: 100%;
   height: 100%;
   z-index: 2;
-  
+
   background-color: rgba(42, 42, 44, 0.8);
 }
 .viewImg img {
