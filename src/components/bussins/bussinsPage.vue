@@ -3,7 +3,7 @@
   <div class="bussins container-fluid" id="services">
     <div class="">
       <div class="cover">
-        <img :src="imgUrl" alt="" class="cover-photo" />
+        <img :src="bussins.bussinsPic" alt="" class="cover-photo" />
         <label for="imgFile"></label>
         <input
           type="file"
@@ -56,6 +56,8 @@ import BaseCard from "@/components/UI/BaseCard.vue";
 import TheHeader from "../layout/TheHeader.vue";
 import addService from "@/components/forms/addService.vue";
 import { activeBussins } from "@/sotre.js/bussins/activeBussins.js";
+import {BussinsProfile} from '../../sotre.js/bussins/bussinsPic'
+const bussins =BussinsProfile();
 
 const formVisibilty = ref("none");
 
@@ -69,12 +71,20 @@ const closeForm = () => {
   formVisibilty.value = "none";
 };
 
-const handelImgSrc = (event) => {
+const handelImgSrc = async (event) => {
   const file = event.target.files[0];
-
+ await bussins.sendbussinsPic(file);
+ setTimeout(async function(){
+  await bussins.getbussinsPic();
+ },5000)
+ await bussins.getbussinsPic();
   imgUrl.value = URL.createObjectURL(file);
-};
 
+};
+onBeforeMount(async()=>{
+const bussins = BussinsProfile();
+await bussins.getbussinsPic()
+})
 </script>
 
 <style scoped>

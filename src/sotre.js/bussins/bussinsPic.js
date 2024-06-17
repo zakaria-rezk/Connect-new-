@@ -1,21 +1,21 @@
 import { defineStore } from "pinia";
 
-export const UserProfile = defineStore("userProfile", {
+export const BussinsProfile = defineStore("bussinsProfile", {
   state: () => ({
-    profilePic: null,
+    bussinsPic: null,
   }),
   getters: {},
   actions: {
-    async sendProfilePic(payload) {
+    async sendbussinsPic(payload) {
       const token = localStorage.getItem("token");
-      // console.log('send profile pic')
+      console.log('send bussins pic')
       let formData = new FormData();
       formData.append("file", payload);
       try {
         const response = fetch(
-          "https://localhost:7165/api/Account/add-customer-picture",
+          "https://localhost:7165/api/Freelancer/Update-freelancer-picture",
           {
-            method: "POST",
+            method: "PUT",
             headers: {
               Accept: "*/*",
               Authorization: `Bearer ${token}`,
@@ -28,15 +28,15 @@ export const UserProfile = defineStore("userProfile", {
         throw error;
       }
     },
-    async getProfilePic() {
-      // console.log("get customer profile oic");
+    async getbussinsPic() {
+      console.log("get bussins profile oic");
       const token = localStorage.getItem("token");
       console.log("token");
       try {
-        // console.log(token);
+        console.log(token);
 
         const response = await fetch(
-          "https://localhost:7165/api/Account/get-customer-picture",
+          "https://localhost:7165/api/Freelancer/get-freelancer-picture",
 
           {
             method: "GET",
@@ -52,15 +52,15 @@ export const UserProfile = defineStore("userProfile", {
           const error ='some thing went wrong'
           throw error
         }
-        // console.log(response);
+        console.log(response);
         const imageUrl = await response.text();
-        console.log(imageUrl + "imgulrسسسسسي");
+        console.log(imageUrl + "imgulrbussisns");
         const baseUrl = "https://localhost:7165";
-        this.profilePic = `${baseUrl}${imageUrl}`;
+        this.bussinsPic = `${baseUrl}${imageUrl}`;
 
         localStorage.removeItem("pic");
-        localStorage.setItem("pic", this.profilePic);
-        // console.log(this.profilePic + "profile pic");
+        localStorage.setItem("pic", this.bussinsPic);
+        console.log(this.bussinsPic + "profile pic");
       } catch (error) {
         throw error;
       }

@@ -1,159 +1,137 @@
 <template>
-  <div class="parent">
-    <TheHeader />
-   
-    <!-- سلايدر -->
-    <div class="slider">
-      <div id="carouselExampleCaptions" class="carousel slide">
-        <div class="carousel-inner">
-      
-        
-          <div class="carousel-item active">
-            <img
-              src="../../../images/ciudad-maderas-MXbM1NrRqtI-unsplash.jpg"
-              class="d-block w-100"
-              alt="..."
-            />
-            <div class="carousel-caption d-none d-md-block">
-              <h3>Connect</h3>
-              <h4>
-                الموقع الاول والاوحد فى مصر الذى يجمع بين الحجوزات والخدمات
-              </h4>
-              <h5>احجز بسهولة</h5>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img
-              src="../../../images/manuel-moreno-DGa0LQ0yDPc-unsplash.jpg"
-              class="d-block w-100"
-              alt="..."
-            />
-            <div class="carousel-caption d-none d-md-block">
-              <h3>Connect</h3>
-              <h4>
-                الموقع الاول والاوحد فى مصر الذى يجمع بين الحجوزات والخدمات
-              </h4>
-              <h5>احجز بسهولة</h5>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img
-              src="../../../images/frames-for-your-heart-FqqiAvJejto-unsplash.jpg"
-              class="d-block w-100"
-              alt="..."
-            />
-            <div class="carousel-caption d-none d-md-block">
-              <h3>Connect</h3>
-              <h4>
-                الموقع الاول والاوحد فى مصر الذى يجمع بين الحجوزات والخدمات
-              </h4>
-              <h5>احجز بسهولة</h5>
-            </div>
-          </div>
-        </div>
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </div>
-    <!-- شريط البحث والاعلى تقييما -->
-    <div class="container">
-      <!-- شريط البحث -->
-      <div class="mt-5 col-12 d-flex justify-content-center">
-        <div class="d-flex col-10">
-          <input
-            type="text"
-            class="form-control p-2 bg-body-secondary"
-            placeholder="ابحث هنا"
-            aria-label="Search"
-          />
-          <router-link :to="{name:'Connect',hash:'#section'}" @click="Search" class="btn btn-primary" type="button">
-            ابحث
-          </router-link>
-        </div>
-      </div>
-      <!-- نواتج البحث -->
-      <div class="searchResult col-12">
-        <div class="d-flex flex-wrap justify-content-between">
-          <div class="col-3 m-3">دا الديف الى هعمل عليه لوب</div>
-        </div>
-      </div>
-      <!-- الاعلى تقييما -->
-       <section id="section">
-      <div class="toprated col-12">
-        <div class="head d-flex justify-content-center mt-5">
-          <h4 class="p-4">الاعلى تقييما</h4>
-        </div>
-        <div class="cardat col-12">
-          <div class="d-flex flex-wrap justify-content-between col-12">
-            <div
-              v-for="(top, i) in toprateds"
-              :key="i"
-              class="card bg-body-secondary border-1 col-lg-3 col-md-5 m-3 col-sm-11"
-            >
-              <img
-                :src="top.image"
-                class="card-img-top"
-                height="200px"
-                alt="..."
-              />
-              <div class="card-body">
-                <h6>{{ top.title }}</h6>
-                <p>{{ top.category }}</p>
-                <!-- </div> -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    </div>
-  </div>
-</template>
-<style scoped>
+  <TheHeader />
 
-.slider img {
-  height: 450px;
+  <div class="container-fluid bg-primary parent">
+    <div class="img-container position-relative">
+      <img src="../../assets/6238505.jpg" class="" alt="..." />
+    </div>
+    <div class="title position-absolute text-uppercase">
+      <h2>ارتقي الان الي السوق</h2>
+      <h3>العالمية</h3>
+      <router-link :to="{ name: 'hotel-reservations' }" class="btn">
+        تواصل معنا</router-link
+      >
+    </div>
+   
+  </div>
+   <div class="wave">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill="#0d6efd"
+          fill-opacity="1"
+          d="M0,32L40,80C80,128,160,224,240,266.7C320,309,400,299,480,288C560,277,640,267,720,234.7C800,203,880,149,960,133.3C1040,117,1120,139,1200,138.7C1280,139,1360,117,1400,106.7L1440,96L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"
+        ></path>
+        
+      </svg>
+     
+    </div>
+  
+    <hr>
+    <AboutConnect />
+    <TheFooter/>
+</template>
+<script setup>
+import AboutConnect from "../pages/AboutConnect.vue"
+import TheHeader from "../layout/TheHeader.vue";
+
+import TheFooter from "../layout/TheFooter.vue";
+
+
+</script>
+<style scoped>
+.parent {
+  position: relative;
+ height: 90vh;
+ 
 }
+.img-container {
+  z-index: 8;
+  position: absolute;
+  width: 50%;
+
+  right: 50%;
+}
+.img-container img {
+  width: 100%;
+  height: 85vh;
+  object-fit: fill;
+  border-radius: 30% 60%;
+}
+.title {
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  right: 10%;
+  color: rgb(255, 255, 255);
+  z-index: 1;
+}
+.btn {
+  color: var(--primarycolor);
+  margin: 20px;
+  background-color: white;
+}
+.btn:hover {
+  background-color: var(--primarycolor);
+  color: white;
+}
+.wave{
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  top: 61px;
+  width: 100%;
+  z-index: 0;
+}
+
+.container::after {
+  content: "";
+ 
+  width: 100px;
+  height: 100px;
+}
+
+h2 {
+  font-size: 4rem;
+}
+h3 {
+  animation: animate 10s linear infinite;
+  color: rgb(17, 188, 245);
+  font-size: 4rem;
+  /* -webkit-box-reflect: below 5px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgb(250, 244, 244))); */
+}
+@keyframes animate {
+  0.0%,
+  18.0%,
+  20.0%,
+  50.1%,
+  60.1%,
+  65.0%,
+  80.1%,
+  90.0%,
+  92.1%,
+  100.0% {
+    color: #0d6efd;
+    text-shadow: none;
+  }
+  18.0%,
+  20.1%,
+  30%,
+  50%,
+  60.1%,
+  65%,
+  80.1%,
+  92.1%,
+  100.0% {
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 10px rgb(255, 255, 255), 0 0 20px rgb(255, 255, 255),
+      0 0 40px rgb(255, 255, 255), 0 0 80px rgb(255, 255, 255),
+      0 0 100px rgb(255, 255, 255);
+  }
+}
+
 @media (max-width: 700px) {
   .slider img {
     height: 250px;
   }
 }
 </style>
-<script setup>
-import { onMounted, ref } from "vue";
-import TheHeader from "../layout/TheHeader.vue";
 
-const toprateds = ref({});
-const getTopRated = async () => {
-  try {
-    const response = await fetch("https://fakestoreapi.com/products?limit=6");
-    if (!response.ok) {
-      throw new Error("Failed to fetch data");
-    }
-    const jsonData = await response.json();
-   
-    toprateds.value = jsonData;
-  } catch (error) {
-    console.error("Error fetching data:", error.message);
-  }
-};
-
-onMounted(getTopRated);
-</script>

@@ -1,7 +1,7 @@
 <template>
   <div class="container container-fluid">
     <button
-    :disabled="pageIndex === 1"
+    :disabled="pageIndex === 0"
     @click.prevent="previousPage"
     class="btn pg-btn  p-1 fs-1"
     >السابق</button
@@ -32,7 +32,7 @@ import { ref, onBeforeMount, onMounted } from "vue";
 const isAnimted=ref(false)
 const useOfferedServices = offeredServices();
 
-const pageIndex = ref(1);
+const pageIndex = ref(0);
 
 const nextPage = async () => {
   isAnimted.value=!isAnimted.value;
@@ -42,7 +42,7 @@ const nextPage = async () => {
   await useOfferedServices.getOfferdServices(pageIndex.value);
   isAnimted.value=!isAnimted.value;
  },2600)
-  // isAnimted.value=false;
+  
 };
 const previousPage = async () => {
   --pageIndex.value;
@@ -53,7 +53,7 @@ const previousPage = async () => {
 onMounted(async () => {
   console.log("onmounted hook pagination");
   const useOfferedServices = offeredServices();
-  await useOfferedServices.getOfferdServices(1);
+  await useOfferedServices.getOfferdServices(0);
   console.log(useOfferedServices.G_offeredServices);
 });
 </script>
@@ -95,11 +95,14 @@ onMounted(async () => {
   object-fit: cover;
   width:100% ;
   height: 250px;
- 
+ transition: transform 2s ease-in-out;
+}
+.wrapper :hover{
+  transform: scale(1.1);
 }
 .animated{
   animation: pagination 3s ease-in  0s 1 alternate ;
-  background-color: rgb(207, 204, 204);
+  background-color: rgb(250, 251, 251);
 }
 
 .banner-image {

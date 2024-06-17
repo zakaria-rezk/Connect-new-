@@ -3,7 +3,7 @@
   <div class="viewImg" v-if="displayProfilePic">
     <img :src="userProfile.profilePic" ref="userImg" />
   </div>
-  <p>{{ data }}</p>
+ 
   <div class="profile">
     <div class="profile-info">
       <div class="profile-picture">
@@ -63,7 +63,7 @@
         <div class="col-auto ml-auto">
           <router-link
             v-if="user.hasBussins"
-            :to="{ name: 'bussinsPage', params: { id: user.activeUserToken } }"
+            :to="{ name: 'bussinsPage', params: { id: user.userName } }"
             class="btn link m-1 btn-selected btn-primary"
           >
             نشاطي التجاري</router-link
@@ -125,7 +125,7 @@ const handleFileChange = async (e) => {
   await userProfile.sendProfilePic(file);
   setTimeout( async function(){
     await userProfile.getProfilePic();
-  },15000)
+  },5000)
   
 };
 const handleClickOutside = (event) => {
@@ -158,7 +158,7 @@ onBeforeUnmount(() => {
 .profile {
   /* filter: blur(15px);
  filter: contrast(5p); */
-  background-color: #f2f2f2;
+  background-color: #e6e9ed;
 }
 img {
   width: 100%;

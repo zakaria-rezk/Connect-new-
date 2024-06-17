@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand bg-primary-lg navbar-dark ">
     <div class="container-fluid">
       <!-- Logo --><router-link to="/">
         <img
@@ -19,7 +19,7 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/" class="nav-link">الخدمات</router-link>
+            <router-link :to="{name:'hotel-reservations'}" class="nav-link">الخدمات</router-link>
           </li>
         </ul>
       </div>
@@ -31,7 +31,7 @@
           <!-- Login Link -->
           <li class="nav-item" v-show="isAuth">
             <button class="nav-link" @click="chagneverticalNavVisibilty">
-              <div class="imgpic"><img :src="pic" alt="" /></div>
+              <div class="imgpic"><img :src="picture.profilePic" alt="" /></div>
             </button>
           </li>
 
@@ -99,11 +99,13 @@
 
 <script setup>
 import { onBeforeMount, onMounted, ref } from "vue";
+
 import { UserProfile } from "@/sotre.js/profile/userProfile";
 import { authStore } from "../../sotre.js/authentication/authSotre.js";
 import { activeUser } from "@/sotre.js/profile/activeUser.js";
 const active = activeUser();
 const store = authStore();
+const picture =UserProfile()
 const pic = ref(null);
 const verticalNav = ref("none");
 const isAuth = localStorage.getItem("token");
@@ -168,6 +170,7 @@ onMounted(async () => {
   font-size: 1.1rem; /* تكبير حجم الروابط */
   margin-right: 1rem; /* توسيع المسافات بين الروابط */
   color: aliceblue;
+  color: darkblue;
 }
 .navbar-nav .nav-item:hover {
   background-color: var(--primarycolor);
