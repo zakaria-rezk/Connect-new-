@@ -144,7 +144,7 @@ const handleClickOutside = (event) => {
 onBeforeMount(async () => {
   const pic = UserProfile();
   await pic.getProfilePic();
-  console.log("unbefore un mount");
+ 
   router.push({ name: "customerReservation" });
   document.addEventListener("click", handleClickOutside);
   await userData.userData();

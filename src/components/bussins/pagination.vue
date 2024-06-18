@@ -6,6 +6,7 @@
     class="btn pg-btn  p-1 fs-1"
     >السابق</button
   >
+  <div v-if="useOfferedServices.G_offeredServices.length !=0" >
     <div
       v-for="service in useOfferedServices.G_offeredServices"
       :key="service.id"
@@ -20,7 +21,8 @@
         <button class="btn fill">اطلب الخدمة</button>
       </div>
     </div>
-  
+  </div>
+  <div v-else class="mx-5 text-warning"><h1>  لا يوجد خدمات ف الوقت الحالي  </h1></div>
   <button class="btn  pg-btn p-1 fs-1" @click="nextPage">التالي</button>
 
   </div>
@@ -29,6 +31,9 @@
 <script setup>
 import { offeredServices } from "@/sotre.js/bussins/offeredServices";
 import { ref, onBeforeMount, onMounted } from "vue";
+import { useRoute } from "vue-router";
+
+const props =defineProps(['BussinsID']);
 const isAnimted=ref(false)
 const useOfferedServices = offeredServices();
 
@@ -51,10 +56,12 @@ const previousPage = async () => {
 };
 
 onMounted(async () => {
-  console.log("onmounted hook pagination");
+const route =useRoute()
   const useOfferedServices = offeredServices();
-  await useOfferedServices.getOfferdServices(0);
-  console.log(useOfferedServices.G_offeredServices);
+  console.log(route.params.id)
+  await useOfferedServices.getOfferdServices(0,route.params.id); 
+  console.log(useOfferedServices.G_offeredServices)   
+  
 });
 </script>
 

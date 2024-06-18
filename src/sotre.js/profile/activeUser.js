@@ -101,12 +101,15 @@ export const activeUser = defineStore("activeUser", {
    async decode(token){
     
       const decodedToken = jwtDecode(token);
-     
+      console.log(decodedToken)
       const customerRole =  await decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
       
       const userName =  await decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+      const id =await decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+     
      
       localStorage.setItem('userName',userName)
+      localStorage.setItem('id',id)
      
        this.roles=customerRole;
    

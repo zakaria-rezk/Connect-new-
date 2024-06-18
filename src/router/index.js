@@ -37,6 +37,12 @@ const router = createRouter({
      
     },
     {
+      path: "/freelansers/:id",
+      name: "freelansers",
+      component: () => import("../components/pages/Freelansers.vue"),
+     
+    },
+    {
       path: "/changepassword/:id",
       name: "changepassword",
       component: () => import("../components/register/changePass.vue"),
@@ -87,8 +93,9 @@ const router = createRouter({
         meta: { requierAuth: true },
         beforeEnter: async (to, from, next) => {
          
-          const active =  activeBussins();
-           await active.bussinsData()
+          const bussinsData=activeBussins();
+          await bussinsData.bussinsData();
+           
              next();
         },
    
@@ -138,4 +145,5 @@ router.beforeEach(async (to,from,next) => {
   else next()
   
 });
+
 export default router;

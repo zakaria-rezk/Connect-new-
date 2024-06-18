@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand bg-primary-lg navbar-dark ">
+  <nav class="navbar navbar-expand bg-primary-lg navbar-dark">
     <div class="container-fluid">
       <!-- Logo --><router-link to="/">
         <img
@@ -19,7 +19,11 @@
           </li>
 
           <li class="nav-item">
-            <router-link :to="{name:'hotel-reservations'}" class="nav-link">الخدمات</router-link>
+            <router-link
+              :to="{ name: 'freelansers', params: { id: Id } }"
+              class="nav-link"
+              >مقدمي الخدمات
+            </router-link>
           </li>
         </ul>
       </div>
@@ -63,7 +67,7 @@
         </router-link>
         <router-link
           v-if="active.hasBussins"
-          :to="{ name: 'bussinsPage', params: { id: userName } }"
+          :to="{ name: 'bussinsPage', params: { id: Id } }"
           class="router-link"
           ><p class="px-1">
             <font-awesome-icon icon="fa-solid fa-money-check" class="px-1" />
@@ -103,13 +107,15 @@ import { onBeforeMount, onMounted, ref } from "vue";
 import { UserProfile } from "@/sotre.js/profile/userProfile";
 import { authStore } from "../../sotre.js/authentication/authSotre.js";
 import { activeUser } from "@/sotre.js/profile/activeUser.js";
+import { activeBussins } from "@/sotre.js/bussins/activeBussins.js";
 const active = activeUser();
 const store = authStore();
-const picture =UserProfile()
+const picture = UserProfile();
 const pic = ref(null);
 const verticalNav = ref("none");
 const isAuth = localStorage.getItem("token");
 const userName = ref("null");
+const Id = ref("null");
 
 const chagneverticalNavVisibilty = () => {
   verticalNav.value = verticalNav.value === "inline" ? "none" : "inline";
@@ -122,15 +128,17 @@ onBeforeMount(async () => {
   const token = localStorage.getItem("token");
   const user = activeUser();
   await user.decode(token);
-  const username = localStorage.getItem("userName");
+  const username = localStorage.getItem("userName"); 
+  const bussinsData = activeBussins();
+  await bussinsData.bussinsData();
   userName.value = username;
+  Id.value = bussinsData.bussinsId;
 });
 onMounted(async () => {
   const getProfilePic = UserProfile();
   await getProfilePic.getProfilePic();
   const profilePic = localStorage.getItem("pic");
   pic.value = profilePic;
-  
 });
 </script>
 

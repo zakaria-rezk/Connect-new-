@@ -9,13 +9,15 @@ export const offeredServices = defineStore("offeredServices", {
 G_offeredServices: (state) =>state.offeredServices
   },
   actions: {
-    async getOfferdServices (pageIndex){
+    async getOfferdServices (pageIndex,bussinsId){
       this.offeredServices=[]
-       const bussins =activeBussins();
-      console.log(pageIndex)
+      //  const bussins =activeBussins();
+      //  await bussins.bussinsData()
+       
+     
       try {
         const token =localStorage.getItem("token")
-        const response = await fetch(`https://localhost:7165/api/Freelancer/get-offered-services/${bussins.bussinsId}?pageIndex=${pageIndex}&pageSize=3`,{
+        const response = await fetch(`https://localhost:7165/api/Freelancer/get-offered-services/${bussinsId}?pageIndex=${pageIndex}&pageSize=3`,{
          method: "GET",
           headers:{
             'accept': '*/*',
@@ -31,7 +33,7 @@ G_offeredServices: (state) =>state.offeredServices
         const data = await response.json();
         
        
-      
+     
       
        for(let item =0; item <data.length;item++){
          const array ={
@@ -44,7 +46,7 @@ G_offeredServices: (state) =>state.offeredServices
          this.offeredServices.push(array)
         
        }
-       
+  
         
       
       }

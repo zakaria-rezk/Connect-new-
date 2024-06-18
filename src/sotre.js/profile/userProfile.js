@@ -23,7 +23,6 @@ export const UserProfile = defineStore("userProfile", {
             body: formData,
           }
         );
-        console.log(response);
       } catch (error) {
         throw error;
       }
@@ -31,9 +30,7 @@ export const UserProfile = defineStore("userProfile", {
     async getProfilePic() {
       // console.log("get customer profile oic");
       const token = localStorage.getItem("token");
-      console.log("token");
       try {
-        // console.log(token);
 
         const response = await fetch(
           "https://localhost:7165/api/Account/get-customer-picture",
@@ -54,7 +51,6 @@ export const UserProfile = defineStore("userProfile", {
         }
         // console.log(response);
         const imageUrl = await response.text();
-        console.log(imageUrl + "imgulrسسسسسي");
         const baseUrl = "https://localhost:7165";
         this.profilePic = `${baseUrl}${imageUrl}`;
 

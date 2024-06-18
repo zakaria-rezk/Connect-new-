@@ -34,6 +34,29 @@ export const activeBussins = defineStore("activeBussins", {
       }
 
       this.bussinId = data.id;
+     
+    },
+    async bussinsDataById(BussinsID) {
+      const token = localStorage.getItem("token");
+      
+      const response = await fetch(
+        `https://localhost:7165/api/Freelancer/get-freelancer-by-id/${BussinsID}`,
+        
+        {
+          method: "GET",
+          headers: {
+            accept: "*/*",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        const error = "some thing fonign wrong";
+        throw error;
+      }
+
+      this.bussinId = data.id;
       this.name = data.name;
       this.description = data.description;
     },

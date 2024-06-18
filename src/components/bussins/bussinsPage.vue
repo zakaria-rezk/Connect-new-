@@ -29,7 +29,7 @@
         <div class="bussins-services">
           <BaseCard title="الخدمات" class="my-5" />
           <div class="services d-flex">
-            <pagination/> 
+            <pagination :BussinsID="route.params.id"/> 
           </div>
           <addService :formVisibilty="formVisibilty" @closeForm="closeForm" />
           <div class="container d-flex justify-content-center my-4">
@@ -51,18 +51,17 @@
 <script setup>
 import { onBeforeMount, onMounted, ref } from "vue";
 import pagination from "../bussins/pagination.vue";
-
 import BaseCard from "@/components/UI/BaseCard.vue";
 import TheHeader from "../layout/TheHeader.vue";
 import addService from "@/components/forms/addService.vue";
 import { activeBussins } from "@/sotre.js/bussins/activeBussins.js";
 import {BussinsProfile} from '../../sotre.js/bussins/bussinsPic'
+import { useRoute } from "vue-router";
 const bussins =BussinsProfile();
-
+const route =useRoute();
 const formVisibilty = ref("none");
 
 const active = activeBussins();
-const imgUrl = ref("/src/assets/WhatsApp Image 2023-06-20 at 09.11.46.jpg");
 const showForm = () => {
   
   formVisibilty.value = "flex";
@@ -82,8 +81,17 @@ const handelImgSrc = async (event) => {
 
 };
 onBeforeMount(async()=>{
+ const route =useRoute();
+ console.log(route.params.id)
+  const G_bussinsById=activeBussins();
+  await G_bussinsById.bussinsDataById(route.params.id)
+    
 const bussins = BussinsProfile();
-await bussins.getbussinsPic()
+await active.bussinsData()
+await bussins.getbussinsPic();
+
+
+
 })
 </script>
 
