@@ -1,7 +1,7 @@
 <template>
    <TheHeader/>
         
-   <button @click.prevent="search()">a7a</button>
+  
    <div class="container">
    <div 
       v-for="account in accounts"

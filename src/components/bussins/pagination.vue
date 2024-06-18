@@ -18,7 +18,7 @@
       <p class="">{{service.description}}</p>
       <div class="button-wrapper">
         <button class="btn outline">{{ service.price }}ج</button>
-        <button class="btn fill">اطلب الخدمة</button>
+        <button  @click.prevent="sendRequest(service.name,service.price,service.description)" class="btn fill">اطلب الخدمة</button>
       
     </div>
   </div>
@@ -36,7 +36,7 @@ import { useRoute } from "vue-router";
 const props =defineProps(['BussinsID']);
 const isAnimted=ref(false)
 const useOfferedServices = offeredServices();
-
+const route=useRoute()
 const pageIndex = ref(0);
 
 const nextPage = async () => {
@@ -44,7 +44,7 @@ const nextPage = async () => {
   ++pageIndex.value;
  
  setTimeout( async()=>{
-  await useOfferedServices.getOfferdServices(pageIndex.value);
+  await useOfferedServices.getOfferdServices(pageIndex.value,route.params.id);
   isAnimted.value=!isAnimted.value;
  },2600)
   
@@ -52,15 +52,36 @@ const nextPage = async () => {
 const previousPage = async () => {
   --pageIndex.value;
 
-  await useOfferedServices.getOfferdServices(pageIndex.value);
+  await useOfferedServices.getOfferdServices(pageIndex.value,route.params.id);
 };
-
+const sendRequest=async(name,price,description)=>{
+  const id=localStorage.getItem('bussinsId')
+  
+  const token =localStorage.getItem('token');
+  
+  const request =await fetch(`https://localhost:7165/api/Account/send-service-request?freelancerId=${id}`,{
+    method:'POST',
+    headers:{
+    accept: '*/*',
+    Authorization:`Bearer ${token}`, 
+    'Content-Type': 'application/json'
+   },
+   body:JSON.stringify({
+    name: name,
+   price: price,
+   description: description
+   })
+  
+  }
+  )
+  console.log(request);
+}
 onMounted(async () => {
-const route =useRoute()
+
   const useOfferedServices = offeredServices();
-  console.log(route.params.id)
+
   await useOfferedServices.getOfferdServices(0,route.params.id); 
-  console.log(useOfferedServices.G_offeredServices)   
+  
   
 });
 </script>

@@ -77,7 +77,7 @@ import TheFooter from "../layout/TheFooter.vue";
 .wave{
   position: absolute;
   background-color: rgb(255, 255, 255);
-  top: 61px;
+  top: 70px;
   width: 100%;
   z-index: 0;
 }
