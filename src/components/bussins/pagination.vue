@@ -6,7 +6,7 @@
     class="btn pg-btn  p-1 fs-1"
     >السابق</button
   >
-  <div v-if="useOfferedServices.G_offeredServices.length !=0" >
+  
     <div
       v-for="service in useOfferedServices.G_offeredServices"
       :key="service.id"
@@ -19,10 +19,10 @@
       <div class="button-wrapper">
         <button class="btn outline">{{ service.price }}ج</button>
         <button class="btn fill">اطلب الخدمة</button>
-      </div>
+      
     </div>
   </div>
-  <div v-else class="mx-5 text-warning"><h1>  لا يوجد خدمات ف الوقت الحالي  </h1></div>
+  <div v-if="useOfferedServices.G_offeredServices.length===0" class="mx-5 text-warning"><h1>  لا يوجد خدمات ف الوقت الحالي  </h1></div>
   <button class="btn  pg-btn p-1 fs-1" @click="nextPage">التالي</button>
 
   </div>

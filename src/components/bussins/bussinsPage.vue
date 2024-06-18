@@ -33,7 +33,7 @@
           </div>
           <addService :formVisibilty="formVisibilty" @closeForm="closeForm" />
           <div class="container d-flex justify-content-center my-4">
-            <button
+            <button v-if="isAdmin"
               type="button"
               class="btn btn-primary"
               @click.prevent="showForm"
@@ -49,7 +49,7 @@
   </div>
 </template>
 <script setup>
-import { onBeforeMount, onMounted, ref } from "vue";
+import { computed, onBeforeMount, onMounted, ref } from "vue";
 import pagination from "../bussins/pagination.vue";
 import BaseCard from "@/components/UI/BaseCard.vue";
 import TheHeader from "../layout/TheHeader.vue";
@@ -60,8 +60,11 @@ import { useRoute } from "vue-router";
 const bussins =BussinsProfile();
 const route =useRoute();
 const formVisibilty = ref("none");
-
+const bussinsId=localStorage.getItem('bussinsId')
 const active = activeBussins();
+const isAdmin=computed (()=>{
+  return bussinsId ===route.params.id
+})
 const showForm = () => {
   
   formVisibilty.value = "flex";

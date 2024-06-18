@@ -32,7 +32,7 @@ export const activeBussins = defineStore("activeBussins", {
         const error = "some thing fonign wrong";
         throw error;
       }
-
+     localStorage.setItem('bussinsId',data.id)
       this.bussinId = data.id;
      
     },
