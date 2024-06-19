@@ -17,7 +17,7 @@
       <h3 class="bg-secandray">{{ service.name }}</h3>
       <p class="">{{service.description}}</p>
       <div class="button-wrapper">
-        <button class="btn outline">{{ service.price }}ج</button>
+        <button class="btn outline">{{ service.price }}</button>
         <button  @click.prevent="sendRequest(service.name,service.price,service.description)" class="btn fill">اطلب الخدمة</button>
       
     </div>

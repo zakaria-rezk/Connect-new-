@@ -17,7 +17,7 @@
       <div class="bussins">
         <div class="bussins-detail">
           <h3>اسم النشاط :{{ active.name }}</h3>
-          <h3>نوع النشاط : {{ active.bussinsDesc }}</h3>
+          <h3>نوع النشاط : نصميم وانشاء المواقع الكترونية</h3>
         </div>
         <div class="title">
           <BaseCard title="نبذة عن المحبة" />

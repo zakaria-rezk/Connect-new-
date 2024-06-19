@@ -143,6 +143,9 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+.navbar{
+  height: 70px;
+}
 .verticalNav {
   position: absolute;
   width: 200px;

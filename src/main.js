@@ -21,10 +21,10 @@ import {
     faShop,
     faPhone,
     faBriefcase,
-    faKitchenSet,faClosedCaptioning,faCamera,faEye
+    faKitchenSet,faClosedCaptioning,faCamera,faEye,faMagnifyingGlass,faCircleXmark
   } from '@fortawesome/free-solid-svg-icons';
 /* add icons to the library */
-library.add(faMoneyCheck,faGears,faRightFromBracket,faLocation,faUser,faShop,faPhone,faBriefcase,faKitchenSet,faClosedCaptioning,faCamera,faEye);
+library.add(faCircleXmark,faMoneyCheck,faGears,faRightFromBracket,faLocation,faUser,faShop,faPhone,faBriefcase,faKitchenSet,faClosedCaptioning,faCamera,faEye,faMagnifyingGlass);
 
 const app=createApp(App)
 app.use(createPinia())
