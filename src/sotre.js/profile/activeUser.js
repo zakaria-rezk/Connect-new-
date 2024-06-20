@@ -8,7 +8,8 @@ export const activeUser = defineStore("activeUser", {
     gover: null,
     city: null,
     street: null,
-    phone:null
+    phone:null,
+    image:null,
   }),
   getters: {
     userName(state) {
@@ -25,6 +26,9 @@ export const activeUser = defineStore("activeUser", {
     },
     userPhone(state){
       return state.phone
+    },
+    profirleImg(state){
+      return state.image
     },
     hasBussins(state) {
       return state.roles.includes('Freelancer')
@@ -54,13 +58,14 @@ export const activeUser = defineStore("activeUser", {
         }
 
         if (response.ok)
-     
+     console.log(data)
         this.name = data.name;
         this.gover = data.state;
         this.city = data.city;
         this.street = data.street;
-       
-   
+        this.image =data.image;
+        console.log('get user data')
+    localStorage.setItem('pic',this.image)
       } catch (error) {
         throw error;
       }
@@ -101,7 +106,7 @@ export const activeUser = defineStore("activeUser", {
    async decode(token){
     
       const decodedToken = jwtDecode(token);
-      console.log(decodedToken)
+     
       const customerRole =  await decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
       
       const userName =  await decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];

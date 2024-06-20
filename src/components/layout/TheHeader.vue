@@ -35,7 +35,7 @@
           <!-- Login Link -->
           <li class="nav-item" v-show="isAuth">
             <button class="nav-link" @click="chagneverticalNavVisibilty">
-              <div class="imgpic"><img :src="picture.profilePic" alt="" /></div>
+              <div class="imgpic"><img :src=" 'https://localhost:7165' +active.profirleImg" alt="" /></div>
             </button>
           </li>
 
@@ -135,9 +135,9 @@ onBeforeMount(async () => {
   Id.value = bussinsData.bussinsId;
 });
 onMounted(async () => {
-  const getProfilePic = UserProfile();
-  await getProfilePic.getProfilePic();
-  const profilePic = localStorage.getItem("pic");
+  const active =activeUser();
+  await active.userData();
+  const profilePic=localStorage.getItem('pic');
   pic.value = profilePic;
 });
 </script>

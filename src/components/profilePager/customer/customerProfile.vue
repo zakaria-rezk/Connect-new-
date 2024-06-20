@@ -7,7 +7,10 @@
   <div class="profile">
     <div class="profile-info">
       <div class="profile-picture">
-        <img class="image" :src="userProfile.profilePic" />
+        <img class="image" :src="'https://localhost:7165'+user.profirleImg" v-if="user.profirleImg !=='/Images/default/avatar'"/>
+
+        <img class="image" src="../../../assets/15528.jpg" v-else  />
+
         <button
           class="custom-file-upload bg-primary btn"
           @click="ImgSetting"
@@ -23,7 +26,7 @@
         type="file"
         id="fileInput"
         @change="handleFileChange($event)"
-        accept="image/png, image/jpeg, image/jpg,image/Jpg"
+        accept="image/*"
         ref="fileInput"
         style="display: none"
       />
@@ -125,7 +128,8 @@ const handleFileChange = async (e) => {
   await userProfile.sendProfilePic(file);
   setTimeout( async function(){
     await userProfile.getProfilePic();
-  },5000)
+  },3000)
+
   
 };
 const handleClickOutside = (event) => {
@@ -142,8 +146,9 @@ const handleClickOutside = (event) => {
 };
 
 onBeforeMount(async () => {
-  const pic = UserProfile();
-  await pic.getProfilePic();
+     const user =activeUser();
+      
+         await user.userData()
  
   router.push({ name: "customerReservation" });
   document.addEventListener("click", handleClickOutside);
