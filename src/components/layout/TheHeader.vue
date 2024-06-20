@@ -35,7 +35,15 @@
           <!-- Login Link -->
           <li class="nav-item" v-show="isAuth">
             <button class="nav-link" @click="chagneverticalNavVisibilty">
-              <div class="imgpic"><img :src=" 'https://localhost:7165' +active.profirleImg" alt="" /></div>
+              <div class="imgpic">
+                <img
+                 
+                  :src="'https://localhost:7165' + active.profirleImg"
+                  v-if="active.profirleImg !== '/Images/default/avatar'"
+                />
+
+                <img  src="../../assets/15528.jpg" v-else />
+              </div>
             </button>
           </li>
 
@@ -128,22 +136,22 @@ onBeforeMount(async () => {
   const token = localStorage.getItem("token");
   const user = activeUser();
   await user.decode(token);
-  const username = localStorage.getItem("userName"); 
+  const username = localStorage.getItem("userName");
   const bussinsData = activeBussins();
   await bussinsData.bussinsData();
   userName.value = username;
   Id.value = bussinsData.bussinsId;
 });
 onMounted(async () => {
-  const active =activeUser();
+  const active = activeUser();
   await active.userData();
-  const profilePic=localStorage.getItem('pic');
+  const profilePic = localStorage.getItem("pic");
   pic.value = profilePic;
 });
 </script>
 
 <style scoped>
-.navbar{
+.navbar {
   height: 70px;
 }
 .verticalNav {
