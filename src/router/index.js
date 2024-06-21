@@ -50,7 +50,7 @@ const router = createRouter({
     },
   
     {
-      path: "/customer/:id",
+      path: "/customer/:userName",
       name: "customerWithId",
       component: () =>
         import("../components/profilePager/customer/customerProfile.vue"),
@@ -101,7 +101,7 @@ const router = createRouter({
     },
 
     {
-      path: "/updateProfile/:id",
+      path: "/updateProfile/:userName",
       name: "updateProfile",
       component: () =>
         import("../components/forms/updateProfile.vue"),

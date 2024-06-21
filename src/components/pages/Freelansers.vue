@@ -15,7 +15,7 @@
             <h3>{{ account.profession }}</h3>
             <h4>{{ account.city }}{{ account.state }}</h4>
             <p>el iarkjf dgfdgfdsfaf</p>
-            <router-link :to="{name:'bussinsPage',params:{id:id}}"  class="btn align-self-center bg-warning my-4">عرض الملف الشخصي</router-link>
+            <router-link :to="{name:'bussinsPage',params:{id:account.id}}"  class="btn align-self-center bg-warning my-4">عرض الملف الشخصي</router-link>
           </div>
         </div>
         <hr />
@@ -55,6 +55,8 @@ onBeforeMount(async () => {
   search();
   const route = useRoute();
   id.value = route.params.id;
+  console.log(id.value)
+
 });
 </script>
 <style scoped>

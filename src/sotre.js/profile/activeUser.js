@@ -114,7 +114,7 @@ export const activeUser = defineStore("activeUser", {
       localStorage.setItem('userName',userName)
       localStorage.setItem('id',id)
      
-       this.roles=customerRole;
+      
    
     }
   },

@@ -3,8 +3,8 @@
   <div class="bussins container-fluid" id="services">
     <div class="">
       <div class="cover">
-        <!-- <img :src="'https://localhost:7165' + active.bussinsImage" alt="" class="cover-photo" /> -->
-              <img class="cover-photo" :src="'https://localhost:7165'+active.bussinsImage" v-if="active.bussinsImage !=='/Images/default/avatar'"/>
+        <!-- <img :src="'https://localhost:7165' + G_bussinsById.bussinsImage" alt="" class="cover-photo" /> -->
+              <img class="cover-photo" :src="'https://localhost:7165'+G_bussinsById.bussinsImage" v-if="G_bussinsById.bussinsImage !=='/Images/default/avatar'"/>
 
         <img class="cover-photo" src="../../assets/15528.jpg" v-else  />  
         <label for="imgFile" v-if="isAdmin"></label>
@@ -19,14 +19,14 @@
       
       <div class="bussins">
         <div class="bussins-detail">
-          <h3>اسم النشاط :{{ active.bussinsName }}</h3>
-          <h3>نوع النشاط :    {{ active.bussinsProfession }}</h3>
+          <h3>اسم النشاط :{{ G_bussinsById.bussinsName }}</h3>
+          <h3>نوع النشاط :    {{ G_bussinsById.bussinsProfession }}</h3>
         </div>
         <div class="title">
           <BaseCard title="نبذة عن المحبة" />
 
           <p>
-            {{ active.bussinsDesc }}
+            {{ G_bussinsById.bussinsDesc }}
           </p>
         </div>
         <div class="bussins-services">
@@ -63,10 +63,10 @@ import { useRoute } from "vue-router";
 const bussins =BussinsProfile();
 const route =useRoute();
 const formVisibilty = ref("none");
-const bussinsId=localStorage.getItem('bussinsId')
-const active = activeBussins();
+const bussinsId=ref();
+const G_bussinsById=activeBussins();
 const isAdmin=computed (()=>{
-  return bussinsId ===route.params.id
+  return bussinsId.value ===route.params.id
 })
 const showForm = () => {
   
@@ -89,15 +89,10 @@ const handelImgSrc = async (event) => {
 onBeforeMount(async()=>{
  const route =useRoute();
  console.log(route.params.id)
-  const G_bussinsById=activeBussins();
+ await G_bussinsById.bussinsData();
+ bussinsId.value =G_bussinsById.bussinsId
   await G_bussinsById.bussinsDataById(route.params.id)
-    
-const bussins = BussinsProfile();
-await active.bussinsData()
-await bussins.getbussinsPic();
-
-
-
+   await bussins.getbussinsPic();
 })
 </script>
 

@@ -65,7 +65,7 @@
     <div class="verticalNav" :style="{ display: verticalNav }">
       <ul>
         <router-link
-          :to="{ name: 'customerWithId', params: { id: userName } }"
+          :to="{ name: 'customerWithId', params: { userName: userName } }"
           class="router-link"
           ><p class="px-1">
             <font-awesome-icon icon="fa-solid fa-user" class="px-1" />
@@ -82,7 +82,7 @@
           <li>نشاطي التجاري</li>
         </router-link>
         <router-link
-          :to="{ name: 'updateProfile', params: { id: userName } }"
+          :to="{ name: 'updateProfile', params: { userName: userName } }"
           class="router-link"
           ><p class="px-1">
             <font-awesome-icon icon="fa-solid fa-gears" class="px-1" />
@@ -129,8 +129,8 @@ const token = localStorage.getItem("token");
 const chagneverticalNavVisibilty = () => {
   verticalNav.value = verticalNav.value === "inline" ? "none" : "inline";
 };
-const logout = () => {
-  store.logout();
+const logout =async () => {
+   store.logout();
 };
 const userRoles = async () => {
   const response = await fetch(
@@ -150,18 +150,22 @@ const userRoles = async () => {
 onBeforeMount(async () => {
     await userRoles();
  
-  const username = localStorage.getItem("userName");
+  
   
   await bussins.bussinsData();
-  userName.value = username;
-  console.log(bussins.bussinsId);
+ 
+  
+ 
   Id.value = bussins.bussinsId;
+  console.log(Id.value)
   
   await active.decode(token);
 });
 onMounted(async () => {
- 
   await active.userData();
+  const username =active.userName
+  userName.value = username;
+  
   const profilePic = localStorage.getItem("pic");
   pic.value = profilePic;
 });
