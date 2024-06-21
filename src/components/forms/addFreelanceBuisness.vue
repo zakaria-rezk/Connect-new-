@@ -131,7 +131,7 @@
                 class="mb-4"
               />
               <h3>شكرا لك هذا يساعدنا في تحسين خدماتنا</h3>
-              <button
+              <button 
               
                 class="btn btn-primary"
             
@@ -169,6 +169,7 @@
 <script setup>
 import { computed, reactive, ref } from "vue";
 import { addBussins } from "@/sotre.js/bussins/addBussins";
+import { activeBussins } from "@/sotre.js/bussins/activeBussins";
 import router from "@/router";
 const token = localStorage.getItem("token");
 const store = addBussins();
@@ -178,7 +179,7 @@ const back = ref(6);
 const skill1 =ref()
 const skill2 =ref()
 const skill3 =ref()
-
+const bussinsId=activeBussins();
 const Bussins = reactive({
   name: ". . .",
   profession: ". . .",
@@ -266,8 +267,10 @@ const submitForm = async () => {
     skills: [skill1.value,skill2.value,skill3.value],
   };
   console.log(CreateBussins)
+  
   await store.addBussins(CreateBussins);
-  router.push({name:'bussinsPage' ,params:{id:token}})
+  await bussinsId.bussinsData();
+  router.push({name:'bussinsPage' ,params:{id:bussinsId.bussinsId}})
 };
 </script>
 

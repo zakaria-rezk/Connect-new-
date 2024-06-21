@@ -64,8 +64,7 @@ export const activeUser = defineStore("activeUser", {
         this.city = data.city;
         this.street = data.street;
         this.image =data.image;
-        console.log('get user data')
-    localStorage.setItem('pic',this.image)
+    
       } catch (error) {
         throw error;
       }
@@ -107,7 +106,6 @@ export const activeUser = defineStore("activeUser", {
     
       const decodedToken = jwtDecode(token);
      
-      const customerRole =  await decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
       
       const userName =  await decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
       const id =await decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']

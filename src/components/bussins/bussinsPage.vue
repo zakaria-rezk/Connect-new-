@@ -3,8 +3,11 @@
   <div class="bussins container-fluid" id="services">
     <div class="">
       <div class="cover">
-        <img :src="bussins.bussinsPic" alt="" class="cover-photo" />
-        <label for="imgFile"></label>
+        <!-- <img :src="'https://localhost:7165' + active.bussinsImage" alt="" class="cover-photo" /> -->
+              <img class="cover-photo" :src="'https://localhost:7165'+active.bussinsImage" v-if="active.bussinsImage !=='/Images/default/avatar'"/>
+
+        <img class="cover-photo" src="../../assets/15528.jpg" v-else  />  
+        <label for="imgFile" v-if="isAdmin"></label>
         <input
           type="file"
           accept="image/png, image/jpeg, image/jpg"
@@ -16,8 +19,8 @@
       
       <div class="bussins">
         <div class="bussins-detail">
-          <h3>اسم النشاط :{{ active.name }}</h3>
-          <h3>نوع النشاط : نصميم وانشاء المواقع الكترونية</h3>
+          <h3>اسم النشاط :{{ active.bussinsName }}</h3>
+          <h3>نوع النشاط :    {{ active.bussinsProfession }}</h3>
         </div>
         <div class="title">
           <BaseCard title="نبذة عن المحبة" />
@@ -78,9 +81,9 @@ const handelImgSrc = async (event) => {
  await bussins.sendbussinsPic(file);
  setTimeout(async function(){
   await bussins.getbussinsPic();
- },5000)
- await bussins.getbussinsPic();
-  imgUrl.value = URL.createObjectURL(file);
+ },2000)
+ 
+ 
 
 };
 onBeforeMount(async()=>{

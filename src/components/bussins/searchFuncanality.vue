@@ -97,7 +97,7 @@ const removeWord = (word) => {
 .keyword {
   display: flex;
   flex-direction: row;
-  background-color: rgb(204, 205, 208);
+  background-color: rgb(220, 221, 223);
   color: rgb(8, 70, 240);
   text-align: center;
 }

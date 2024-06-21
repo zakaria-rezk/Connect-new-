@@ -3,6 +3,8 @@ import { defineStore } from "pinia";
 export const activeBussins = defineStore("activeBussins", {
   state: () => ({
     name: null,
+    image:null,
+    profession:null,
     description: null,
     bussinId: null,
     offeredServices: [],
@@ -10,7 +12,9 @@ export const activeBussins = defineStore("activeBussins", {
   getters: {
     bussinsName: (state) => state.name,
     bussinsDesc: (state) => state.description,
+    bussinsProfession: (state) => state.profession,
     bussinsId: (state) => state.bussinId,
+    bussinsImage: (state) => state.image,
   },
   actions: {
     async bussinsData() {
@@ -32,9 +36,9 @@ export const activeBussins = defineStore("activeBussins", {
         const error = "some thing fonign wrong";
         throw error;
       }
-     localStorage.setItem('bussinsId',data.id)
+    
       this.bussinId = data.id;
-     
+     console.log(this.bussinId)
     },
     async bussinsDataById(BussinsID) {
       const token = localStorage.getItem("token");
@@ -55,10 +59,13 @@ export const activeBussins = defineStore("activeBussins", {
         const error = "some thing fonign wrong";
         throw error;
       }
-
-      this.bussinId = data.id;
+   console.log('bussins data by id')
+   console.log(data)
+     
       this.name = data.name;
       this.description = data.description;
+      this.image=data.image;
+      this.profession=data.profession
     },
   },
 });

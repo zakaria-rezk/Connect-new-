@@ -37,12 +37,11 @@
             <button class="nav-link" @click="chagneverticalNavVisibilty">
               <div class="imgpic">
                 <img
-                 
                   :src="'https://localhost:7165' + active.profirleImg"
                   v-if="active.profirleImg !== '/Images/default/avatar'"
                 />
 
-                <img  src="../../assets/15528.jpg" v-else />
+                <img src="../../assets/15528.jpg" v-else />
               </div>
             </button>
           </li>
@@ -74,7 +73,7 @@
           <li>حسابي</li>
         </router-link>
         <router-link
-          v-if="active.hasBussins"
+          v-if="hasBussins"
           :to="{ name: 'bussinsPage', params: { id: Id } }"
           class="router-link"
           ><p class="px-1">
@@ -118,12 +117,14 @@ import { activeUser } from "@/sotre.js/profile/activeUser.js";
 import { activeBussins } from "@/sotre.js/bussins/activeBussins.js";
 const active = activeUser();
 const store = authStore();
-const picture = UserProfile();
+const hasBussins = ref(false);
 const pic = ref(null);
+const bussins=activeBussins();
 const verticalNav = ref("none");
 const isAuth = localStorage.getItem("token");
 const userName = ref("null");
 const Id = ref("null");
+const token = localStorage.getItem("token");
 
 const chagneverticalNavVisibilty = () => {
   verticalNav.value = verticalNav.value === "inline" ? "none" : "inline";
@@ -131,19 +132,35 @@ const chagneverticalNavVisibilty = () => {
 const logout = () => {
   store.logout();
 };
+const userRoles = async () => {
+  const response = await fetch(
+    "https://localhost:7165/api/Account/user-roles",
+    {
+      method: "GET",
+      headers: {
+        accept: '*/*',
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const roles = await response.json();
+   hasBussins.value= roles.includes('Freelancer');
+};
 
 onBeforeMount(async () => {
-  const token = localStorage.getItem("token");
-  const user = activeUser();
-  await user.decode(token);
+    await userRoles();
+ 
   const username = localStorage.getItem("userName");
-  const bussinsData = activeBussins();
-  await bussinsData.bussinsData();
+  
+  await bussins.bussinsData();
   userName.value = username;
-  Id.value = bussinsData.bussinsId;
+  console.log(bussins.bussinsId);
+  Id.value = bussins.bussinsId;
+  
+  await active.decode(token);
 });
 onMounted(async () => {
-  const active = activeUser();
+ 
   await active.userData();
   const profilePic = localStorage.getItem("pic");
   pic.value = profilePic;

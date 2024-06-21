@@ -27,8 +27,7 @@ export const UserProfile = defineStore("userProfile", {
             body: formData,
           }
         );
-        console.log('send profile pic') 
-        console.log(response)
+     
       } catch (error) {
         throw error;
       }
@@ -56,7 +55,6 @@ export const UserProfile = defineStore("userProfile", {
         console.log(response);
         const imageUrl = await response.text();
         user.image =imageUrl;
-        console.log('get profile pic ')
         await user.userData()
         const baseUrl = "https://localhost:7165";
         this.pic = `${baseUrl}${imageUrl}`;

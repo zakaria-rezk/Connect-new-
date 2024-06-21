@@ -93,8 +93,7 @@ const router = createRouter({
         meta: { requierAuth: true },
         beforeEnter: async (to, from, next) => {
          
-          const bussinsData=activeBussins();
-          await bussinsData.bussinsData();
+         
            
              next();
         },

@@ -59,13 +59,14 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { addBussins } from "@/sotre.js/bussins/addBussins";
-
+import { offeredServices } from "@/sotre.js/bussins/offeredServices";
 const bussins =addBussins();
 const props = defineProps(["formVisibilty"]);
 const emit = defineEmits("closeForm");
-
-
+const services=offeredServices();
+import { useRoute } from "vue-router";
 const inputVal = ref();
+const route =useRoute();
 const service =reactive({
   name:null,
   price:null,
@@ -80,6 +81,9 @@ const service =reactive({
   service.description='';
   service.price='';
   service.ImageUrl=null;
+  
+  console.log(route.params.id)
+  await services.getOfferdServices(0,route.params.id)
   emit("closeForm");
  
       

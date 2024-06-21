@@ -1,7 +1,7 @@
 <template>
   <TheHeader />
   <div class="viewImg" v-if="displayProfilePic">
-    <img :src="userProfile.profilePic" ref="userImg" />
+    <img :src="'https://localhost:7165'+user.profirleImg" ref="userImg" />
   </div>
  
   <div class="profile">
@@ -32,12 +32,12 @@
       />
       <div class="userData d-flex justify-content-center fs-5">
         <p><font-awesome-icon icon="fa-solid fa-user" /></p>
-        <p class="px-1">{{ userData.userName }}</p>
+        <p class="px-1">{{ user.userName }}</p>
         <p><font-awesome-icon icon="fa-solid fa-location" /></p>
-        <p class="px-2">{{ userData.userCity }},{{ userData.userState }}</p>
+        <p class="px-2">{{ user.userCity }},{{ user.userState }}</p>
       </div>
       <div>
-        <p>{{ userData.userStreet }}</p>
+        <p>{{ user.userStreet }}</p>
       </div>
     </div>
     <div class="container bg-gray-300">
@@ -65,14 +65,14 @@
         </div>
         <div class="col-auto ml-auto">
           <router-link
-            v-if="user.hasBussins"
-            :to="{ name: 'bussinsPage', params: { id: user.userName } }"
+            v-if="hasBussins"
+            :to="{ name: 'bussinsPage', params: { id: bussins.bussinsId } }"
             class="btn link m-1 btn-selected btn-primary"
           >
             نشاطي التجاري</router-link
           >
           <router-link
-            v-if="!user.hasBussins"
+            v-if="!hasBussins"
             :to="{ name: 'addfreelancebuisness' }"
             class="btn link m-1 btn-selected btn-primary"
           >
@@ -101,9 +101,11 @@ import { activeUser } from "../../../sotre.js/profile/activeUser.js";
 import TheHeader from "@/components/layout/TheHeader.vue";
 import { UserProfile } from "@/sotre.js/profile/userProfile.js";
 import ImgSettings from "../../UI/ImgSettings.vue";
+import { activeBussins } from "@/sotre.js/bussins/activeBussins";
+const bussins=activeBussins()
 import router from "@/router";
 const data = ref(1);
-const userData = activeUser();
+
 const fileInput = ref(null);
 const activeLink = ref("aboutCustomer");
 const user = activeUser();
@@ -112,6 +114,8 @@ const divVisibilty = ref(0);
 const changeImgRef = ref(null);
 const displayProfilePic = ref(false);
 const userImg = ref(null);
+const token =localStorage.getItem("token")
+const hasBussins =ref(false)
 const showImg = () => {
   displayProfilePic.value = true;
 };
@@ -121,7 +125,20 @@ const ImgSetting = () => {
 const handleColor = (par) => {
   activeLink.value = par;
 };
-
+const userRoles = async () => {
+  const response = await fetch(
+    "https://localhost:7165/api/Account/user-roles",
+    {
+      method: "GET",
+      headers: {
+        accept: '*/*',
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const roles = await response.json();
+   hasBussins.value= roles.includes('Freelancer');
+};
 const handleFileChange = async (e) => {
   const file = e.target.files[0];
   data.value++;
@@ -147,12 +164,13 @@ const handleClickOutside = (event) => {
 
 onBeforeMount(async () => {
      const user =activeUser();
-      
+   
          await user.userData()
- 
+         await userRoles();
   router.push({ name: "customerReservation" });
+  console.log(bussins.bussinsId)
   document.addEventListener("click", handleClickOutside);
-  await userData.userData();
+ 
 });
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
@@ -161,8 +179,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .profile {
-  /* filter: blur(15px);
- filter: contrast(5p); */
+
   background-color: #e6e9ed;
 }
 img {

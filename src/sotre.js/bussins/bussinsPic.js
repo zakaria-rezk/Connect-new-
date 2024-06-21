@@ -1,8 +1,10 @@
 import { defineStore } from "pinia";
+import { activeBussins } from "./activeBussins";
 
 export const BussinsProfile = defineStore("bussinsProfile", {
   state: () => ({
     bussinsPic: null,
+    activeBussins:activeBussins()
   }),
   getters: {},
   actions: {
@@ -53,12 +55,10 @@ export const BussinsProfile = defineStore("bussinsProfile", {
           throw error
         }
         const imageUrl = await response.text();
-        
-        const baseUrl = "https://localhost:7165";
-        this.bussinsPic = `${baseUrl}${imageUrl}`;
-
-        localStorage.removeItem("pic");
-        localStorage.setItem("pic", this.bussinsPic);
+        console.log('getpic')
+         this.activeBussins.image=imageUrl
+          console.log(this.activeBussins.image)
+      
       } catch (error) {
         throw error;
       }
