@@ -5,8 +5,8 @@
     <div class="wrapper">
       <searchFuncanality />
 
-      <div>
-        <div class="talent talents container d-felx my-2"  v-for="account in accounts" :key="account.id">
+      <div class="talents">
+        <div class="talent  container d-felx my-2"  v-for="account in accounts" :key="account.id">
           <div class="img">
             <img :src="'https://localhost:7165' + account.image" alt="" class="py-1"/>
           </div>
@@ -66,36 +66,41 @@ onBeforeMount(async () => {
   box-sizing: border-box;
 }
 .container-fluid {
-  background-color: rgb(0, 156, 60);
+ 
 
-  color: rgb(215, 195, 195);
+  color: rgb(162, 202, 18);
 
   height: 100vh;
-  overflow: hidden;
+ 
 }
 
 .wrapper {
-  background-color: rgb(140, 170, 213);
+  background-color: rgb(207, 140, 213);
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 10px;
-  overflow: hidden;
+
 }
 
 .talents {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   text-align: center;
+  background-color: cadetblue;
 }
 .talent {
-  width: 100%;
+  width: 50%;
   height: 35%;
   background-color: rgb(255, 252, 252);
-
+  margin: 5px;
+  border-radius: 25px;
   display: flex;
   flex-direction: row;
   color: rgb(16, 15, 15);
+}
+.talentcont{
+  background-color: rgb(27, 121, 204);
 }
 .img {
   height: 100%;
@@ -113,6 +118,9 @@ onBeforeMount(async () => {
   .wrapper {
     display: flex;
     flex-direction: column;
+  }
+  .talent{
+    height: 50%;
   }
 }
 </style>

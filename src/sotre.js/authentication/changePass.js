@@ -97,6 +97,7 @@ export const changePass = defineStore("changePass", {
         );
         if (response.ok) {
             this.done = true;
+            this.operationNum=0
           }
       } catch (Error) {
         const error = `some thing went wrong${response.status}${Error}`;

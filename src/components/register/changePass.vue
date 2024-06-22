@@ -135,7 +135,7 @@ const checkEqyakity = ( password, confirmpass) => {
   else pass.error =false
 };
 onBeforeMount(() => {
-  console.log(pass.operationNum);
+pass.done=false
 });
 </script>
 <style scoped>
