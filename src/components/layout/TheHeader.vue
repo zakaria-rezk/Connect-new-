@@ -111,7 +111,7 @@
 <script setup>
 import { onBeforeMount, onMounted, ref } from "vue";
 
-import { UserProfile } from "@/sotre.js/profile/userProfile";
+
 import { authStore } from "../../sotre.js/authentication/authSotre.js";
 import { activeUser } from "@/sotre.js/profile/activeUser.js";
 import { activeBussins } from "@/sotre.js/bussins/activeBussins.js";
@@ -119,7 +119,7 @@ const active = activeUser();
 const store = authStore();
 const hasBussins = ref(false);
 const pic = ref(null);
-const bussins=activeBussins();
+const bussins = activeBussins();
 const verticalNav = ref("none");
 const isAuth = localStorage.getItem("token");
 const userName = ref("null");
@@ -129,8 +129,8 @@ const token = localStorage.getItem("token");
 const chagneverticalNavVisibilty = () => {
   verticalNav.value = verticalNav.value === "inline" ? "none" : "inline";
 };
-const logout =async () => {
-   store.logout();
+const logout = async () => {
+  await store.logout();
 };
 const userRoles = async () => {
   const response = await fetch(
@@ -138,34 +138,30 @@ const userRoles = async () => {
     {
       method: "GET",
       headers: {
-        accept: '*/*',
+        accept: "*/*",
         Authorization: `Bearer ${token}`,
       },
     }
   );
   const roles = await response.json();
-   hasBussins.value= roles.includes('Freelancer');
+  hasBussins.value = roles.includes("Freelancer");
 };
 
 onBeforeMount(async () => {
-    await userRoles();
- 
-  
-  
+  await userRoles();
+
   await bussins.bussinsData();
- 
-  
- 
+
   Id.value = bussins.bussinsId;
-  console.log(Id.value)
-  
+ 
+
   await active.decode(token);
 });
 onMounted(async () => {
   await active.userData();
-  const username =active.userName
+  const username = active.userName;
   userName.value = username;
-  
+
   const profilePic = localStorage.getItem("pic");
   pic.value = profilePic;
 });

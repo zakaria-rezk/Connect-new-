@@ -7,7 +7,7 @@ export const activeBussins = defineStore("activeBussins", {
     profession:null,
     description: null,
     bussinId: null,
-    offeredServices: [],
+   
   }),
   getters: {
     bussinsName: (state) => state.name,
@@ -38,7 +38,7 @@ export const activeBussins = defineStore("activeBussins", {
       }
     
       this.bussinId = data.id;
-     console.log(this.bussinId)
+    
     },
     async bussinsDataById(BussinsID) {
       const token = localStorage.getItem("token");
@@ -59,9 +59,7 @@ export const activeBussins = defineStore("activeBussins", {
         const error = "some thing fonign wrong";
         throw error;
       }
-   console.log('bussins data by id')
-   console.log(data)
-     
+ 
       this.name = data.name;
       this.description = data.description;
       this.image=data.image;

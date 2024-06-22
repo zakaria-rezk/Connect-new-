@@ -1,8 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { activeUser } from "@/sotre.js/profile/activeUser";
-import { activeBussins } from "@/sotre.js/bussins/activeBussins";
-import { UserProfile } from "@/sotre.js/profile/userProfile";
-import { offeredServices } from "@/sotre.js/bussins/offeredServices";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -63,7 +60,7 @@ const router = createRouter({
           component: () =>
             import("../components/profilePager/customer/customerReservation.vue"),
         },
-
+      
         
         {
           path: "projects",
@@ -93,6 +90,12 @@ const router = createRouter({
              next();
         },
    
+    },
+    {
+      path: "/customer/:userName/deleteaccount",
+      name: "DeleteAccount",
+      component: () =>
+        import("../components/register/DeleteAccount.vue"),
     },
 
     {

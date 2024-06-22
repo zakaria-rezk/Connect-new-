@@ -1,15 +1,19 @@
 <template>
   <TheHeader />
   <div class="viewImg" v-if="displayProfilePic">
-    <img :src="'https://localhost:7165'+user.profirleImg" ref="userImg" />
+    <img :src="'https://localhost:7165' + user.profirleImg" ref="userImg" />
   </div>
- 
+
   <div class="profile">
     <div class="profile-info">
       <div class="profile-picture">
-        <img class="image" :src="'https://localhost:7165'+user.profirleImg" v-if="user.profirleImg !=='/Images/default/avatar'"/>
+        <img
+          class="image"
+          :src="'https://localhost:7165' + user.profirleImg"
+          v-if="user.profirleImg !== '/Images/default/avatar'"
+        />
 
-        <img class="image" src="../../../assets/15528.jpg" v-else  />
+        <img class="image" src="../../../assets/15528.jpg" v-else />
 
         <button
           class="custom-file-upload bg-primary btn"
@@ -80,12 +84,19 @@
           >
           <router-link
             :to="{
-              name: 'changePass',
+              name: 'updateProfile',
+              params: { userName: user.userName },
             }"
             class="btn link m-1 btn-selected btn-warning"
           >
             تعديل الملف الشخصي
           </router-link>
+          <!-- <router-link
+            :to="{ name: 'DeleteAccount', params: { userName: user.userName } }"
+            class="btn delete link m-1 btn-selected btn-warning"
+          >
+            حذف الحساب
+          </router-link> -->
         </div>
       </div>
     </div>
@@ -97,11 +108,12 @@
 <script setup>
 import { onBeforeMount, onBeforeUnmount, ref } from "vue";
 import { activeUser } from "../../../sotre.js/profile/activeUser.js";
+import Hint from "@/components/UI/Hint.vue";
 import TheHeader from "@/components/layout/TheHeader.vue";
 import { UserProfile } from "@/sotre.js/profile/userProfile.js";
 import ImgSettings from "../../UI/ImgSettings.vue";
 import { activeBussins } from "@/sotre.js/bussins/activeBussins";
-const bussins=activeBussins()
+const bussins = activeBussins();
 import router from "@/router";
 const data = ref(1);
 
@@ -113,8 +125,8 @@ const divVisibilty = ref(0);
 const changeImgRef = ref(null);
 const displayProfilePic = ref(false);
 const userImg = ref(null);
-const token =localStorage.getItem("token")
-const hasBussins =ref(false)
+const token = localStorage.getItem("token");
+const hasBussins = ref(false);
 const showImg = () => {
   displayProfilePic.value = true;
 };
@@ -130,23 +142,21 @@ const userRoles = async () => {
     {
       method: "GET",
       headers: {
-        accept: '*/*',
+        accept: "*/*",
         Authorization: `Bearer ${token}`,
       },
     }
   );
   const roles = await response.json();
-   hasBussins.value= roles.includes('Freelancer');
+  hasBussins.value = roles.includes("Freelancer");
 };
 const handleFileChange = async (e) => {
   const file = e.target.files[0];
   data.value++;
   await userProfile.sendProfilePic(file);
-  setTimeout( async function(){
+  setTimeout(async function () {
     await userProfile.getProfilePic();
-  },3000)
-
-  
+  }, 1000);
 };
 const handleClickOutside = (event) => {
   if (divVisibilty.value === 1 && !changeImgRef.value.contains(event.target)) {
@@ -162,14 +172,13 @@ const handleClickOutside = (event) => {
 };
 
 onBeforeMount(async () => {
-     const user =activeUser();
-   
-         await user.userData()
-         await userRoles();
+  const user = activeUser();
+
+  await user.userData();
+  await userRoles();
   router.push({ name: "customerReservation" });
-  console.log(bussins.bussinsId)
+
   document.addEventListener("click", handleClickOutside);
- 
 });
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
@@ -178,7 +187,6 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .profile {
-
   background-color: #e6e9ed;
 }
 img {
@@ -254,5 +262,8 @@ footer {
 }
 .ul {
   background-color: azure;
+}
+.delete {
+  background-color: #ca1212;
 }
 </style>

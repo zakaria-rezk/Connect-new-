@@ -28,13 +28,13 @@
   
     <hr>
     <AboutConnect />
-    <TheFooter/>
+    <!-- <TheFooter/> -->
 </template>
 <script setup>
 import AboutConnect from "../pages/AboutConnect.vue"
 import TheHeader from "../layout/TheHeader.vue";
 
-import TheFooter from "../layout/TheFooter.vue";
+// import TheFooter from "../layout/TheFooter.vue";
 
 
 </script>

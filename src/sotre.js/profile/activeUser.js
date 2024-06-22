@@ -58,7 +58,7 @@ export const activeUser = defineStore("activeUser", {
         }
 
         if (response.ok)
-     console.log(data)
+     
         this.name = data.name;
         this.gover = data.state;
         this.city = data.city;

@@ -33,7 +33,7 @@ const token = localStorage.getItem("token");
 const id = ref();
 
 const search = async (keyWord = null) => {
-  console.log(keyWord)
+  
   let searchword = null;
   if (keyWord) {
     searchword = `search=${keyWord}&`;
@@ -49,15 +49,14 @@ const search = async (keyWord = null) => {
   });
   const data = await response.json();
   accounts.value = data;
-  console.log(accounts.value);
+ 
 };
 
 onBeforeMount(async () => {
   search();
   const route = useRoute();
   id.value = route.params.id;
-  console.log(id.value)
-
+  
 });
 </script>
 <style scoped>

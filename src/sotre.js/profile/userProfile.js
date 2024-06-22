@@ -49,15 +49,14 @@ export const UserProfile = defineStore("userProfile", {
         );
 
         if (!response.ok) {
-          const error = "some thing went wrong";
+          const error = "user profile went wrong";
           throw error;
         }
-        console.log(response);
+        
         const imageUrl = await response.text();
         user.image =imageUrl;
-        await user.userData()
-        const baseUrl = "https://localhost:7165";
-        this.pic = `${baseUrl}${imageUrl}`;
+        await user.userData();
+    
 
        
        
