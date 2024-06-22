@@ -3,7 +3,7 @@
 
   <div class="container-fluid">
     <div class="wrapper">
-      <searchFuncanality />
+      <searchFuncanality @search="search"/>
 
       <div class="talents">
         <div class="talent  container d-felx my-2"  v-for="account in accounts" :key="account.id">
@@ -33,6 +33,7 @@ const token = localStorage.getItem("token");
 const id = ref();
 
 const search = async (keyWord = null) => {
+  console.log(keyWord)
   let searchword = null;
   if (keyWord) {
     searchword = `search=${keyWord}&`;

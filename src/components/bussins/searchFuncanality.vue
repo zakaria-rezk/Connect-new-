@@ -21,7 +21,7 @@
         placeholder="ابحث عن موهبة لتنفيذ عملك"
         v-model="searchWord[0]"
       />
-      <button @click.prevent="ss" for="" class="label py-2">
+      <button @click.prevent="search" for="" class="label py-2">
         <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
       </button>
     </div>
@@ -51,7 +51,7 @@
 </template>
 <script setup>
 import { ref } from "vue";
-
+const emit = defineEmits("search");
 const words = ref([]);
 const searchWord = ref([]);
 const skills = ref([
@@ -62,12 +62,12 @@ const skills = ref([
   "مدخل البيانات",
   "التعليق الصوتي",
 ]);
-const dfa = (e) => {
-  console.log(e.target.value);
-};
-const ss = () => {
+
+const search = () => {
   words.value = [...searchWord.value];
-  console.log(searchWord.value);
+ 
+  console.log(...searchWord.value);
+  emit('search',...searchWord.value)
   searchWord.value = [];
 };
 const removeWord = (word) => {
