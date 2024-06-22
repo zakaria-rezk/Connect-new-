@@ -27,119 +27,113 @@
                 ><font-awesome-icon icon="fa fa-shop"></font-awesome-icon
               ></span>
             </div>
-        <form  @submit.prevent="submitForm">
-            <div v-show="current === 5" class="tab">
-              <h6>اسم النشاط التجاري الخاص بك</h6>
-            
-              <p>
-                <input
-                  placeholder=". . ."
-                  name="fname"
-                  v-model="Bussins.name"
-                  required
-                  @focus="toNull(Bussins, 'name')"
-                />
-              </p>
-            </div>
-            <div v-show="current === 4" class="tab">
-              <h6>ادخل تخصصك</h6>
-              <p>
-                <input
-                  placeholder=". . ."
-                  name="dd"
-                  v-model="Bussins.profession"
-                  @focus="toNull(Bussins, 'profession')"
-                  required
-                />
-              </p>
-            </div>
-            <div v-show="current === 3" class="tab">
-              <h6>اكتب نبذة مختصرة عن نشاطك التجاري</h6>
-              <p>
-                <input
-                  placeholder=". . ."
-                  name="dd"
-                  v-model="Bussins.decsription"
-                  @focus="toNull(Bussins, 'decsription')"
-                  required
-                />
-              </p>
-            </div>
+            <form @submit.prevent="submitForm">
+              <div v-show="current === 5" class="tab">
+                <h6>اسم النشاط التجاري الخاص بك</h6>
 
-            <div v-show="current === 2" class="tab">
-              <h6>اختار محفاظتك</h6>
-              <p>
-                <input
-                  placeholder=". . ."
-                  name="email"
-                  v-model="Bussins.state"
-                  @focus="toNull(Bussins, 'state')"
-                  required
-                />
-              </p>
-            </div>
-            <div v-show="current === 2" class="tab">
-              <h6>اختر المدينة</h6>
-              <p>
-                <input
-                  placeholder=". . ."
-                  v-model="Bussins.city"
-                  required
-                  @focus="toNull(Bussins, 'city')"
-                />
-              </p>
-            </div>
+                <p>
+                  <input
+                    placeholder=". . ."
+                    name="fname"
+                    v-model="Bussins.name"
+                    required
+                    @focus="toNull(Bussins, 'name')"
+                  />
+                </p>
+              </div>
+              <div v-show="current === 4" class="tab">
+                <h6>ادخل تخصصك</h6>
+                <p>
+                  <input
+                    placeholder=". . ."
+                    name="dd"
+                    v-model="Bussins.profession"
+                    @focus="toNull(Bussins, 'profession')"
+                    required
+                  />
+                </p>
+              </div>
+              <div v-show="current === 3" class="tab">
+                <h6>اكتب نبذة مختصرة عن نشاطك التجاري</h6>
+                <p>
+                  <input
+                    placeholder=". . ."
+                    name="dd"
+                    v-model="Bussins.decsription"
+                    @focus="toNull(Bussins, 'decsription')"
+                    required
+                  />
+                </p>
+              </div>
 
-            <div v-show="current === 2" class="tab">
-              <h6>اختر اسم الشارع</h6>
-              <p>
-                <input
-                  placeholder=". . ."
-                  v-model="Bussins.street"
-                  required
-                  @focus="toNull(Bussins, 'street')"
-                />
-              </p>
-            </div>
+              <div v-show="current === 2" class="tab">
+                <h6>اختار محفاظتك</h6>
+                <p>
+                  <input
+                    placeholder=". . ."
+                    name="email"
+                    v-model="Bussins.state"
+                    @focus="toNull(Bussins, 'state')"
+                    required
+                  />
+                </p>
+              </div>
+              <div v-show="current === 2" class="tab">
+                <h6>اختر المدينة</h6>
+                <p>
+                  <input
+                    placeholder=". . ."
+                    v-model="Bussins.city"
+                    required
+                    @focus="toNull(Bussins, 'city')"
+                  />
+                </p>
+              </div>
 
-            <div v-show="current === 1" class="tab">
-              <h6>ادخل رقم الهاتف</h6>
-              <p>
-                <input
-                  placeholder=". . ."
-                  required
-                  type="tel"
-                  v-model="Bussins.phone"
-                  @focus="toNull(Bussins, 'phone')"
-                />
-              </p>
-            </div>
+              <div v-show="current === 2" class="tab">
+                <h6>اختر اسم الشارع</h6>
+                <p>
+                  <input
+                    placeholder=". . ."
+                    v-model="Bussins.street"
+                    required
+                    @focus="toNull(Bussins, 'street')"
+                  />
+                </p>
+              </div>
 
-            <div v-show="current === 0" class="tab">
-              <h6>ادخل بعض الخدمات الذي يقدمها النشاط الخاص بك (اختياري)</h6>
-              <p>
-                <input placeholder=". . ." required v-model="skill1" />
-                <input placeholder=". . ." required v-model="skill2" />
-                <input placeholder=". . ."  required   v-model="skill3"  />
-              </p>
-              <p class="router-link">لماذا هذا الاختيار</p>
-            </div>
-            <div v-show="current === -1" class="tab thanks" id="text-message">
-              <img
-                src="https://i.imgur.com/O18mJ1K.png"
-                width="100"
-                class="mb-4"
-              />
-              <h3>شكرا لك هذا يساعدنا في تحسين خدماتنا</h3>
-              <button 
-              
-                class="btn btn-primary"
-            
-                >التالي</button
-              >
-          
-            </div>
-          </form>
+              <div v-show="current === 1" class="tab">
+                <h6>ادخل رقم الهاتف</h6>
+                <p>
+                  <input
+                    placeholder=". . ."
+                    required
+                    type="tel"
+                    v-model="Bussins.phone"
+                    @focus="toNull(Bussins, 'phone')"
+                  />
+                </p>
+              </div>
+
+              <div v-show="current === 0" class="tab">
+                <h6>ادخل بعض الخدمات الذي يقدمها النشاط الخاص بك (اختياري)</h6>
+                <p>
+                  <input placeholder=". . ." required v-model="skill1" />
+                  <input placeholder=". . ." required v-model="skill2" />
+                  <input placeholder=". . ." required v-model="skill3" />
+                </p>
+                <p class="router-link">لماذا هذا الاختيار</p>
+              </div>
+              <div v-show="current === -1" class="tab thanks" id="text-message">
+                <img
+                  src="https://i.imgur.com/O18mJ1K.png"
+                  width="100"
+                  class="mb-4"
+                />
+                <h3>شكرا لك هذا يساعدنا في تحسين خدماتنا</h3>
+                <button class="btn btn-primary">التالي</button>
+              </div>
+            </form>
             <div style="overflow: auto" id="nextprevious">
               <div style="float: right">
                 <button
@@ -167,19 +161,20 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref } from "vue";
+import { computed, reactive, ref, onBeforeMount } from "vue";
 import { addBussins } from "@/sotre.js/bussins/addBussins";
 import { activeBussins } from "@/sotre.js/bussins/activeBussins";
 import router from "@/router";
-const token = localStorage.getItem("token");
+import { useRoute } from "vue-router";
+const route = useRoute();
 const store = addBussins();
 const current = ref(5);
 const next = ref(4);
 const back = ref(6);
-const skill1 =ref()
-const skill2 =ref()
-const skill3 =ref()
-const bussinsId=activeBussins();
+const skill1 = ref();
+const skill2 = ref();
+const skill3 = ref();
+const bussinsId = activeBussins();
 const Bussins = reactive({
   name: ". . .",
   profession: ". . .",
@@ -220,7 +215,6 @@ const formIsvalid = () => {
   else return true;
 };
 const toNull = (obj, proeprty) => {
-
   obj[proeprty] = "";
 };
 const move = (val) => {
@@ -255,7 +249,6 @@ const move = (val) => {
 
 //  if(formData.value.name.trim()!='' && formData.value.description.trim() !='' &&formData.value.phoneNumber.length ===11&&formData.value.location.trim() !=''){
 const submitForm = async () => {
-  
   const CreateBussins = {
     name: Bussins.name,
     profession: Bussins.profession,
@@ -264,14 +257,23 @@ const submitForm = async () => {
     state: Bussins.state,
     city: Bussins.city,
     street: Bussins.street,
-    skills: [skill1.value,skill2.value,skill3.value],
+    skills: [skill1.value, skill2.value, skill3.value],
   };
-  console.log(CreateBussins)
+  console.log(CreateBussins);
+  if (!route.params.id) {
+    await store.addBussins(CreateBussins);
+  }
+  else if(route.params.id){
+    await store.updateBussins(CreateBussins);
+    console.log('update')
+  }
   
-  await store.addBussins(CreateBussins);
   await bussinsId.bussinsData();
-  router.push({name:'bussinsPage' ,params:{id:bussinsId.bussinsId}})
+  router.push({ name: "bussinsPage", params: { id: bussinsId.bussinsId } });
 };
+onBeforeMount(() => {
+  console.log(route.params.id);
+});
 </script>
 
 <style scoped>

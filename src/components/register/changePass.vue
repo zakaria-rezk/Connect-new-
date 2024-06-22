@@ -77,7 +77,7 @@
                 class="form-control"
                 id="email"
                 v-model="confirmPass"
-                @change="checkEqyakity($event, newPass, confirmPass)"
+               
                 ref="confirmInput"
                 required
               />
@@ -98,7 +98,6 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import { changePass } from "@/sotre.js/authentication/changePass.js";
 import { onBeforeMount, ref } from "vue";
@@ -128,14 +127,10 @@ const goToLogin = async () => {
 
   localStorage.clear();
 };
-const checkEqyakity = ( password, confirmpass) => {
-  if(password!=confirmpass){
-  pass.error=true
-  }
-  else pass.error =false
-};
+
 onBeforeMount(() => {
 pass.done=false
+pass.error=false
 });
 </script>
 <style scoped>

@@ -55,7 +55,7 @@
               class="btn link m-1 btn-selected الشخصي"
               @click="handleColor('aboutCustomer')"
             >
-              الحجوزات</router-link
+            الطلبات</router-link
             >
             <router-link
               :to="{ name: 'customerMessagess' }"
@@ -64,20 +64,20 @@
               @click="handleColor('customerProtfolio')"
             >
               الطلبات
-            </router-link>
+            </router-link >
           </div>
         </div>
         <div class="col-auto ml-auto">
           <router-link
             v-if="hasBussins"
-            :to="{ name: 'bussinsPage', params: { id: bussins.bussinsId } }"
+            :to="{ name: 'bussinsPage', params: { id: bussins.bussinsId  } }"
             class="btn link m-1 btn-selected btn-primary"
           >
             نشاطي التجاري</router-link
           >
           <router-link
             v-if="!hasBussins"
-            :to="{ name: 'addfreelancebuisness' }"
+            :to="{ name: 'addfreelance' }"
             class="btn link m-1 btn-selected btn-primary"
           >
             انشاء عمل</router-link
@@ -91,30 +91,32 @@
           >
             تعديل الملف الشخصي
           </router-link>
-          <!-- <router-link
-            :to="{ name: 'DeleteAccount', params: { userName: user.userName } }"
-            class="btn delete link m-1 btn-selected btn-warning"
-          >
-            حذف الحساب
-          </router-link> -->
+        
         </div>
       </div>
     </div>
   </div>
   <div class="container">
+    <router-view v-if="user.requests.length===0"/>
+  <tableRequestVue v-else />
+  </div>
+  <div class="container">
     <router-view />
+  <tableRequestVue />
   </div>
 </template>
 <script setup>
 import { onBeforeMount, onBeforeUnmount, ref } from "vue";
 import { activeUser } from "../../../sotre.js/profile/activeUser.js";
-import Hint from "@/components/UI/Hint.vue";
+
 import TheHeader from "@/components/layout/TheHeader.vue";
 import { UserProfile } from "@/sotre.js/profile/userProfile.js";
 import ImgSettings from "../../UI/ImgSettings.vue";
 import { activeBussins } from "@/sotre.js/bussins/activeBussins";
 const bussins = activeBussins();
 import router from "@/router";
+
+import tableRequestVue from "../tableRequest.vue";
 const data = ref(1);
 
 const fileInput = ref(null);
@@ -137,6 +139,7 @@ const handleColor = (par) => {
   activeLink.value = par;
 };
 const userRoles = async () => {
+  const token = localStorage.getItem("token");
   const response = await fetch(
     "https://localhost:7165/api/Account/user-roles",
     {
@@ -172,13 +175,16 @@ const handleClickOutside = (event) => {
 };
 
 onBeforeMount(async () => {
-  const user = activeUser();
+ 
 
   await user.userData();
-  await userRoles();
+  await user.userRequest()
   router.push({ name: "customerReservation" });
 
   document.addEventListener("click", handleClickOutside);
+   
+  await userRoles();
+ 
 });
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);

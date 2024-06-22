@@ -10,6 +10,7 @@ export const activeUser = defineStore("activeUser", {
     street: null,
     phone:null,
     image:null,
+    requests:[],
   }),
   getters: {
     userName(state) {
@@ -69,6 +70,40 @@ export const activeUser = defineStore("activeUser", {
         throw error;
       }
     },
+    async userRequest() {
+      const token = localStorage.getItem('token')
+     
+      try {
+      
+        const response = await fetch(
+          'https://localhost:7165/api/Freelancer/get-freelancer-requests?pageIndex=0&pageSize=16',
+          {
+            method: "GET",
+
+            headers: {
+              accept: "*/*",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        
+        if (!response.ok) {
+          const error = response.message || "can not fetch userData";
+          throw error;
+        }
+
+        if (response.ok){
+          const data = await response.json();
+     
+        this.requests=data; 
+        console.log(this.requests)
+        
+        }
+    
+      } catch (error) {
+        throw error;
+      }
+  },
     async updateProfile(payload){
       
       const token =localStorage.getItem('token')

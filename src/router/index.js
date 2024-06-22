@@ -118,14 +118,21 @@ const router = createRouter({
       component: () => import("../components/pages/hotelReservation.vue"),
     },
     {
-      path: "/addFreelanceBuisness",
+      path: "/addFreelance",
+      name: "addfreelance",
+      component: () =>
+        import(
+          "../components/forms/addFreelanceBuisness.vue"
+        ),
+    },
+    {
+      path: "/addFreelanceBuisness/:id",
       name: "addfreelancebuisness",
       component: () =>
         import(
           "../components/forms/addFreelanceBuisness.vue"
         ),
     },
-   
 
     {
       path: "/",

@@ -130,7 +130,7 @@ const chagneverticalNavVisibilty = () => {
   verticalNav.value = verticalNav.value === "inline" ? "none" : "inline";
 };
 const logout = async () => {
-  await store.logout();
+   store.logout();
 };
 const userRoles = async () => {
   const response = await fetch(
@@ -144,11 +144,13 @@ const userRoles = async () => {
     }
   );
   const roles = await response.json();
+  console.log(roles)
   hasBussins.value = roles.includes("Freelancer");
 };
 
+
 onBeforeMount(async () => {
-  await userRoles();
+ 
 
   await bussins.bussinsData();
 
@@ -156,6 +158,7 @@ onBeforeMount(async () => {
  
 
   await active.decode(token);
+  
 });
 onMounted(async () => {
   await active.userData();
@@ -164,6 +167,9 @@ onMounted(async () => {
 
   const profilePic = localStorage.getItem("pic");
   pic.value = profilePic;
+ 
+   userRoles();
+
 });
 </script>
 

@@ -55,7 +55,7 @@ const previousPage = async () => {
   await useOfferedServices.getOfferdServices(pageIndex.value,route.params.id);
 };
 const sendRequest=async(name,price,description)=>{
-  const id=localStorage.getItem('bussinsId')
+  const id=route.params.id;
   
   const token =localStorage.getItem('token');
   

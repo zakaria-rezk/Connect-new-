@@ -38,13 +38,21 @@
           <div class="container d-flex justify-content-center my-4">
             <button v-if="isAdmin"
               type="button"
-              class="btn btn-primary"
+              class="btn btn-primary mx-2"
               @click.prevent="showForm"
             >
               اضافة خدمة
             </button>
+            <router-link v-if="isAdmin" :to="{name:'addfreelancebuisness',params:{id:route.params.id}}"
+              type="button"
+              class="btn btn-warning mx-2"
+              @click.prevent="showForm"
+            >
+               خدمةتعديل الملف الشخي
+            </router-link>
             
           </div>
+          
         </div>
       
       </div>

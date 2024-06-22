@@ -82,6 +82,54 @@ export const addBussins = defineStore("addBussins", {
         throw error;
       }
     },
+    async updateBussins(payload) {
+      const token =localStorage.getItem('token')
+   
+     console.log(payload)
+      try {
+        const response = await fetch(
+          "https://localhost:7165/api/Freelancer/update-freelancer-business",
+          {
+            method: "PUT",
+            headers: {
+              accept: "*/*",
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: payload.name,
+              description: payload.description,
+              phoneNumber: payload.phone,
+              profession: payload.profession,
+              street: payload.street,
+
+              city: payload.city,
+              state: payload.state,
+              skills: payload.skills,
+            }),
+          }
+        );
+
+        if (!response.ok) {
+         
+          const error = response.message || "can not fetch userData";
+          throw error;
+         
+        }
+
+        if (response.ok) this.name = payload.name;
+        this.profession = payload.profession;
+        this.description = payload.description;
+        this.phone = payload.phone;
+        this.state = payload.state;
+        this.city = payload.city;
+        this.street = payload.street;
+        this.skills = payload.skills;
+     
+      } catch (error) {
+        throw error;
+      }
+    },
 
     
     async addServices(payload) {
