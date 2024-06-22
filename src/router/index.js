@@ -31,8 +31,8 @@ const router = createRouter({
     },
   
     {
-      path: "/forgetpassword",
-      name: "forgetpassword",
+      path: "/changePass",
+      name: "changePass",
       component: () => import("../components/register/changePass.vue"),
      
     },
@@ -42,12 +42,7 @@ const router = createRouter({
       component: () => import("../components/pages/Freelansers.vue"),
      
     },
-    {
-      path: "/changepassword/:id",
-      name: "changepassword",
-      component: () => import("../components/register/changePass.vue"),
-     
-    },
+
   
     {
       path: "/customer/:userName",

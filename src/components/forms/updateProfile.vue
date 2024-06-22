@@ -61,7 +61,7 @@
             >حفظ</router-link
           >
           <router-link
-            :to="{ name: 'changepassword', params: { id: userName } }"
+            :to="{ name: 'changePass'}"
             class="btn btn-danger"
             >تغيير كلمة المرور</router-link
           >

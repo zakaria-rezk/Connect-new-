@@ -1,122 +1,168 @@
 <template>
-    <div class="wrap">
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div
-        class="col-md-6" :style="{'background-color': 'aliceblue'}"
-        style="
-          border: 2px solid rgba(0, 123, 255, 0.5);
-          border-radius: 10px;
-          padding: 20px;
-          margin-top: 50px;
-        "
-      >
-        <h2 class="text-center mb-3" style="color: #333">تغيير كلمة المرور</h2>
-        <form @submit.prevent >
-          <div class="form-group" v-show="!forget">
-            <label for="oldPassword" style="color: #333"
-              >كلمة المرور القديمة :</label
-            >
-            <input
-              type="password"
-              class="form-control"
-              id="oldPassword"
-          
-              required
-              style="border-color: rgba(0, 123, 255, 0.5)"
-            />
-          </div>
-          <div class="form-group" v-show="forget">
-            <label for="oldPassword" style="color: #333"
-              >  ادخل البريد الاكتروني :</label
-            >
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-          
-              required
-              style="border-color: rgba(0, 123, 255, 0.5)"
-            />
-          </div>
-          <div class="form-group"  v-show="!forget">
-            <label for="newPassword" style="color: #333"
-              >كلمة المرور الجديدة :</label
-            >
-            <input
-              type="password"
-              class="form-control"
-              id="newPassword"
-            
-              required
-              style="border-color: rgba(0, 123, 255, 0.5)"
-            />
-          </div>
-          <div class="form-group"  v-show="!forget">
-            <label for="confirmNewPassword" style="color: #333"
-              >تأكيد كلمة المرور الجديدة :</label
-            >
-            <input
-              type="password"
-              class="form-control"
-              id="confirmNewPassword"
-            
-              required
-              style="border-color: rgba(0, 123, 255, 0.5)"
-            />
-          </div>
-          <div class="text-center">
-            <button
-              type="submit"
-              class="btn btn-primary"
-              style="
-                background-color: rgba(0, 123, 255, 0.8);
-                border-color: rgba(0, 123, 255, 0.8);
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                width: 100%;
-              "
-            >
-              تغيير كلمة المرور
-            </button>
-          </div>
-        </form>
+  <div class="wrap">
+    <Error title="نم تغيير كلمة المرور بنجاح برجاء تسجيل الدخول" link @tryclose="goToLogin" v-if="pass.done" />
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div
+          class="col-md-6"
+          style="
+            border: 2px solid rgba(0, 123, 255, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 50px;
+          "
+        >
+          <h2 class="text-center mb-3" style="color: #333">
+            اعادة تعيين كلمة المرور
+          </h2>
+          <form @submit.prevent>
+            <div class="form-group" v-if="pass.operationNum === 0">
+              <label for="email" style="color: #333"
+                >عنوان البريد الالكترونى :</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                v-model="email"
+                required
+              />
+              <p v-if="pass.error">   فشل ارسال رمز التاكيد تاكد من عنوان بريدك الالكتروني واتصالك بالانترنت</p>
+              <div class="text-center py-0">
+                <button
+                  @click.prevent="sendMail(email)"
+                  class="btn btn-primary"
+                >
+                  ارسال
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group" v-if="pass.operationNum === 1">
+              <label for="email" style="color: #333"> ادخل رمز التاكيد :</label>
+              <input
+                type="number"
+                class="form-control"
+                id="email"
+                v-model="otpNum"
+                required
+              />
+              <div class="btn text-center py-0">
+                <p v-if="pass.error">رمز التاكيد غير صحيح</p>
+
+                <button
+                  @click.prevent="sendotp(otpNum)"
+                  class="btn btn-primary"
+                >
+                  ارسال
+                </button>
+              </div>
+            </div>
+            <div class="form-group" v-if="pass.operationNum === 2">
+              <label for="email" style="color: #333">
+                ادخل كلمة المرور الجديدة :</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                v-model="newPass"
+                required
+              />
+              <label for="email" style="color: #333">
+                تاكيد كلمة المرور :</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                v-model="confirmPass"
+                @change="checkEqyakity($event, newPass, confirmPass)"
+                ref="confirmInput"
+                required
+              />
+              <p v-if="pass.error">كملتي المرور غير متطابقتين</p>
+
+              <div class="text-center py-3">
+                <button
+                  @click.prevent="updatePass(newPass, confirmPass)"
+                  class="btn btn-primary"
+                >
+                  ارسال
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
+
 <script setup>
-import { useRoute } from 'vue-router';
-import { ref ,onMounted} from 'vue';
-const forget = ref(true);
+import { changePass } from "@/sotre.js/authentication/changePass.js";
+import { onBeforeMount, ref } from "vue";
+import Error from "../UI/Error.vue";
+import router from "@/router";
+const pass = changePass();
+const email = ref();
+const otpNum = ref();
+const newPass = ref();
+const confirmPass = ref();
+const confirmInput = ref(null);
+const sendMail = async (email) => {
+  console.log(email);
+  await pass.sendEmail(email);
+};
+const sendotp = async (otpNum) => {
+  console.log(otpNum);
+  await pass.sendOtp(otpNum);
+};
+const updatePass = async (a, b) => {
+ 
+    await pass.updatePass(a, b);
+  
+};
+const goToLogin = async () => {
+  await router.push({ name: "Login" });
 
-
-onMounted(async () => {
-  const router = useRoute();
-  if (router.params.id) {
-    forget.value = false; 
-    console.log("change");
+  localStorage.clear();
+};
+const checkEqyakity = ( password, confirmpass) => {
+  if(password!=confirmpass){
+  pass.error=true
   }
+  else pass.error =false
+};
+onBeforeMount(() => {
+  console.log(pass.operationNum);
 });
-
 </script>
 <style scoped>
-.wrap{
-   
-  animation: slide-up 0.5s ease;
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../assets/15528.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
 }
 .form-group {
-  
+  background-color: aliceblue;
   margin-bottom: 20px;
 }
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.form-group input {
+  border-color: rgba(0, 123, 255, 0.5);
+}
+.btn {
+  border-color: rgba(0, 123, 255, 0.8);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+p {
+  color: red;
 }
 </style>

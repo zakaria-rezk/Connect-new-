@@ -80,8 +80,7 @@
           >
           <router-link
             :to="{
-              name: 'updateProfile',
-              params: { id: user.activeUserToken },
+              name: 'changePass',
             }"
             class="btn link m-1 btn-selected btn-warning"
           >

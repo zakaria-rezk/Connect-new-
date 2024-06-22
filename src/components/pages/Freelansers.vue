@@ -5,10 +5,10 @@
     <div class="wrapper">
       <searchFuncanality />
 
-      <div v-for="account in accounts" :key="account.id" class="talents">
-        <div class="talent container d-felx">
+      <div>
+        <div class="talent talents container d-felx my-2"  v-for="account in accounts" :key="account.id">
           <div class="img">
-            <img :src="'https://localhost:7165' + account.image" alt="" />
+            <img :src="'https://localhost:7165' + account.image" alt="" class="py-1"/>
           </div>
           <div class="talentDetail d-flex flex-column align-items-start p-4">
             <h5>{{ account.name }}</h5>

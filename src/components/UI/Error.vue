@@ -1,7 +1,7 @@
 <template>
  <div class="body">
    <header class="title">
-   <h1>حدث خطا</h1>  
+   <h1> تنبيه </h1>  
   </header>
    <div class="message">
     <h2>{{ title }}</h2>
