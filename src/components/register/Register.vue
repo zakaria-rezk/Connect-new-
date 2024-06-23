@@ -28,7 +28,7 @@
               ref="emailInput"
             />
             <input
-              type="text"
+              type="password"
               placeholder= '*ادخل كلمة المرور'
               v-model="registerData.password.value"
               ref="passwordInput"

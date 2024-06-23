@@ -12,8 +12,8 @@
             <tbody>
                 <tr v-for="request in user.requests" :key="request.id">
                     <td>  {{request.name  }}الحصول علي {{ request.customerName }}يريد</td>
-                    <td><button>✅</button> </td>
-                    <td><button>❌</button></td>
+                    <td><button @click="accpet(request)">✅</button> </td>
+                    <td><button @click="refuse(request)">❌</button></td>
                 </tr>
             </tbody>
         </table>
@@ -22,7 +22,13 @@
 <script setup>
 import { activeUser } from "@/sotre.js/profile/activeUser";
 const user=activeUser();
-
+const accpet =async(id)=>{
+   user.requests.shift();
+    // const response =await fetch(`https://localhost:7165/api/Freelancer/accept/${id}`,)
+}
+const refuse = async ()=>{
+    user.requests.shift();
+}
 
 
 </script>
