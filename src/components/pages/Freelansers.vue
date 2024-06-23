@@ -14,7 +14,7 @@
             <h5>{{ account.name }}</h5>
             <h3>{{ account.profession }}</h3>
             <h4>{{ account.city }}{{ account.state }}</h4>
-            <p>el iarkjf dgfdgfdsfaf</p>
+            
             <router-link :to="{name:'bussinsPage',params:{id:account.id}}"  class="btn align-self-center bg-warning my-4">عرض الملف الشخصي</router-link>
           </div>
         </div>
@@ -75,7 +75,7 @@ onBeforeMount(async () => {
 }
 
 .wrapper {
-  background-color: rgb(207, 140, 213);
+  background-color: rgb(211, 216, 224);
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -87,12 +87,12 @@ onBeforeMount(async () => {
   display: flex;
   flex-direction: row;
   text-align: center;
-  background-color: cadetblue;
+  background-color: rgb(255, 255, 255);
 }
 .talent {
   width: 50%;
   height: 35%;
-  background-color: rgb(255, 252, 252);
+  background-color: rgb(155, 152, 152);
   margin: 5px;
   border-radius: 25px;
   display: flex;
