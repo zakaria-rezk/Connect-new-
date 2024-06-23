@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <!-- Logo --><router-link to="/">
         <img
-          src="../../assets/WhatsApp_Image_2024-02-21_at_10.02.13_890990b8-removebg-preview.png"
+          src="../../assets/blank-profile-picture-973460_640.png"
           alt=""
           class="logo"
         />

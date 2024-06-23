@@ -13,7 +13,7 @@
           v-if="user.profirleImg !== '/Images/default/avatar'"
         />
 
-        <img class="image" src="../../../assets/15528.jpg" v-else />
+        <img class="image" src="../../../assets/blank-profile-picture-973460_640.png" v-else />
 
         <button
           class="custom-file-upload bg-primary btn"
@@ -99,7 +99,7 @@
 <script setup>
 import { onBeforeMount, onBeforeUnmount, ref } from "vue";
 import { activeUser } from "../../../sotre.js/profile/activeUser.js";
-
+// import Error from "@/components/UI/Error.vue";
 import TheHeader from "@/components/layout/TheHeader.vue";
 import { UserProfile } from "@/sotre.js/profile/userProfile.js";
 import ImgSettings from "../../UI/ImgSettings.vue";
