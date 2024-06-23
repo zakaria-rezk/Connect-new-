@@ -57,14 +57,7 @@
             >
             الطلبات</router-link
             >
-            <router-link
-              :to="{ name: 'customerMessagess' }"
-              :class="{ 'btn-primary': activeLink === 'customerProtfolio' }"
-              class="btn m-1 link btn-selected الاعمال"
-              @click="handleColor('customerProtfolio')"
-            >
-              الطلبات
-            </router-link >
+            
           </div>
         </div>
         <div class="col-auto ml-auto">
@@ -100,10 +93,8 @@
     <router-view v-if="user.requests.length===0"/>
   <tableRequestVue v-else />
   </div>
-  <div class="container">
-    <router-view />
-  <tableRequestVue />
-  </div>
+ 
+ 
 </template>
 <script setup>
 import { onBeforeMount, onBeforeUnmount, ref } from "vue";

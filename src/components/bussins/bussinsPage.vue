@@ -23,7 +23,7 @@
           <h3>نوع النشاط :    {{ G_bussinsById.bussinsProfession }}</h3>
         </div>
         <div class="title">
-          <BaseCard title="نبذة عن المحبة" />
+          <BaseCard :title=" 'نبذة عن '  +G_bussinsById.bussinsName " />
 
           <p>
             {{ G_bussinsById.bussinsDesc }}
@@ -48,7 +48,7 @@
               class="btn btn-warning mx-2"
               @click.prevent="showForm"
             >
-               خدمةتعديل الملف الشخي
+                 تعديل بيانات الملف الشخصي
             </router-link>
             
           </div>
