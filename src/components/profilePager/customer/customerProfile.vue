@@ -169,13 +169,13 @@ onBeforeMount(async () => {
  
 
   await user.userData();
-  await user.userRequest()
+  
   router.push({ name: "customerReservation" });
 
   document.addEventListener("click", handleClickOutside);
    
   await userRoles();
- 
+  await user.userRequest();
 });
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);

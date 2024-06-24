@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <!-- Logo --><router-link to="/">
         <img
-          src="../../assets/blank-profile-picture-973460_640.png"
+          src="../../assets/WhatsApp_Image_2024-02-21_at_10.02.13_890990b8-removebg-preview.png"
           alt=""
           class="logo"
         />
@@ -41,7 +41,7 @@
                   v-if="active.profirleImg !== '/Images/default/avatar'"
                 />
 
-                <img src="../../assets/15528.jpg" v-else />
+                <img src="../../assets/blank-profile-picture-973460_640.png" v-else />
               </div>
             </button>
           </li>

@@ -100,7 +100,7 @@ onBeforeMount(async()=>{
  await G_bussinsById.bussinsData();
  bussinsId.value =G_bussinsById.bussinsId
   await G_bussinsById.bussinsDataById(route.params.id)
-   await bussins.getbussinsPic();
+  //  await bussins.getbussinsPic();
 })
 </script>
 

@@ -11,7 +11,8 @@
             </thead>
             <tbody>
                 <tr v-for="request in user.requests" :key="request.id">
-                    <td>  {{request.name  }}الحصول علي {{ request.customerName }}يريد</td>
+                    <!-- <td>  طلب {{ request.customerName }}يريد</td> -->
+                    <td>    {{request.name }}</td>
                     <td><button @click="accpet(request)">✅</button> </td>
                     <td><button @click="refuse(request)">❌</button></td>
                 </tr>

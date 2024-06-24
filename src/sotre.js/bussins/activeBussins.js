@@ -40,6 +40,7 @@ export const activeBussins = defineStore("activeBussins", {
       this.bussinId = data.id;
     
     },
+
     async bussinsDataById(BussinsID) {
       const token = localStorage.getItem("token");
       
@@ -54,12 +55,15 @@ export const activeBussins = defineStore("activeBussins", {
           },
         }
       );
-      const data = await response.json();
+    
       if (!response.ok) {
         const error = "some thing fonign wrong";
         throw error;
       }
- 
+      const data = await response.json(); 
+     
+      
+
       this.name = data.name;
       this.description = data.description;
       this.image=data.image;

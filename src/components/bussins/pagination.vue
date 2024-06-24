@@ -56,7 +56,7 @@ const previousPage = async () => {
 };
 const sendRequest=async(name,price,description)=>{
   const id=route.params.id;
-  
+  console.log(name,price,description);
   const token =localStorage.getItem('token');
   
   const request =await fetch(`https://localhost:7165/api/Account/send-service-request?freelancerId=${id}`,{
