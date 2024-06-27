@@ -5,21 +5,7 @@
     <div class="wrapper">
       <searchFuncanality @search="search"/>
 
-      <div class="talents">
-        <div class="talent  container d-felx my-2"  v-for="account in accounts" :key="account.id">
-          <div class="img">
-            <img :src="'https://localhost:7165' + account.image" alt="" class="py-1"/>
-          </div>
-          <div class="talentDetail d-flex flex-column align-items-start p-4">
-            <h5>{{ account.name }}</h5>
-            <h3>{{ account.profession }}</h3>
-            <h4>{{ account.city }}{{ account.state }}</h4>
-            
-            <router-link :to="{name:'bussinsPage',params:{id:account.id}}"  class="btn align-self-center bg-warning my-4">عرض الملف الشخصي</router-link>
-          </div>
-        </div>
-        <hr />
-      </div>
+   
     </div>
   </div>
 </template>

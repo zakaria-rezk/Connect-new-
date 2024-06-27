@@ -77,6 +77,7 @@ const service =reactive({
 
  const addServices = async()=>{
    await bussins.addServices(service)
+   emit("closeForm");
   service.name = "";
   service.description='';
   service.price='';
@@ -84,7 +85,7 @@ const service =reactive({
   
   console.log(route.params.id)
   await services.getOfferdServices(0,route.params.id)
-  emit("closeForm");
+  
  
       
 
