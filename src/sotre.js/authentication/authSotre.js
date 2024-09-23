@@ -120,7 +120,7 @@ export const authStore = defineStore("autStore", {
     async login(payload) {
       try {
         const response = await fetch(
-          "https://localhost:7165/api/Account/login",
+          "https://connectegy.runasp.net/api/Account/login",
           {
             method: "POST",
             headers: {
@@ -160,7 +160,7 @@ export const authStore = defineStore("autStore", {
 
       try {
         const response = await fetch(
-          "https://localhost:7165/api/Account/register",
+          "https://connectegy.runasp.net/api/Account/register",
           {
             method: "POST",
             headers: {

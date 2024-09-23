@@ -15,7 +15,7 @@ export const BussinsProfile = defineStore("bussinsProfile", {
       formData.append("file", payload);
       try {
         const response = fetch(
-          "https://localhost:7165/api/Freelancer/Update-freelancer-picture",
+          "https://connectegy.runasp.net/api/Freelancer/Update-freelancer-picture",
           {
             method: "PUT",
             headers: {
@@ -38,7 +38,7 @@ export const BussinsProfile = defineStore("bussinsProfile", {
        
 
         const response = await fetch(
-          "https://localhost:7165/api/Freelancer/get-freelancer-picture",
+          "https://connectegy.runasp.net/api/Freelancer/get-freelancer-picture",
 
           {
             method: "GET",

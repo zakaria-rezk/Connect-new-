@@ -1,7 +1,7 @@
 <template>
   <TheHeader />
   <div class="viewImg" v-if="displayProfilePic">
-    <img :src="'https://localhost:7165' + user.profirleImg" ref="userImg" />
+    <img :src="'https://connectegy.runasp.net' + user.profirleImg" ref="userImg" />
   </div>
 
   <div class="profile">
@@ -9,7 +9,7 @@
       <div class="profile-picture">
         <img
           class="image"
-          :src="'https://localhost:7165' + user.profirleImg"
+          :src="'https://connectegy.runasp.net' + user.profirleImg"
           v-if="user.profirleImg !== '/Images/default/avatar'"
         />
 
@@ -132,7 +132,7 @@ const handleColor = (par) => {
 const userRoles = async () => {
   const token = localStorage.getItem("token");
   const response = await fetch(
-    "https://localhost:7165/api/Account/user-roles",
+    "https://connectegy.runasp.net/api/Account/user-roles",
     {
       method: "GET",
       headers: {

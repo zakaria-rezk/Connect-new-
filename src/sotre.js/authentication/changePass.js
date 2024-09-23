@@ -16,7 +16,7 @@ export const changePass = defineStore("changePass", {
       this.email = email;
       try {
         const response = await fetch(
-          `https://localhost:7165/api/Account/ForgotPassword?Email=${email}`,
+          `https://connectegy.runasp.net/api/Account/ForgotPassword?Email=${email}`,
           {
             method: "POST",
             headers: {
@@ -44,7 +44,7 @@ export const changePass = defineStore("changePass", {
 
       try {
         const response = await fetch(
-          "https://localhost:7165/api/Account/VerifyOTP",
+          "https://connectegy.runasp.net/api/Account/VerifyOTP",
           {
             method: "POST",
             headers: {
@@ -79,7 +79,7 @@ export const changePass = defineStore("changePass", {
       const token = localStorage.getItem("token");
       try {
         const response = await fetch(
-          "https://localhost:7165/api/Account/ResetPassword",
+          "https://connectegy.runasp.net/api/Account/ResetPassword",
           {
             method: "POST",
             headers: {

@@ -40,7 +40,7 @@ export const addBussins = defineStore("addBussins", {
     
       try {
         const response = await fetch(
-          "https://localhost:7165/api/Freelancer/add-freelancer-business",
+          "https://connectegy.runasp.net/api/Freelancer/add-freelancer-business",
           {
             method: "POST",
             headers: {
@@ -85,7 +85,7 @@ export const addBussins = defineStore("addBussins", {
    
       try {
         const response = await fetch(
-          "https://localhost:7165/api/Freelancer/update-freelancer-business",
+          "https://connectegy.runasp.net/api/Freelancer/update-freelancer-business",
           {
             method: "PUT",
             headers: {
@@ -128,7 +128,7 @@ export const addBussins = defineStore("addBussins", {
     async addServices(payload) {
  
 
-      const url = "https://localhost:7165/api/Freelancer/add-offered-service";
+      const url = "https://connectegy.runasp.net/api/Freelancer/add-offered-service";
       const queryPar = {
         Name: payload.name,
         Description: payload.description,

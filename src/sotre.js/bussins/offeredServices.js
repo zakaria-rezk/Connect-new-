@@ -17,7 +17,7 @@ G_offeredServices: (state) =>state.offeredServices
      
       try {
         const token =localStorage.getItem("token")
-        const response = await fetch(`https://localhost:7165/api/Freelancer/get-offered-services/${bussinsId}?pageIndex=${pageIndex}&pageSize=3`,{
+        const response = await fetch(`https://connectegy.runasp.net/api/Freelancer/get-offered-services/${bussinsId}?pageIndex=${pageIndex}&pageSize=3`,{
          method: "GET",
           headers:{
             'accept': '*/*',
@@ -40,15 +40,13 @@ G_offeredServices: (state) =>state.offeredServices
            name:data[item].name,
            price:data[item].price,
            description:data[item].description,
-           image:`https://localhost:7165${data[item].image}`
+           image:`https://connectegy.runasp.net/${data[item].image}`
 
          }
          this.offeredServices.push(array)
         
        }
-  
-        
-      
+
       }
       catch(error){
         throw error

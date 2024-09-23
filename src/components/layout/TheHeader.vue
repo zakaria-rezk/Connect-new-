@@ -37,7 +37,7 @@
             <button class="nav-link" @click="chagneverticalNavVisibilty">
               <div class="imgpic">
                 <img
-                  :src="'https://localhost:7165' + active.profirleImg"
+                  :src="'https://connectegy.runasp.net' + active.profirleImg"
                   v-if="active.profirleImg !== '/Images/default/avatar'"
                 />
 
@@ -134,7 +134,7 @@ const logout = async () => {
 };
 const userRoles = async () => {
   const response = await fetch(
-    "https://localhost:7165/api/Account/user-roles",
+    "https://connectegy.runasp.net/api/Account/user-roles",
     {
       method: "GET",
       headers: {

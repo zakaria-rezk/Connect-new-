@@ -3,10 +3,10 @@
   <div class="bussins container-fluid" id="services">
     <div class="">
       <div class="cover">
-        <!-- <img :src="'https://localhost:7165' + G_bussinsById.bussinsImage" alt="" class="cover-photo" /> -->
+      
         <img
           class="cover-photo"
-          :src="'https://localhost:7165' + G_bussinsById.bussinsImage"
+          :src="'https://connectegy.runasp.net' + G_bussinsById.bussinsImage"
           v-if="G_bussinsById.bussinsImage !== '/Images/default/avatar'"
         />
 

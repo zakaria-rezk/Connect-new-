@@ -17,7 +17,7 @@ export const UserProfile = defineStore("userProfile", {
       formData.append("file", payload);
       try {
         const response = fetch(
-          "https://localhost:7165/api/Account/Update-customer-picture",
+          "https://connectegy.runasp.net/api/Account/Update-customer-picture",
           {
             method: "PUT",
             headers: {
@@ -37,7 +37,7 @@ export const UserProfile = defineStore("userProfile", {
       const token = localStorage.getItem("token");
       try {
         const response = await fetch(
-          "https://localhost:7165/api/Account/get-customer-picture",
+          "https://connectegy.runasp.net/api/Account/get-customer-picture",
 
           {
             method: "GET",

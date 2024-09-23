@@ -16,7 +16,7 @@ const emitFire =()=>{
 }
 const deleteImg =async()=>{
   const token =localStorage.getItem("token")
-  const response =await fetch('https://localhost:7165/api/Account/delete-customer-picture',{
+  const response =await fetch('https://connectegy.runasp.net/api/Account/delete-customer-picture',{
     method:'DELETE',
     headers:{
       accept:'*/*',

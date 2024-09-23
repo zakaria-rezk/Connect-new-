@@ -21,7 +21,7 @@ export const activeBussins = defineStore("activeBussins", {
       const token = localStorage.getItem("token");
       
       const response = await fetch(
-        "https://localhost:7165/api/Freelancer/freelancer-profile",
+        "https://connectegy.runasp.net/api/Freelancer/freelancer-profile",
         {
           method: "GET",
           headers: {
@@ -45,7 +45,7 @@ export const activeBussins = defineStore("activeBussins", {
       const token = localStorage.getItem("token");
       
       const response = await fetch(
-        `https://localhost:7165/api/Freelancer/get-freelancer-by-id/${BussinsID}`,
+        `https://connectegy.runasp.net/api/Freelancer/get-freelancer-by-id/${BussinsID}`,
         
         {
           method: "GET",

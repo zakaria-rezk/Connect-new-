@@ -25,7 +25,6 @@ import { activeUser } from "@/sotre.js/profile/activeUser";
 const user=activeUser();
 const accpet =async(id)=>{
    user.requests.shift();
-    // const response =await fetch(`https://localhost:7165/api/Freelancer/accept/${id}`,)
 }
 const refuse = async ()=>{
     user.requests.shift();

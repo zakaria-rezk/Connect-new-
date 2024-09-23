@@ -18,7 +18,7 @@
           <div class="d-flex">
             <div class="img">
               <img
-                :src="'https://localhost:7165' + account.image"
+                :src="'https://connectegy.runasp.net' + account.image"
                 alt=""
                 class="py-1"
               />
@@ -56,7 +56,7 @@ const search = async (keyWord = null) => {
   if (keyWord) {
     searchword = `search=${keyWord}&`;
   } else searchword = "";
-  const url = `https://localhost:7165/api/Freelancer/filter-freelancers?${searchword}pageIndex=1&pageSize=9`;
+  const url = `https://connectegy.runasp.net/api/Freelancer/filter-freelancers?${searchword}pageIndex=1&pageSize=9`;
 
   const response = await fetch(url, {
     method: "POST",

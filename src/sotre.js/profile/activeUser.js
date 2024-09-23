@@ -42,7 +42,7 @@ export const activeUser = defineStore("activeUser", {
       try {
       
         const response = await fetch(
-          "https://localhost:7165/api/Account/profile",
+          "https://connectegy.runasp.net/api/Account/profile",
           {
             method: "GET",
 
@@ -76,7 +76,7 @@ export const activeUser = defineStore("activeUser", {
       try {
       
         const response = await fetch(
-          'https://localhost:7165/api/Freelancer/get-freelancer-requests?pageIndex=0&pageSize=16',
+          'https://connectegy.runasp.net/api/Freelancer/get-freelancer-requests?pageIndex=0&pageSize=16',
           {
             method: "GET",
 
@@ -109,7 +109,7 @@ export const activeUser = defineStore("activeUser", {
       const token =localStorage.getItem('token')
       
           try{
-            const response =await fetch('https://localhost:7165/api/Account/update-customer-info',{
+            const response =await fetch('https://connectegy.runasp.net/api/Account/update-customer-info',{
               method:'PUT',
               headers:{
                 'accept': '*/*',

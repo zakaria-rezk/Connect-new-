@@ -84,7 +84,7 @@ const sendRequest = async (name, price, description) => {
   const token = localStorage.getItem("token");
 
   const request = await fetch(
-    `https://localhost:7165/api/Account/send-service-request?freelancerId=${id}`,
+    `https://connectegy.runasp.net/api/Account/send-service-request?freelancerId=${id}`,
     {
       method: "POST",
       headers: {
