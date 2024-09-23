@@ -87,7 +87,7 @@ const formData = reactive({
   street: user.userStreet,
 });
 const submitForm = () => {
-  console.log(formData)
+
   user.updateProfile(formData);
 };
 onMounted(async () => {

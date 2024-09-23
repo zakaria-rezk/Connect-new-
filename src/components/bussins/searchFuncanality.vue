@@ -1,7 +1,7 @@
 <template>
   <div class="search d-flex flex-column py-5 mx-4">
     <div class="d-flex">
-      <div class="keyword d-flex mx-1" v-for="word in words" :key="word">
+      <div class="keyword d-flex" v-for="word in words" :key="word">
         <p v-if="word">{{ word }}</p>
         <button @click.prevent="removeWord(word)" class="span">
           <font-awesome-icon
@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <div class="searchItem mt-5">
+    <div class="searchItem d-flex mt-5">
       <input
         type="text"
         class="searchInput"
@@ -65,23 +65,25 @@ const skills = ref([
 
 const search = () => {
   words.value = [...searchWord.value];
- 
-  console.log(...searchWord.value);
-  emit('search',...searchWord.value)
+
+  emit("search", ...searchWord.value);
   searchWord.value = [];
 };
 const removeWord = (word) => {
-  console.log(word);
   const index = words.value.indexOf(word);
-  console.log(index);
-  console.log(words.value);
+
   words.value.splice(index, 1);
 };
 </script>
 <style scoped>
-
+.search {
+ 
+}
+.searchItem select,input{
+  width: 90% !important;
+  
+}
 .searchInput {
-  width: 80%;
   height: 40px;
 }
 .label {

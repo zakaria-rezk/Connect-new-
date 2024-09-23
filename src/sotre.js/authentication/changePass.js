@@ -12,7 +12,7 @@ export const changePass = defineStore("changePass", {
   getters: () => {},
   actions: {
     async sendEmail(email) {
-      console.log(email);
+     
       this.email = email;
       try {
         const response = await fetch(
@@ -38,7 +38,7 @@ export const changePass = defineStore("changePass", {
     },
     async sendOtp(otpNum) {
       let otp = otpNum.toString();
-      console.log(typeof otp);
+    
       this.otpNumber = otpNum;
       const token = localStorage.getItem("token");
 

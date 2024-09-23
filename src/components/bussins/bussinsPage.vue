@@ -96,7 +96,7 @@ const handelImgSrc = async (event) => {
 };
 onBeforeMount(async()=>{
  const route =useRoute();
- console.log(route.params.id)
+
  await G_bussinsById.bussinsData();
  bussinsId.value =G_bussinsById.bussinsId
   await G_bussinsById.bussinsDataById(route.params.id)

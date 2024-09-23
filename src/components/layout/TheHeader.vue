@@ -144,7 +144,7 @@ const userRoles = async () => {
     }
   );
   const roles = await response.json();
-  console.log(roles)
+
   hasBussins.value = roles.includes("Freelancer");
 };
 

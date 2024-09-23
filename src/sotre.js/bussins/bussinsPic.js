@@ -25,7 +25,7 @@ export const BussinsProfile = defineStore("bussinsProfile", {
             body: formData,
           }
         );
-        console.log(response);
+     
       } catch (error) {
         throw error;
       }
@@ -55,9 +55,9 @@ export const BussinsProfile = defineStore("bussinsProfile", {
           throw error
         }
         const imageUrl = await response.text();
-        console.log('getpic')
+     
          this.activeBussins.image=imageUrl
-          console.log(this.activeBussins.image)
+    
       
       } catch (error) {
         throw error;

@@ -186,7 +186,6 @@ const registerValidtion = () => {
     lastNameInput.value.classList.add("error");
   }
   if (!isValidEmail.value) {
-    console.log(!isValidEmail.value)
     registerData.email.errorMessage = true;
     emailInput.value.classList.add("error");
   }

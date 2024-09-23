@@ -96,7 +96,7 @@ export const activeUser = defineStore("activeUser", {
           const data = await response.json();
      
         this.requests=data; 
-        console.log(this.requests)
+    
         
         }
     

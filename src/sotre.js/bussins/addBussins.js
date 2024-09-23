@@ -35,9 +35,9 @@ export const addBussins = defineStore("addBussins", {
   },
   actions: {
     async addBussins(payload) {
-      const token =localStorage.getItem('token')
-   
-     console.log(payload)
+      const token = localStorage.getItem("token");
+
+    
       try {
         const response = await fetch(
           "https://localhost:7165/api/Freelancer/add-freelancer-business",
@@ -63,10 +63,8 @@ export const addBussins = defineStore("addBussins", {
         );
 
         if (!response.ok) {
-         
           const error = response.message || "can not fetch userData";
           throw error;
-         
         }
 
         if (response.ok) this.name = payload.name;
@@ -77,15 +75,14 @@ export const addBussins = defineStore("addBussins", {
         this.city = payload.city;
         this.street = payload.street;
         this.skills = payload.skills;
-     
       } catch (error) {
         throw error;
       }
     },
     async updateBussins(payload) {
-      const token =localStorage.getItem('token')
+      const token = localStorage.getItem("token");
+
    
-     console.log(payload)
       try {
         const response = await fetch(
           "https://localhost:7165/api/Freelancer/update-freelancer-business",
@@ -111,10 +108,8 @@ export const addBussins = defineStore("addBussins", {
         );
 
         if (!response.ok) {
-         
           const error = response.message || "can not fetch userData";
           throw error;
-         
         }
 
         if (response.ok) this.name = payload.name;
@@ -125,16 +120,14 @@ export const addBussins = defineStore("addBussins", {
         this.city = payload.city;
         this.street = payload.street;
         this.skills = payload.skills;
-     
       } catch (error) {
         throw error;
       }
     },
 
-    
     async addServices(payload) {
-      console.log(payload.ImageUrl)
-    
+ 
+
       const url = "https://localhost:7165/api/Freelancer/add-offered-service";
       const queryPar = {
         Name: payload.name,
@@ -148,19 +141,18 @@ export const addBussins = defineStore("addBussins", {
             encodeURIComponent(key) + "=" + encodeURIComponent(queryPar[key])
         )
         .join("&");
-   
-            
-            let formDate =new FormData()
-            formDate.append('image',payload.ImageUrl)
-            // formDate.append('imageName',payload.ImageUrl.name)
-     
+
+      let formDate = new FormData();
+      formDate.append("image", payload.ImageUrl);
+      // formDate.append('imageName',payload.ImageUrl.name)
+
       try {
         const response = await fetch(url + "?" + queryString, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${this.token}`,
           },
-          body:formDate
+          body: formDate,
         });
       } catch (error) {
         throw error;

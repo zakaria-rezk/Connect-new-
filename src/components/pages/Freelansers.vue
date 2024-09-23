@@ -1,11 +1,39 @@
 <template>
   <TheHeader />
-
   <div class="container-fluid">
-    <div class="wrapper">
-      <searchFuncanality @search="search"/>
-
-   
+    <div class="row">
+      <div class="wrapper col-12 col-md-4">
+        <searchFuncanality @search="search" />
+      </div>
+      <div class="talents d-flex col-12 col-md-8">
+        <div
+          class="talent flex-column flex-md-row my-2 mx-2"
+          v-for="account in accounts"
+          :key="account.id"
+        >
+          <div class="d-flex">
+            <div class="img">
+              <img
+                :src="'https://localhost:7165' + account.image"
+                alt=""
+                class="py-1"
+              />
+            </div>
+            <div class="talentDetail d-flex flex-column align-items-start p-2">
+              <h4>اسم المؤسسة: {{ account.name }}</h4>
+              <h3>النشاط :{{ account.profession }}</h3>
+              <h4>العنوان :{{ account.city }}{{ account.state }}</h4>
+            </div>
+          </div>
+          <div class="m-md-3 text-center">
+            <router-link
+              :to="{ name: 'bussinsPage', params: { id: account.id } }"
+              class="btn align-self-start justify-self-end bg-warning"
+              >عرض الملف الشخصي</router-link
+            >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -19,13 +47,12 @@ const token = localStorage.getItem("token");
 const id = ref();
 
 const search = async (keyWord = null) => {
-  
   let searchword = null;
   if (keyWord) {
     searchword = `search=${keyWord}&`;
   } else searchword = "";
   const url = `https://localhost:7165/api/Freelancer/filter-freelancers?${searchword}pageIndex=1&pageSize=9`;
-  console.log(url);
+
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -35,74 +62,67 @@ const search = async (keyWord = null) => {
   });
   const data = await response.json();
   accounts.value = data;
- 
+  console.log(accounts.value);
 };
 
 onBeforeMount(async () => {
   search();
   const route = useRoute();
+
   id.value = route.params.id;
-  
 });
 </script>
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 .container-fluid {
   color: rgb(162, 202, 18);
   height: 100vh;
 }
 
 .wrapper {
-  background-color: rgb(211, 216, 224);
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 10px;
-
+  background-color: rgb(48, 127, 255);
+  height: 100% !important;
 }
-
 .talents {
   display: flex;
   flex-direction: row;
-  text-align: center;
-  background-color: rgb(255, 255, 255);
+  height: 100%;
+  background-color: rgb(216, 4, 0);
 }
 .talent {
-  width: 50%;
-  height: 35%;
-  background-color: rgb(155, 152, 152);
-  margin: 5px;
-  border-radius: 25px;
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgb(225, 225, 8);
+  margin: 5px;
+  width: 100%;
+
+  border-radius: 25px;
   color: rgb(16, 15, 15);
 }
-.talentcont{
+.talentcont {
   background-color: rgb(27, 121, 204);
 }
 .img {
   height: 100%;
-  width: 70px;
+  width: 100px;
 }
 .img img {
-  width: 60px;
+  width: 90px;
   border-radius: 50%;
 }
-.talentDetail {
-  display: flex;
-  flex-grow: 1;
-}
+
 @media (max-width: 1024px) {
   .wrapper {
     display: flex;
     flex-direction: column;
   }
-  .talent{
+  .talent {
     height: 50%;
+  }
+}
+@media (max-width: 768px) {
+  .container-fluid {
+    position: relative;
+    top: 15px;
   }
 }
 </style>

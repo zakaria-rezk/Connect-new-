@@ -259,20 +259,20 @@ const submitForm = async () => {
     street: Bussins.street,
     skills: [skill1.value, skill2.value, skill3.value],
   };
-  console.log(CreateBussins);
+ 
   if (!route.params.id) {
     await store.addBussins(CreateBussins);
   }
   else if(route.params.id){
     await store.updateBussins(CreateBussins);
-    console.log('update')
+   
   }
   
   await bussinsId.bussinsData();
   router.push({ name: "bussinsPage", params: { id: bussinsId.bussinsId } });
 };
 onBeforeMount(() => {
-  console.log(route.params.id);
+
 });
 </script>
 

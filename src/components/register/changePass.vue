@@ -110,11 +110,11 @@ const newPass = ref();
 const confirmPass = ref();
 const confirmInput = ref(null);
 const sendMail = async (email) => {
-  console.log(email);
+
   await pass.sendEmail(email);
 };
 const sendotp = async (otpNum) => {
-  console.log(otpNum);
+
   await pass.sendOtp(otpNum);
 };
 const updatePass = async (a, b) => {

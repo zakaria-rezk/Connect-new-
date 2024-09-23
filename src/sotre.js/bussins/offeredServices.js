@@ -32,7 +32,7 @@ G_offeredServices: (state) =>state.offeredServices
         
         const data = await response.json();
         
-       console.log('offerdservicse')
+   
      
       
        for(let item =0; item <data.length;item++){

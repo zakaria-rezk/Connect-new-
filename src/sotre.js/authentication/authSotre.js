@@ -143,7 +143,7 @@ export const authStore = defineStore("autStore", {
         } else if (response.status === 404) {
           this.userNotFound = true;
         } else if (response.status === 401) {
-          console.log("401");
+        
           this.incorrectPass = true;
         } else if (response.status === 403) {
           this.warn = true;
@@ -181,7 +181,7 @@ export const authStore = defineStore("autStore", {
             }),
           }
         );
-        console.log(response);
+
         if (response.status === 200) {
           this.link = true;
           this.warn = true;
