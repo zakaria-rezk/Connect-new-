@@ -4,9 +4,13 @@
     <div class="">
       <div class="cover">
         <!-- <img :src="'https://localhost:7165' + G_bussinsById.bussinsImage" alt="" class="cover-photo" /> -->
-              <img class="cover-photo" :src="'https://localhost:7165'+G_bussinsById.bussinsImage" v-if="G_bussinsById.bussinsImage !=='/Images/default/avatar'"/>
+        <img
+          class="cover-photo"
+          :src="'https://localhost:7165' + G_bussinsById.bussinsImage"
+          v-if="G_bussinsById.bussinsImage !== '/Images/default/avatar'"
+        />
 
-        <img class="cover-photo" src="../../assets/15528.jpg" v-else  />  
+        <img class="cover-photo" src="../../assets/15528.jpg" v-else />
         <label for="imgFile" v-if="isAdmin"></label>
         <input
           type="file"
@@ -16,14 +20,14 @@
           hidden
         />
       </div>
-      
+
       <div class="bussins">
         <div class="bussins-detail">
           <h3>اسم النشاط :{{ G_bussinsById.bussinsName }}</h3>
-          <h3>نوع النشاط :    {{ G_bussinsById.bussinsProfession }}</h3>
+          <h3>نوع النشاط : {{ G_bussinsById.bussinsProfession }}</h3>
         </div>
         <div class="title">
-          <BaseCard :title=" 'نبذة عن '  +G_bussinsById.bussinsName " />
+          <BaseCard :title="'نبذة عن ' + G_bussinsById.bussinsName" />
 
           <p>
             {{ G_bussinsById.bussinsDesc }}
@@ -32,29 +36,32 @@
         <div class="bussins-services">
           <BaseCard title="الخدمات" class="my-5" />
           <div class="services d-flex">
-            <pagination :BussinsID="route.params.id"/> 
+            <pagination :BussinsID="route.params.id" :admin="isAdmin" />
           </div>
           <addService :formVisibilty="formVisibilty" @closeForm="closeForm" />
           <div class="container d-flex justify-content-center my-4">
-            <button v-if="isAdmin"
+            <button
+              v-if="isAdmin"
               type="button"
               class="btn btn-primary mx-2"
               @click.prevent="showForm"
             >
               اضافة خدمة
             </button>
-            <router-link v-if="isAdmin" :to="{name:'addfreelancebuisness',params:{id:route.params.id}}"
+            <router-link
+              v-if="isAdmin"
+              :to="{
+                name: 'addfreelancebuisness',
+                params: { id: route.params.id },
+              }"
               type="button"
               class="btn btn-warning mx-2"
               @click.prevent="showForm"
             >
-                 تعديل بيانات الملف الشخصي
+              تعديل بيانات الملف الشخصي
             </router-link>
-            
           </div>
-          
         </div>
-      
       </div>
     </div>
   </div>
@@ -66,18 +73,17 @@ import BaseCard from "@/components/UI/BaseCard.vue";
 import TheHeader from "../layout/TheHeader.vue";
 import addService from "@/components/forms/addService.vue";
 import { activeBussins } from "@/sotre.js/bussins/activeBussins.js";
-import {BussinsProfile} from '../../sotre.js/bussins/bussinsPic'
+import { BussinsProfile } from "../../sotre.js/bussins/bussinsPic";
 import { useRoute } from "vue-router";
-const bussins =BussinsProfile();
-const route =useRoute();
+const bussins = BussinsProfile();
+const route = useRoute();
 const formVisibilty = ref("none");
-const bussinsId=ref();
-const G_bussinsById=activeBussins();
-const isAdmin=computed (()=>{
-  return bussinsId.value ===route.params.id
-})
+const bussinsId = ref();
+const G_bussinsById = activeBussins();
+const isAdmin = computed(() => {
+  return bussinsId.value === route.params.id;
+});
 const showForm = () => {
-  
   formVisibilty.value = "flex";
 };
 const closeForm = () => {
@@ -86,22 +92,19 @@ const closeForm = () => {
 
 const handelImgSrc = async (event) => {
   const file = event.target.files[0];
- await bussins.sendbussinsPic(file);
- setTimeout(async function(){
-  await bussins.getbussinsPic();
- },2000)
- 
- 
-
+  await bussins.sendbussinsPic(file);
+  setTimeout(async function () {
+    await bussins.getbussinsPic();
+  }, 2000);
 };
-onBeforeMount(async()=>{
- const route =useRoute();
+onBeforeMount(async () => {
+  const route = useRoute();
 
- await G_bussinsById.bussinsData();
- bussinsId.value =G_bussinsById.bussinsId
-  await G_bussinsById.bussinsDataById(route.params.id)
+  await G_bussinsById.bussinsData();
+  bussinsId.value = G_bussinsById.bussinsId;
+  await G_bussinsById.bussinsDataById(route.params.id);
   //  await bussins.getbussinsPic();
-})
+});
 </script>
 
 <style scoped>
