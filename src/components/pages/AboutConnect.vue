@@ -21,9 +21,7 @@
     >
       <img src="../../assets/Screenshot 2024-06-17 040651.png" alt="" />
       <div class="description mx-2">
-        <h1>
-        انشي النشاط التجاري الخاص بك واحجز لك مكان ع الانترنت 
-        </h1>
+        <h1>انشي النشاط التجاري الخاص بك واحجز لك مكان ع الانترنت</h1>
         <p>
           استخدم البيانات الاتية لتسجل نشاطك [الاسم-رفم الهاتف - البريد
           الالكتروني]
@@ -34,13 +32,9 @@
       class="container content d-flex justify-content-center align-items-center"
     >
       <div class="description">
-        <h1>
-          
-          اعرض خدماتك وانطلق وساهم في ذيادة مبيعاتك الي اضعافها
-        </h1>
+        <h1>اعرض خدماتك وانطلق وساهم في ذيادة مبيعاتك الي اضعافها</h1>
         <p>
-          اهلا بك في   كونكت اهلا بك في الحاضر
-          اهلا بك في   كونكت اهلا بك في الحاضر
+          اهلا بك في كونكت اهلا بك في الحاضر اهلا بك في كونكت اهلا بك في الحاضر
         </p>
       </div>
 
@@ -52,13 +46,13 @@
 .aboutParent {
   z-index: 1;
   position: relative;
+
   background-color: rgb(255, 255, 255);
 }
 .content {
   align-self: flex-end;
   overflow: hidden;
-  color:  rgb(13, 159, 207);
- 
+  color: rgb(13, 159, 207);
 }
 .content::before {
   content: "كيف تحقق اقصي استفادة من كونكت";
@@ -68,7 +62,7 @@
   padding-right: 10px;
   width: 100%;
   height: 50px;
-  background-color:#0d6efd;
+  background-color: #0d6efd;
   top: -0px;
   z-index: -1;
 }
@@ -86,6 +80,9 @@
   .content::before {
     top: -40px;
     font-size: 1.5rem;
+  }
+  .aboutParent {
+    top: 100px;
   }
 }
 </style>

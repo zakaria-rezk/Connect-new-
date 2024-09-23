@@ -5,44 +5,37 @@
     <div class="img-container position-relative">
       <img src="../../assets/6238505.jpg" class="" alt="..." />
     </div>
-    <div class="title position-absolute text-uppercase">
-      <h2>ارتقي الان الي السوق</h2>
-      <h3>العالمية</h3>
+    <div class="title unfixed position-absolute text-uppercase">
+      <h2 class="">ارتقي الان الي السوق</h2>
+      <h3 class="text">العالمي</h3>
       <router-link :to="{ name: 'hotel-reservations' }" class="btn">
         تواصل معنا</router-link
       >
     </div>
-   
   </div>
-   <div class="wave">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path
-          fill="#0d6efd"
-          fill-opacity="1"
-          d="M0,32L40,80C80,128,160,224,240,266.7C320,309,400,299,480,288C560,277,640,267,720,234.7C800,203,880,149,960,133.3C1040,117,1120,139,1200,138.7C1280,139,1360,117,1400,106.7L1440,96L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"
-        ></path>
-        
-      </svg>
-     
-    </div>
-  
-    <hr>
-    <AboutConnect />
-    <!-- <TheFooter/> -->
+  <div class="wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path
+        fill="#0d6efd"
+        fill-opacity="1"
+        d="M0,32L40,80C80,128,160,224,240,266.7C320,309,400,299,480,288C560,277,640,267,720,234.7C800,203,880,149,960,133.3C1040,117,1120,139,1200,138.7C1280,139,1360,117,1400,106.7L1440,96L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"
+      ></path>
+    </svg>
+  </div>
+
+  <hr />
+  <AboutConnect />
+  <!-- <TheFooter/> -->
 </template>
 <script setup>
-import AboutConnect from "../pages/AboutConnect.vue"
+import AboutConnect from "../pages/AboutConnect.vue";
 import TheHeader from "../layout/TheHeader.vue";
 
 // import TheFooter from "../layout/TheFooter.vue";
-
-
 </script>
 <style scoped>
 .parent {
   position: relative;
- height: 90vh;
- 
 }
 .img-container {
   z-index: 8;
@@ -74,7 +67,7 @@ import TheHeader from "../layout/TheHeader.vue";
   background-color: var(--primarycolor);
   color: white;
 }
-.wave{
+.wave {
   position: absolute;
   background-color: rgb(255, 255, 255);
   top: 70px;
@@ -84,7 +77,7 @@ import TheHeader from "../layout/TheHeader.vue";
 
 .container::after {
   content: "";
- 
+
   width: 100px;
   height: 100px;
 }
@@ -128,10 +121,22 @@ h3 {
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .slider img {
     height: 250px;
   }
+  .wave {
+    top: 100px;
+  }
+  .parent {
+    top: 100px;
+  }
+  .unfixed {
+    top: 20px;
+    
+  }
+  .text {
+    font-size: 2rem !important;
+  }
 }
 </style>
-

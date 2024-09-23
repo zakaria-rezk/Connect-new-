@@ -52,12 +52,8 @@ onBeforeMount(async () => {
   box-sizing: border-box;
 }
 .container-fluid {
- 
-
   color: rgb(162, 202, 18);
-
   height: 100vh;
- 
 }
 
 .wrapper {
