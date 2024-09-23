@@ -23,7 +23,7 @@
       <img :src="service.image" class="banner-image" alt="" />
 
       <h3 class="bg-secandray">{{ service.name }}</h3>
-      <p class="">{{ service.description }}</p>
+      <p class="w-100">{{ service.description }}</p>
       <div class="button-wrapper">
         <button class="btn outline price">{{ service.price }}</button>
         <button

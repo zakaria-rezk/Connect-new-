@@ -5,7 +5,11 @@
       <div class="wrapper col-12 col-md-4">
         <searchFuncanality @search="search" />
       </div>
+
       <div class="talents d-flex col-12 col-md-8">
+        <div v-if="accounts.length === 0" class="text-center w-100">
+          <h2 class="  m-auto">لا يوجد نتائج تطابق بحثك</h2>
+        </div>
         <div
           class="talent flex-column flex-md-row my-2 mx-2"
           v-for="account in accounts"
@@ -34,6 +38,7 @@
           </div>
         </div>
       </div>
+     
     </div>
   </div>
 </template>
