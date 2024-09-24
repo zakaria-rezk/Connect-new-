@@ -6,12 +6,12 @@
         <searchFuncanality @search="search" />
       </div>
 
-      <div class="talents d-flex col-12 col-md-8">
+      <div class="talents d-flex flex-column col-12 col-md-8 overflow-hidden">
         <div v-if="accounts.length === 0" class="text-center w-100">
-          <h2 class="  m-auto">لا يوجد نتائج تطابق بحثك</h2>
+          <h2 class="m-auto">لا يوجد نتائج تطابق بحثك</h2>
         </div>
         <div
-          class="talent flex-column flex-md-row my-2 mx-2"
+          class="talent flex-column flex-md-row my-2 mx-2 w-100"
           v-for="account in accounts"
           :key="account.id"
         >
@@ -38,7 +38,6 @@
           </div>
         </div>
       </div>
-     
     </div>
   </div>
 </template>
@@ -84,21 +83,22 @@ onBeforeMount(async () => {
 }
 
 .wrapper {
-  background-color: rgb(48, 127, 255);
+  background-color: #0b7ea1;
   height: 100% !important;
 }
 .talents {
   display: flex;
   flex-direction: row;
   height: 100%;
-  background-color: rgb(216, 4, 0);
+  background-color: #e6edf1;
 }
 .talent {
   display: flex;
   justify-content: space-between;
-  background-color: rgb(225, 225, 8);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 2px 4px 10px 0px rgba(0, 0, 0, 0.2);
   margin: 5px;
-  width: 100%;
+  width: 100% !important;
 
   border-radius: 25px;
   color: rgb(16, 15, 15);
